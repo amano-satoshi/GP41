@@ -7,6 +7,8 @@ public class StageSpawner : MonoBehaviour
     public GameObject Cube;
     public GameObject[] SeaArea;
     public GameObject Bow;
+    public GameObject Ship;
+    public GameObject Obstacle;
     [SerializeField, Header("海域の配置")]
     private Vector3[] SeaAreaPos;
     [SerializeField, Header("海流の方向の矢印の配置")]
@@ -15,6 +17,8 @@ public class StageSpawner : MonoBehaviour
     private float[] SeaAreaAngle;
     [SerializeField, Header("海流の速度")]
     private float[] SeaAreaSpeed;
+    [SerializeField, Header("船の位置")]
+    private Vector3[] ShipPos = new Vector3[4];
     private GameObject SeaAreaObj;
     private GameObject Bowobj;
     private GameObject Cubeobj;
@@ -51,6 +55,19 @@ public class StageSpawner : MonoBehaviour
             SeaAreaObj.GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
             SeaAreaObj.GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[i]);
         }
+
+        // 障害物
+        for(int x = 0; x < 11; ++x)
+        {
+            int z = Random.Range(0, 4);
+            Instantiate(Obstacle, new Vector3((x - 5) * 6.0f, -5.5f, (z - 2) * 5.0f), Quaternion.identity);
+        }
+
+        // 船
+        for(int i = 0; i < 4; ++i)
+        {
+            Instantiate(Ship, ShipPos[i], Quaternion.identity);
+        }
     }
 
     // Update is called once per frame
@@ -62,5 +79,10 @@ public class StageSpawner : MonoBehaviour
     public List<GameObject> GetDrowingPersons()
     {
         return DrowingPersons;
+    }
+
+    public Vector3[] GetShipPos()
+    {
+        return ShipPos;
     }
 }

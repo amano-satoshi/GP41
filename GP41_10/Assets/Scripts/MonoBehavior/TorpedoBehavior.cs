@@ -3,6 +3,7 @@
 // 魚雷の挙動(TorpedoBehavior : MonoBehaviour)
 // Author : Satoshi Amano
 // 作成日 : 2019/10/11
+// 更新日 : 2019/11/15　AI作成
 //
 ///////////////////////////////////////////////////////////////
 
@@ -67,7 +68,7 @@ public class TorpedoBehavior : MonoBehaviour
     void Start()
     {
         StageInfo = GameObject.Find("StageSpawner");
-        target = GameObject.Find("person");
+        //target = GameObject.Find("person");
     }
 
     // ===================== Update =======================
@@ -81,7 +82,7 @@ public class TorpedoBehavior : MonoBehaviour
                 Search();
                 break;
             case TorpedoState.RESCUE:
-                
+                Rescue();
                 break;
             case TorpedoState.EMERGENCY:
                 decel();
@@ -122,12 +123,13 @@ public class TorpedoBehavior : MonoBehaviour
                 break;
         }
         Debug.Log(TorpedoSpeed);
+        Debug.Log(torpedoState);
     }
 
     // 上向き
     void MoveUp()
     {
-        Vector3 axis = new Vector3(1.0f, 0.0f, 0.0f); // 回転軸
+        Vector3 axis = transform.right; // 回転軸
         float angle = -TorpedoRotSpeed * Time.deltaTime; // 回転の角度
         TorpedoRotUD += angle;
         if (TorpedoRotUD < -TorpedoMaxRot)
@@ -145,7 +147,7 @@ public class TorpedoBehavior : MonoBehaviour
     // 下向き
     void MoveDown()
     {
-        Vector3 axis = new Vector3(1.0f, 0.0f, 0.0f); // 回転軸
+        Vector3 axis = transform.right; // 回転軸
         float angle = TorpedoRotSpeed * Time.deltaTime; // 回転の角度
         TorpedoRotUD += angle;
         if (TorpedoRotUD > TorpedoMaxRot)
@@ -163,7 +165,7 @@ public class TorpedoBehavior : MonoBehaviour
     // 左向き
     void MoveLeft()
     {
-        Vector3 axis = new Vector3(0.0f, 1.0f, 0.0f); // 回転軸
+        Vector3 axis = transform.up; // 回転軸
         float angle = -TorpedoRotSpeed * Time.deltaTime; // 回転の角度
         TorpedoRotLR += angle;
         if (TorpedoRotLR < -TorpedoMaxRot)
@@ -181,7 +183,7 @@ public class TorpedoBehavior : MonoBehaviour
     // 右向き
     void MoveRight()
     {
-        Vector3 axis = new Vector3(0.0f, 1.0f, 0.0f); // 回転軸
+        Vector3 axis = transform.up; // 回転軸
         float angle = TorpedoRotSpeed * Time.deltaTime; // 回転の角度
         TorpedoRotLR += angle;
         if (TorpedoRotLR > TorpedoMaxRot)
@@ -217,7 +219,8 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + transform.up * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.green);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
+        //Debug.DrawLine(transform.position + transform.up * 0.5f + transform.up * range, (transform.position + transform.up * 0.5f + transform.up * range) + transform.forward * distance, Color.green);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -232,7 +235,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + -transform.right * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.red);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -247,7 +250,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + -transform.up * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.blue);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.blue);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -262,7 +265,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + transform.right * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.yellow);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.yellow);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -278,7 +281,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + vec * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.red);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.red);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -291,7 +294,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + vec * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.blue);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.blue);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -304,7 +307,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + vec * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.yellow);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.yellow);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -317,7 +320,7 @@ public class TorpedoBehavior : MonoBehaviour
         ray = new Ray(transform.position + transform.up * 0.5f + vec * range, transform.forward);
 
         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-        Debug.DrawLine(ray.origin, ray.direction * distance, Color.green);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
 
         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
         {
@@ -374,17 +377,17 @@ public class TorpedoBehavior : MonoBehaviour
             ray = new Ray(transform.position + transform.up * 0.5f + transform.right * range, vec);
 
             //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-            Debug.DrawLine(ray.origin, ray.direction * distance, Color.green);
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
 
             Vector3 vec1 = (transform.up + transform.right).normalized;
             ray1 = new Ray(transform.position + transform.up * 0.5f + vec1 * range, vec);
             //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-            Debug.DrawLine(ray1.origin, ray1.direction * distance, Color.green);
+            Debug.DrawLine(ray1.origin, ray1.origin + ray1.direction * distance, Color.green);
 
             Vector3 vec2 = (-transform.up + transform.right).normalized;
             ray2 = new Ray(transform.position + transform.up * 0.5f + vec2 * range, vec);
             //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-            Debug.DrawLine(ray2.origin, ray2.direction * distance, Color.green);
+            Debug.DrawLine(ray2.origin, ray2.origin + ray2.direction * distance, Color.green);
 
             if ((Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle") || (Physics.Raycast(ray1, out hit, distance) && hit.collider.tag == "Obstacle") ||
                 (Physics.Raycast(ray2, out hit, distance) && hit.collider.tag == "Obstacle"))
@@ -395,17 +398,17 @@ public class TorpedoBehavior : MonoBehaviour
                 vec = (transform.forward + vec).normalized;
                 ray = new Ray(transform.position + transform.up * 0.5f - transform.right * range, vec);
                 //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-                Debug.DrawLine(ray.origin, ray.direction * distance, Color.green);
+                Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
 
                 vec1 = (transform.up + -transform.right).normalized;
                 ray1 = new Ray(transform.position + transform.up * 0.5f + vec1 * range, vec);
                 //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-                Debug.DrawLine(ray1.origin, ray1.direction * distance, Color.green);
+                Debug.DrawLine(ray1.origin, ray1.origin + ray1.direction * distance, Color.green);
 
                 vec2 = (-transform.up + -transform.right).normalized;
                 ray2 = new Ray(transform.position + transform.up * 0.5f + vec2 * range, vec);
                 //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-                Debug.DrawLine(ray2.origin, ray2.direction * distance, Color.green);
+                Debug.DrawLine(ray2.origin, ray2.origin + ray2.direction * distance, Color.green);
 
                 if ((Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle") || (Physics.Raycast(ray1, out hit, distance) && hit.collider.tag == "Obstacle") ||
                 (Physics.Raycast(ray2, out hit, distance) && hit.collider.tag == "Obstacle"))
@@ -417,7 +420,7 @@ public class TorpedoBehavior : MonoBehaviour
                     ray = new Ray(transform.position + transform.up * 0.5f - transform.up * range, vec);
 
                     //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-                    Debug.DrawLine(ray.origin, ray.direction * distance, Color.green);
+                    Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
                     if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
                     {
                         // 下チェック
@@ -427,7 +430,7 @@ public class TorpedoBehavior : MonoBehaviour
                         ray = new Ray(transform.position + transform.up * 0.5f + transform.up * range, vec);
 
                         //Rayの可視化    ↓Rayの原点　　　　↓Rayの方向　　　　　↓Rayの色
-                        Debug.DrawLine(ray.origin, ray.direction * distance, Color.green);
+                        Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
                         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
                         {
                             Debug.Log("回避不可");
@@ -478,7 +481,12 @@ public class TorpedoBehavior : MonoBehaviour
 
     void Search()
     {
-        if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
+        if((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
+        {
+            torpedoState = TorpedoState.RESCUE;
+            Debug.Log("救出！！");
+        }
+        else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
         {
             if (TorpedoSpeed > TorpedoMinSpeed) decel();
             timeElapsed = 0.0f;
@@ -495,6 +503,7 @@ public class TorpedoBehavior : MonoBehaviour
         }
         // --------------- 移動 -----------------
         transform.position += transform.forward * TorpedoSpeed * Time.deltaTime;
+       
 
         // --------- 障害物感知 ---------
         HitCheck();
@@ -504,22 +513,22 @@ public class TorpedoBehavior : MonoBehaviour
         {
             Vector3 vec = (target.transform.position - (transform.position + transform.up)).normalized;
             // 救出者が右にいる
-            if (Vector3.Dot(vec, transform.right) <= 1f && Vector3.Dot(vec, transform.right) > 0.2f)
+            if (Vector3.Dot(vec, transform.right) <= 1f && Vector3.Dot(vec, transform.right) > 0.1f)
             {
                 MoveRight();
             }
             // 救出者が左にいる
-            else if (Vector3.Dot(vec, transform.right) >= -1f && Vector3.Dot(vec, transform.right) < 0.2f)
+            else if (Vector3.Dot(vec, transform.right) >= -1f && Vector3.Dot(vec, transform.right) < 0.1f)
             {
                 MoveLeft();
             }
             // 救出者が上にいる
-            if (Vector3.Dot(vec, transform.up) <= 1f && Vector3.Dot(vec, transform.up) > 0.2f)
+            if (Vector3.Dot(vec, transform.up) <= 1f && Vector3.Dot(vec, transform.up) > 0.1f)
             {
                 MoveUp();
             }
             // 救出者が下にいる
-            else if (Vector3.Dot(vec, transform.up) >= -1f && Vector3.Dot(vec, transform.up) < 0.2f)
+            else if (Vector3.Dot(vec, transform.up) >= -1f && Vector3.Dot(vec, transform.up) < 0.1f)
             {
                 MoveDown();
             }
@@ -542,6 +551,21 @@ public class TorpedoBehavior : MonoBehaviour
         {
             TorpedoSpeed = TorpedoMinSpeed;
         }
+
+        Debug.Log(target.transform.position);
+    }
+
+    void Rescue()
+    {
+        TorpedoSpeed = 0f;
+        Vector3 axis = transform.right; // 回転軸
+        if(TorpedoRotUD != 0f)
+        {
+            float angle = -TorpedoRotUD; // 回転の角度
+            Quaternion q = Quaternion.AngleAxis(angle, axis); // 軸axisの周りにangle回転させるクォータニオン
+            transform.rotation = q * transform.rotation; // クォータニオンで回転させる
+            TorpedoRotUD -= TorpedoRotUD;
+        }
     }
     // おぼれている人の情報セット
     public void SetDrowningPerson(GameObject DrowningPerson)
@@ -562,6 +586,9 @@ public class TorpedoBehavior : MonoBehaviour
         {
             DrowningPersonList.Add(DrowningPerson);
         }
+        target = DrowningPersonList[0];
+        transform.LookAt(target.transform.position);
+        Debug.Log(target);
     }
 
     // おぼれている人の情報削除
@@ -577,5 +604,11 @@ public class TorpedoBehavior : MonoBehaviour
                 DrowningPersonList.RemoveAt(i);
             }
         }
+    }
+
+    public void SetTarget(GameObject Target)
+    {
+        target = Target;
+        transform.LookAt(target.transform.position);
     }
 }

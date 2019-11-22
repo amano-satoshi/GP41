@@ -7,6 +7,8 @@ TagManager:
   - Rader
   - SeaArea
   - Obstacle
+  - DrowingPerson
+  - Target
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6899597131834400850}
   - component: {fileID: 5307420101037082022}
   - component: {fileID: 535457628764901699}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pPlane3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 6899597131834400852}
   - component: {fileID: 8319926787796947957}
   - component: {fileID: 333783769750068361}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 6899597131834400854}
   - component: {fileID: 2795799249378047211}
   - component: {fileID: 5234255795996550891}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 6899597131836695222}
   - component: {fileID: 6899597131845782870}
   - component: {fileID: 3375745674987857060}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: iruka_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,10 +393,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70acccf30174ccd4990ee8b6a2108ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TorpedoSpeed: 3
-  TorpedoMaxSpeed: 5
-  TorpedoMinSpeed: 1
-  TorpedoChangeSpeed: 0.05
-  TorpedoMaxRot: 45
+  TorpedoSpeed: 6
+  TorpedoMaxSpeed: 6
+  TorpedoMinSpeed: 2
+  TorpedoChangeSpeed: 0.2
+  TorpedoMaxRot: 180
   TorpedoRotSpeed: 15
-  distance: 100
+  distance: 10
+  range: 0.5

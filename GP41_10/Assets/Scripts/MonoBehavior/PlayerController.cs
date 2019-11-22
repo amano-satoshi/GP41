@@ -15,10 +15,13 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> targets = new List<GameObject>();
     private List<GameObject> RescueTarget = new List<GameObject>();
     private List<GameObject> cameraList = new List<GameObject>();
+    private GameObject StageInfo;
+
     // Start is called before the first frame update
     void Start()
     {
         cursorBehavior = Cursor.GetComponent<CursorBehavior>();
+        StageInfo = GameObject.Find("StageSpawner");
     }
 
     // Update is called once per frame
@@ -53,31 +56,76 @@ public class PlayerController : MonoBehaviour
         {
             GameObject TorpedoObj;
             GameObject TorpedocameraObj;
+            StageSpawner stageSpawner = StageInfo.GetComponent<StageSpawner>();
             for (int i = 0; i < targets.Count; ++i)
             {
                 RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
                 switch(i)
                 {
                     case 0:
-                        TorpedoObj = Instantiate(Torpedo, new Vector3(0f, -5f, 20f), Quaternion.Euler(0f, 0f, 0f));
+                        TorpedoObj = Instantiate(Torpedo, stageSpawner.GetShipPos()[0], Quaternion.Euler(0f, 0f, 0f));
+                        if (RescueTarget != null)
+                        {
+                            for (int j = 0; j < RescueTarget.Count; ++j)
+                            {
+                                TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                            }
+                        }
+                        else
+                        {
+                            TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                        }
                         TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
                         TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
                         cameraList.Add(TorpedocameraObj);
                         break;
                     case 1:
-                        TorpedoObj = Instantiate(Torpedo, new Vector3(0f, -5f, -20f), Quaternion.Euler(0f, 0f, 0f));
+                        TorpedoObj = Instantiate(Torpedo, stageSpawner.GetShipPos()[1], Quaternion.Euler(0f, 0f, 0f));
+                        if (RescueTarget != null)
+                        {
+                            for (int j = 0; j < RescueTarget.Count; ++j)
+                            {
+                                TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                            }
+                        }
+                        else
+                        {
+                            TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                        }
                         TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
                         TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
                         cameraList.Add(TorpedocameraObj);
                         break;
                     case 2:
-                        TorpedoObj = Instantiate(Torpedo, new Vector3(-50f, -5f, 0f), Quaternion.Euler(0f, 0f, 0f));
+                        TorpedoObj = Instantiate(Torpedo, stageSpawner.GetShipPos()[2], Quaternion.Euler(0f, 0f, 0f));
+                        if (RescueTarget != null)
+                        {
+                            for (int j = 0; j < RescueTarget.Count; ++j)
+                            {
+                                TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                            }
+                        }
+                        else
+                        {
+                            TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                        }
                         TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
                         TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
                         cameraList.Add(TorpedocameraObj);
                         break;
                     case 3:
-                        TorpedoObj = Instantiate(Torpedo, new Vector3(50f, -5f, 0f), Quaternion.Euler(0f, 0f, 0f));
+                        TorpedoObj = Instantiate(Torpedo, stageSpawner.GetShipPos()[3], Quaternion.Euler(0f, 0f, 0f));
+                        if (RescueTarget != null)
+                        {
+                            for (int j = 0; j < RescueTarget.Count; ++j)
+                            {
+                                TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                            }
+                        }
+                        else
+                        {
+                            TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                        }
                         TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
                         TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
                         cameraList.Add(TorpedocameraObj);
