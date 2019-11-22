@@ -8,7 +8,7 @@ public class StageSpawner : MonoBehaviour
     public GameObject[] SeaArea;
     public GameObject Bow;
     public GameObject Ship;
-    public GameObject Obstacle;
+    public GameObject[] Obstacle = new GameObject[4];
     [SerializeField, Header("海域の配置")]
     private Vector3[] SeaAreaPos;
     [SerializeField, Header("海流の方向の矢印の配置")]
@@ -60,7 +60,7 @@ public class StageSpawner : MonoBehaviour
         for(int x = 0; x < 11; ++x)
         {
             int z = Random.Range(0, 4);
-            Instantiate(Obstacle, new Vector3((x - 5) * 6.0f, -5.5f, (z - 2) * 5.0f), Quaternion.identity);
+            Instantiate(Obstacle[z], new Vector3((x - 5) * 7.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
         }
 
         // 船
