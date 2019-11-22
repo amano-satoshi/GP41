@@ -122,8 +122,8 @@ public class TorpedoBehavior : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log(TorpedoSpeed);
-        Debug.Log(torpedoState);
+        //Debug.Log(TorpedoSpeed);
+        //Debug.Log(torpedoState);
     }
 
     // 上向き
@@ -484,6 +484,7 @@ public class TorpedoBehavior : MonoBehaviour
         if((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
         {
             torpedoState = TorpedoState.RESCUE;
+            StageData.IncreaseRescuePersonCnt();
             Debug.Log("救出！！");
         }
         else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)

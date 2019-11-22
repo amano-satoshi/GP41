@@ -5,12 +5,10 @@ using UnityEngine;
 public class StageSpawner : MonoBehaviour
 {
     public GameObject Cube;
-    public GameObject[] SeaArea;
+    public GameObject SeaArea;
     public GameObject Bow;
     public GameObject Ship;
     public GameObject[] Obstacle = new GameObject[4];
-    [SerializeField, Header("海域の配置")]
-    private Vector3[] SeaAreaPos;
     [SerializeField, Header("海流の方向の矢印の配置")]
     private Vector3[] SeaAreaBowPos;
     [SerializeField, Header("海流の方向")]
@@ -26,6 +24,9 @@ public class StageSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // ステージ情報リセット
+        StageData.Reset();
+
         // おぼれている人
         for (int z = 0; z < 5; ++z)
             for (int x = 0; x < 10; ++x)
@@ -39,9 +40,9 @@ public class StageSpawner : MonoBehaviour
             }
 
         // 海域
-        for(int i = 0; i < 5; ++i)
+        SeaAreaObj = Instantiate(SeaArea, Vector3.zero, Quaternion.identity);
+        for (int i = 0; i < 5; ++i)
         {
-            SeaAreaObj = Instantiate(SeaArea[i], SeaAreaPos[i], Quaternion.identity);
             Instantiate(Bow, SeaAreaBowPos[i], Quaternion.Euler(0f, -SeaAreaAngle[i] + 90f, 0f));
             // 角度をラジアンに変換
             float rad = SeaAreaAngle[i] * Mathf.Deg2Rad;
@@ -52,12 +53,12 @@ public class StageSpawner : MonoBehaviour
             float z = Mathf.Sin(rad);
 
             // 流れの向きと速度を設定
-            SeaAreaObj.GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
-            SeaAreaObj.GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[i]);
+            SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
+            SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[i]);
         }
 
         // 障害物
-        for(int x = 0; x < 11; ++x)
+        for (int x = 0; x < 11; ++x)
         {
             int z = Random.Range(0, 4);
             Instantiate(Obstacle[z], new Vector3((x - 5) * 7.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
@@ -73,7 +74,7 @@ public class StageSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(StageData.GetRescuePersonCnt());
     }
 
     public List<GameObject> GetDrowingPersons()

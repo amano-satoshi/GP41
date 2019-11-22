@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> targets = new List<GameObject>();
     private List<GameObject> RescueTarget = new List<GameObject>();
     private List<GameObject> cameraList = new List<GameObject>();
+
     private GameObject StageInfo;
 
     // Start is called before the first frame update

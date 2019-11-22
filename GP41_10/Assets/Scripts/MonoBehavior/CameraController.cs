@@ -71,4 +71,10 @@ public class CameraController : MonoBehaviour
             CameraList = cameraList;
         }
     }
+
+    public void ResetCameraState()
+    {
+        camerastate = CameraState.DEFAULT;
+        CameraList.Clear();
+    }
 }
