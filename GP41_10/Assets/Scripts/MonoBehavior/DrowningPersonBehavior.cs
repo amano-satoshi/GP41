@@ -20,6 +20,7 @@ public class DrowningPersonBehavior : MonoBehaviour
     private Vector3 vec = new Vector3(0f, 0f, 0f);
     private float speed = 0f;
     private bool Rescue = false;
+    private bool destflg = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,15 +30,24 @@ public class DrowningPersonBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += vec * speed * Time.deltaTime;
-        if(DispTime > 0f)
+        if (!Rescue)
+        {
+            transform.position += vec * speed * Time.deltaTime;
+        }
+
+        if (DispTime > 0f)
         {
             DispTime -= Time.deltaTime;
-            if(DispTime <= 0f && DrowingPerson != null)
+            if (DispTime <= 0f && DrowingPerson != null)
             {
                 Destroy(DrowingPerson);
                 DispTime = 0f;
             }
+        }
+
+        if (destflg)
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -84,5 +94,10 @@ public class DrowningPersonBehavior : MonoBehaviour
     public bool GetRescued()
     {
         return Rescue;
+    }
+
+    public void DestDrowningPerson()
+    {
+        destflg = true;
     }
 }

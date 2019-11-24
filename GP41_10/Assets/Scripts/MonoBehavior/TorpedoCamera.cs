@@ -16,6 +16,7 @@ public class TorpedoCamera : MonoBehaviour
     [SerializeField, Header("目的地に到達するまでの時間")]
     private float smoothing = 0f;
     private Vector3 offset = new Vector3(0f, 0f, 0f); // オフセット
+    private bool destflg = false;
 
     void Start()
     {
@@ -35,11 +36,21 @@ public class TorpedoCamera : MonoBehaviour
             );
             transform.rotation = target.transform.rotation;
         }
+
+        if (destflg)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetTorpedo(GameObject torpedo, Vector3 Offset)
     {
         target = torpedo;
         offset = Offset;
+    }
+
+    public void DestTorpedoCamera()
+    {
+        destflg = true;
     }
 }

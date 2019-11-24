@@ -39,4 +39,9 @@ public class RemainTime : MonoBehaviour
         int seconds = Mathf.FloorToInt(currentTime - minutes * 60);
         uiText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    public float GetRemainTime()
+    {
+        return currentTime;
+    }
 }

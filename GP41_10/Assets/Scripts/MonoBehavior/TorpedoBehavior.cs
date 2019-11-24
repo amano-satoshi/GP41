@@ -23,7 +23,7 @@ public class TorpedoBehavior : MonoBehaviour
         MAX_PLACE
     }
 
-    enum TorpedoState
+    public enum TorpedoState
     {
         SEARCH = 0,
         RESCUE,
@@ -59,11 +59,13 @@ public class TorpedoBehavior : MonoBehaviour
     private float timeElapsed;
     private TorpedoState torpedoState = TorpedoState.SEARCH;
     private bool[] SearchDirection = new bool[(int)CheckPlace.MAX_PLACE];
+    private bool destflg = false;
 
     private List<GameObject> DrowningPersonList = new List<GameObject>();
     private GameObject StageInfo;
     private TorpedoNPCBehavior TorpedoNPC;
     public float torpedospeed { get { return TorpedoSpeed; } }
+    public TorpedoState torpedostate { get { return torpedoState; } }
     // ===================== Start =======================
     void Start()
     {
@@ -122,8 +124,11 @@ public class TorpedoBehavior : MonoBehaviour
             default:
                 break;
         }
-        //Debug.Log(TorpedoSpeed);
-        //Debug.Log(torpedoState);
+
+        if(destflg)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     // 上向き
@@ -141,7 +146,6 @@ public class TorpedoBehavior : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, axis); // 軸axisの周りにangle回転させるクォータニオン
             transform.rotation = q * transform.rotation; // クォータニオンで回転させる
         }
-        Debug.Log("上向き");
     }
 
     // 下向き
@@ -159,7 +163,6 @@ public class TorpedoBehavior : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, axis); // 軸axisの周りにangle回転させるクォータニオン
             transform.rotation = q * transform.rotation; // クォータニオンで回転させる
         }
-        Debug.Log("下向き");
     }
 
     // 左向き
@@ -177,7 +180,6 @@ public class TorpedoBehavior : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, axis); // 軸axisの周りにangle回転させるクォータニオン
             transform.rotation = q * transform.rotation; // クォータニオンで回転させる
         }
-        Debug.Log("左向き");
     }
 
     // 右向き
@@ -195,21 +197,18 @@ public class TorpedoBehavior : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, axis); // 軸axisの周りにangle回転させるクォータニオン
             transform.rotation = q * transform.rotation; // クォータニオンで回転させる
         }
-        Debug.Log("右向き");
     }
 
     // 加速
     void accel()
     {
         TorpedoSpeed += TorpedoChangeSpeed;
-        Debug.Log("加速");
     }
 
     // 減速
     void decel()
     {
         TorpedoSpeed -= TorpedoChangeSpeed;
-        Debug.Log("減速");
     }
 
     // 障害物感知
@@ -327,11 +326,6 @@ public class TorpedoBehavior : MonoBehaviour
             hitplace[(int)CheckPlace.Right] = true;
             hitplace[(int)CheckPlace.UP] = true;
         }
-
-        for (int i = 0; i < 4; ++i)
-        {
-            Debug.Log(hitplace[i]);
-        }
     }
 
     // 回避
@@ -433,7 +427,6 @@ public class TorpedoBehavior : MonoBehaviour
                         Debug.DrawLine(ray.origin, ray.origin + ray.direction * distance, Color.green);
                         if (Physics.Raycast(ray, out hit, distance) && hit.collider.tag == "Obstacle")
                         {
-                            Debug.Log("回避不可");
                             torpedoState = TorpedoState.EMERGENCY;
                         }
                         else
@@ -484,8 +477,8 @@ public class TorpedoBehavior : MonoBehaviour
         if((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
         {
             torpedoState = TorpedoState.RESCUE;
+            target.GetComponent<DrowningPersonBehavior>().Rescued();
             StageData.IncreaseRescuePersonCnt();
-            Debug.Log("救出！！");
         }
         else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
         {
@@ -552,8 +545,6 @@ public class TorpedoBehavior : MonoBehaviour
         {
             TorpedoSpeed = TorpedoMinSpeed;
         }
-
-        Debug.Log(target.transform.position);
     }
 
     void Rescue()
@@ -589,7 +580,6 @@ public class TorpedoBehavior : MonoBehaviour
         }
         target = DrowningPersonList[0];
         transform.LookAt(target.transform.position);
-        Debug.Log(target);
     }
 
     // おぼれている人の情報削除
@@ -611,5 +601,10 @@ public class TorpedoBehavior : MonoBehaviour
     {
         target = Target;
         transform.LookAt(target.transform.position);
+    }
+
+    public void DestTorpedo()
+    {
+        destflg = true;
     }
 }
