@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     private StageState state;
     private List<GameObject> CameraList = new List<GameObject>();
     [SerializeField, Header("マップカメラの配置"), CustomListLabelAttribute(new string[] {"発射前", "1機発射", "2機発射", "3機発射", "4機発射" })]
-    private Rect[] MapRect = new Rect[(int)CameraState.MAX_CAMERASTATE];
+    private Rect[] MapRect = new Rect[5];
     [SerializeField, Header("UI部分を除いた画面の大きさ")]
     private Vector2 DispSize = new Vector2(0f, 0f);
 

@@ -477,8 +477,11 @@ public class TorpedoBehavior : MonoBehaviour
         if((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
         {
             torpedoState = TorpedoState.RESCUE;
-            target.GetComponent<DrowningPersonBehavior>().Rescued();
-            StageData.IncreaseRescuePersonCnt();
+            if(target.tag == "DrowingPerson")
+            {
+                target.GetComponent<DrowningPersonBehavior>().Rescued();
+                StageData.IncreaseRescuePersonCnt();
+            }
         }
         else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
         {

@@ -47,7 +47,7 @@ public class StageSpawner : MonoBehaviour
             {
                 if (Random.Range(0, 5) == 1)
                 {
-                    Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 10f + 5f, 0f, (z - 2.5f) * 10f + 5f), Quaternion.identity);
+                    Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
                     Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
                     DrowingPersons.Add(Cubeobj);
                 }
@@ -74,10 +74,11 @@ public class StageSpawner : MonoBehaviour
         }
 
         // 障害物
-        for (int x = 0; x < 11; ++x)
+        for (int x = 0; x < 16; ++x)
         {
-            int z = Random.Range(0, 4);
-            Instantiate(Obstacle[z], new Vector3((x - 5) * 7.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
+            int z = Random.Range(0, 6);
+            int rock = Random.Range(0, 4);
+            Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
         }
 
         // 船
@@ -100,7 +101,7 @@ public class StageSpawner : MonoBehaviour
                 {
                     if (Random.Range(0, 5) == 1)
                     {
-                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 10f + 5f, 0f, (z - 2.5f) * 10f + 5f), Quaternion.identity);
+                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
                         Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
                         DrowingPersons.Add(Cubeobj);
                     }
@@ -115,7 +116,7 @@ public class StageSpawner : MonoBehaviour
                 {
                     if (Random.Range(0, 5) == 1)
                     {
-                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 10f + 5f, 0f, (z - 2.5f) * 10f + 5f), Quaternion.identity);
+                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
                         Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
                         DrowingPersons.Add(Cubeobj);
                     }

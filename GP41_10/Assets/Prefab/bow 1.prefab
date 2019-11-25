@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2026676106888293397}
   - component: {fileID: 2026676106889620535}
   - component: {fileID: 2026676106890587895}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: layer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026676106888293399}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: bow 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

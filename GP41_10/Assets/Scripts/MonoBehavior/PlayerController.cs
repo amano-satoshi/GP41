@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log(StageData.GetRescuePersonCnt());
+        }
         if (state.GetStageState() != StageState.STAGE_STATE.PREPARE)
         {
             return;
