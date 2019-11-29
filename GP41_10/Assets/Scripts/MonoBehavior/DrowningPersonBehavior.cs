@@ -15,6 +15,7 @@ public class DrowningPersonBehavior : MonoBehaviour
     [SerializeField, Header("マップ画面に表示する時間")]
     private float DispMaxTime = 0f;
     private float DispTime = 0f;
+    private GameObject stagestate;
     public GameObject DispPerson;
     private GameObject DrowingPerson;
     private Vector3 vec = new Vector3(0f, 0f, 0f);
@@ -24,12 +25,17 @@ public class DrowningPersonBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        stagestate = GameObject.Find("StageState");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(stagestate.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.START ||
+            stagestate.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.TIME_UP)
+        {
+            return;
+        }
         if (!Rescue)
         {
             transform.position += vec * speed * Time.deltaTime;

@@ -17,6 +17,10 @@ public class TorpedoCamera : MonoBehaviour
     private float smoothing = 0f;
     private Vector3 offset = new Vector3(0f, 0f, 0f); // オフセット
     private bool destflg = false;
+    public Canvas success;
+    public Canvas failed;
+    private Canvas result = null;
+    private bool TextDisp = false;
 
     void Start()
     {
@@ -35,10 +39,22 @@ public class TorpedoCamera : MonoBehaviour
                 Time.deltaTime * smoothing
             );
             transform.rotation = target.transform.rotation;
+
+            if(target.GetComponent<TorpedoBehavior>().torpedostate == TorpedoBehavior.TorpedoState.RESCUE && !TextDisp)
+            {
+                DispResult(true);
+                TextDisp = true;
+            }
+            else if(target.GetComponent<TorpedoBehavior>().torpedostate == TorpedoBehavior.TorpedoState.FAILED && !TextDisp)
+            {
+                DispResult(false);
+                TextDisp = true;
+            }
         }
 
         if (destflg)
         {
+            Destroy(result.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -52,5 +68,23 @@ public class TorpedoCamera : MonoBehaviour
     public void DestTorpedoCamera()
     {
         destflg = true;
+    }
+
+    void DispResult(bool successflg)
+    {
+        if(successflg)
+        {
+            result = Instantiate(success);
+            result.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+            result.GetComponent<Canvas>().worldCamera = this.gameObject.GetComponent<Camera>();
+            result.GetComponent<Canvas>().planeDistance = 1;
+        }
+        else
+        {
+            result = Instantiate(failed);
+            result.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+            result.GetComponent<Canvas>().worldCamera = this.gameObject.GetComponent<Camera>();
+            result.GetComponent<Canvas>().planeDistance = 1;
+        }
     }
 }

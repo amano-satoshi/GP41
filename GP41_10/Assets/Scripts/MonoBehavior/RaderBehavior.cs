@@ -10,6 +10,8 @@ public class RaderBehavior : MonoBehaviour
     private Vector3 RaderStart = new Vector3(0f, 0f, 0f);
     [SerializeField, Header("レーダーのゴール地点")]
     private Vector3 RaderGoal = new Vector3(0f, 0f, 0f);
+
+    public GameObject stagestate;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,11 @@ public class RaderBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(stagestate.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.START ||
+            stagestate.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.TIME_UP)
+        {
+            return;
+        }
         transform.position -= RaderSpeed * Time.deltaTime;
         if(transform.position.x < RaderGoal.x)
         {

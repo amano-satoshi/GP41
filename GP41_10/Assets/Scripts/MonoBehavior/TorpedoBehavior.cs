@@ -27,6 +27,7 @@ public class TorpedoBehavior : MonoBehaviour
     {
         SEARCH = 0,
         RESCUE,
+        FAILED,
         EMERGENCY,
         RETURN,
 
@@ -70,12 +71,14 @@ public class TorpedoBehavior : MonoBehaviour
     void Start()
     {
         StageInfo = GameObject.Find("StageSpawner");
-        //target = GameObject.Find("person");
+        TorpedoSpeed += StageData.GetBuffSpeed();
+        TorpedoMaxSpeed += StageData.GetBuffSpeed();
     }
 
     // ===================== Update =======================
     void Update()
     {
+        // 加速・減速間隔計算用
         timeElapsed += Time.deltaTime;
         
         switch(torpedoState)
@@ -85,6 +88,9 @@ public class TorpedoBehavior : MonoBehaviour
                 break;
             case TorpedoState.RESCUE:
                 Rescue();
+                break;
+            case TorpedoState.FAILED:
+                Failed();
                 break;
             case TorpedoState.EMERGENCY:
                 decel();
@@ -476,11 +482,15 @@ public class TorpedoBehavior : MonoBehaviour
     {
         if((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
         {
-            torpedoState = TorpedoState.RESCUE;
             if(target.tag == "DrowingPerson")
             {
+                torpedoState = TorpedoState.RESCUE;
                 target.GetComponent<DrowningPersonBehavior>().Rescued();
                 StageData.IncreaseRescuePersonCnt();
+            }
+            else
+            {
+                torpedoState = TorpedoState.FAILED;
             }
         }
         else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
@@ -562,6 +572,20 @@ public class TorpedoBehavior : MonoBehaviour
             TorpedoRotUD -= TorpedoRotUD;
         }
     }
+
+    void Failed()
+    {
+        TorpedoSpeed = 0f;
+        Vector3 axis = transform.right; // 回転軸
+        if (TorpedoRotUD != 0f)
+        {
+            float angle = -TorpedoRotUD; // 回転の角度
+            Quaternion q = Quaternion.AngleAxis(angle, axis); // 軸axisの周りにangle回転させるクォータニオン
+            transform.rotation = q * transform.rotation; // クォータニオンで回転させる
+            TorpedoRotUD -= TorpedoRotUD;
+        }
+    }
+
     // おぼれている人の情報セット
     public void SetDrowningPerson(GameObject DrowningPerson)
     {

@@ -14,6 +14,11 @@ public class StageSpawner : MonoBehaviour
     public GameObject Torpedocamera;
     public GameObject cameraController;
     public GameObject stageTimer;
+    public GameObject stageState;
+    public Canvas startProduction;
+    public Canvas ShootProduction;
+    public Canvas TorpedoLearning;
+    public Canvas EndProduction;
     public GameObject[] Obstacle = new GameObject[4];
     [SerializeField, Header("海流の方向の矢印の配置")]
     private Vector3[] SeaAreaBowPos;
@@ -29,11 +34,17 @@ public class StageSpawner : MonoBehaviour
     private GameObject SeaAreaObj;
     private GameObject Bowobj;
     private GameObject Cubeobj;
+    private Canvas StartProductionObj;
+    private Canvas ShootProductionObj;
+    private Canvas TorpedoLearningObj;
+    private Canvas EndProductionObj;
     private List<GameObject> DrowingPersons = new List<GameObject>();
     private List<GameObject> targets = new List<GameObject>();
     private List<GameObject> RescueTarget = new List<GameObject>();
     private List<GameObject> cameraList = new List<GameObject>();
     private List<GameObject> TorpedoList = new List<GameObject>();
+    private int[] RandomWave = new int[5];
+    private int WaveSpeedChange = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -70,8 +81,9 @@ public class StageSpawner : MonoBehaviour
 
             // 流れの向きと速度を設定
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
-            SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[i]);
+            SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
         }
+        Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
 
         // 障害物
         for (int x = 0; x < 16; ++x)
@@ -86,14 +98,24 @@ public class StageSpawner : MonoBehaviour
         {
             Instantiate(Ship, ShipPos[i], Quaternion.identity);
         }
+
+        // 波の変化のタイミング
+        RandomWave[0] = Random.Range(150, 161);
+        RandomWave[1] = Random.Range(120, 131);
+        RandomWave[2] = Random.Range(90, 101);
+        RandomWave[3] = Random.Range(60, 71);
+        RandomWave[4] = Random.Range(30, 41);
+
+        // 開始演出準備
+        StartProductionObj = Instantiate(startProduction);
     }
 
     // Update is called once per frame
     void Update()
     {
-        int minutes = Mathf.FloorToInt(stageTimer.GetComponent<RemainTime>().GetRemainTime() / 60F);
-        int seconds = Mathf.FloorToInt(stageTimer.GetComponent<RemainTime>().GetRemainTime() - minutes * 60);
-        if (minutes == 2 && seconds == 0 && AddPersonLimit == 2)
+        int times = stageTimer.GetComponent<RemainTime>().GetRemainTime();
+        
+        if ((times == 120 && AddPersonLimit == 2) || (times == 60 && AddPersonLimit == 1))
         {
             // おぼれている人追加
             for (int z = 0; z < 5; ++z)
@@ -108,21 +130,57 @@ public class StageSpawner : MonoBehaviour
                 }
             AddPersonLimit--;
         }
-        else if(minutes == 1 && seconds == 0 && AddPersonLimit == 1)
+
+        if((times == RandomWave[0] && WaveSpeedChange == 5) || (times == RandomWave[1] && WaveSpeedChange == 4) || 
+            (times == RandomWave[2] && WaveSpeedChange == 3) || (times == RandomWave[3] && WaveSpeedChange == 2) ||
+            (times == RandomWave[4] && WaveSpeedChange == 1))
         {
-            // おぼれている人追加
-            for (int z = 0; z < 5; ++z)
-                for (int x = 0; x < 10; ++x)
-                {
-                    if (Random.Range(0, 5) == 1)
-                    {
-                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
-                        Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
-                        DrowingPersons.Add(Cubeobj);
-                    }
-                }
-            AddPersonLimit--;
+            int randomwave = Random.Range(0, 3);
+            for(int i = 0; i < 5; ++i)
+            {
+                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[randomwave]);
+            }
+            Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
+            WaveSpeedChange--;
         }
+
+        if(stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT && ShootProductionObj == null)
+        {
+            // 発射演出準備
+            ShootProductionObj = Instantiate(ShootProduction);
+        }
+
+        if(stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.LEARNING && TorpedoLearningObj == null)
+        {
+            // 学習演出準備
+            TorpedoLearningObj = Instantiate(TorpedoLearning);
+        }
+
+        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.TIME_UP && EndProductionObj == null)
+        {
+            // 終了演出準備
+            EndProductionObj = Instantiate(EndProduction);
+        }
+    }
+
+    public Canvas GetStartProduction()
+    {
+        return StartProductionObj;
+    }
+
+    public Canvas GetShootProduction()
+    {
+        return ShootProductionObj;
+    }
+
+    public Canvas GetTorpedoLearning()
+    {
+        return TorpedoLearningObj;
+    }
+
+    public Canvas GetEndProduction()
+    {
+        return EndProductionObj;
     }
 
     public List<GameObject> GetDrowingPersons()

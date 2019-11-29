@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 3
-  offset: {x: 0, y: 2, z: -5}
+  success: {fileID: 3107628807715002182, guid: 170ef9de1ea0abf4080f8c8cee10f448, type: 3}
+  failed: {fileID: 6059939991266627106, guid: 4f0c4851eee14d74e99ee553e7cb495d, type: 3}

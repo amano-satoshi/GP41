@@ -15,6 +15,7 @@ public class TargetBehavior : MonoBehaviour
     {
         stageSpawer = GameObject.Find("StageSpawner");
         GetComponent<MeshRenderer>().material.color = Color.red;
+        SuccessRange += StageData.GetBuffRange();
     }
 
     // Update is called once per frame

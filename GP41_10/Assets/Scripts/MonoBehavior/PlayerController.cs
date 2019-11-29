@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(StageData.GetRescuePersonCnt());
         }
+        if(Input.GetKeyDown(KeyCode.RightShift))
+        {
+            Debug.Log(StageData.GetLearningGauge());
+        }
         if (state.GetStageState() != StageState.STAGE_STATE.PREPARE)
         {
             return;
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return) && stageSpawner.GetTargets().Count != 0)
         {
             stageSpawner.TorpedoShoot();
-            state.SetStageState(StageState.STAGE_STATE.RESCUE);
+            state.SetStageState(StageState.STAGE_STATE.SHOOT);
         }
     }
 }
