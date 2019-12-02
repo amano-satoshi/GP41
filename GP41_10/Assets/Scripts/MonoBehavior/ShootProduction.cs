@@ -14,6 +14,8 @@ public class ShootProduction : MonoBehaviour
     private Vector3 EndPos;
     private Image CutIn;
     private Text Shoot;
+    [SerializeField, Header("カットインスピード")]
+    private float CutInSpeed = 1242f;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,8 +70,8 @@ public class ShootProduction : MonoBehaviour
 
     void MoveProduction()
     {
-        CutIn.rectTransform.position -= new Vector3(1242f * Time.deltaTime, 0f, 0f);
-        Shoot.rectTransform.position -= new Vector3(1242f * Time.deltaTime, 0f, 0f);
+        CutIn.rectTransform.position -= new Vector3(CutInSpeed * Time.deltaTime, 0f, 0f);
+        Shoot.rectTransform.position -= new Vector3(CutInSpeed * Time.deltaTime, 0f, 0f);
         if(CutIn.rectTransform.localPosition.x <= EndPos.x)
         {
             CutIn.rectTransform.localPosition = EndPos;

@@ -8,6 +8,7 @@ public static class StageData
     static int LearningGauge = 0;
     static float BuffSpeed = 0f;
     static float BuffRange = 0f;
+    public static int PlayerNum = 1;
 
     // ============ ステージ情報リセット ===========
     static public void Reset()

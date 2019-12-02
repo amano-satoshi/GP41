@@ -208,6 +208,11 @@ public class StageSpawner : MonoBehaviour
         return cameraList;
     }
 
+    public float GetOceanCurrentSpeed()
+    {
+        return SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed();
+    }
+
     public void SpawnTarget()
     {
         GameObject target;
