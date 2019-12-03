@@ -113,7 +113,7 @@ Material:
     - _Invert: 1
     - _MipBias: 0
     - _Moving: 0.17
-    - _NormalsScale: 28
+    - _NormalsScale: 200
     - _NormalsStrength: 2
     - _Offset: 0.00008
     - _OverrideReflectionCubemap: 0
@@ -161,7 +161,7 @@ Material:
     - _WaveFoamStart: 0
     - _WaveFoamStrength: 1
     m_Colors:
-    - _DepthFogDensity: {r: 7.38, g: 0.23, b: 0.27, a: 1}
+    - _DepthFogDensity: {r: 0.33, g: 0.23, b: 0.27, a: 1}
     - _Diffuse: {r: 1, g: 0.6, b: 0.73769724, a: 0.72156864}
     - _DiffuseGrazing: {r: 0.08334541, g: 0, b: 1, a: 1}
     - _DiffuseShadow: {r: 0.26539695, g: 0.5933429, b: 0.7924528, a: 1}

@@ -41,10 +41,14 @@ public class BoatAlignNormal : FloatingObjectBase
     [Header("Controls")]
     [SerializeField]
     bool _playerControlled = true;
+    [SerializeField]
+    bool resultMode = false;
     [Tooltip("Used to automatically add throttle input"), SerializeField]
     float _throttleBias = 0f;
     [Tooltip("Used to automatically add turning input"), SerializeField]
     float _steerBias = 0f;
+    [SerializeField]
+    public float rawForward;
 
     [Header("Debug")]
     [SerializeField]
@@ -87,10 +91,7 @@ public class BoatAlignNormal : FloatingObjectBase
 
         // Trigger processing of displacement textures that have come back this frame. This will be processed
         // anyway in Update(), but FixedUpdate() is earlier so make sure it's up to date now.
-        if (OceanRenderer.Instance._simSettingsAnimatedWaves.CollisionSource == SimSettingsAnimatedWaves.CollisionSources.OceanDisplacementTexturesGPU && GPUReadbackDisps.Instance)
-        {
-            GPUReadbackDisps.Instance.ProcessRequests();
-        }
+
 
         var collProvider = OceanRenderer.Instance.CollisionProvider;
         var position = transform.position;
@@ -178,7 +179,11 @@ public class BoatAlignNormal : FloatingObjectBase
         _rb.AddForceAtPosition(transform.forward * Vector3.Dot(transform.forward, -velocityRelativeToWater) * _dragInWaterForward, forcePosition, ForceMode.Acceleration);
 
         float forward = _throttleBias;
-        float rawForward = Input.GetAxis("Vertical");
+        if (!resultMode)
+        {
+            rawForward = Input.GetAxis("Vertical");
+        }
+         
         if (_playerControlled) forward += rawForward;
         _rb.AddForceAtPosition(transform.forward * _enginePower * forward, forcePosition, ForceMode.Acceleration);
 
