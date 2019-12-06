@@ -39,7 +39,7 @@ public class TorpedoLearning : MonoBehaviour
         EraseTime = 4f;
         count = 1;
         ProductionNum = 0;
-        EndPos = new Vector3(-21f, 0f, 0f);
+        EndPos = new Vector3(-66f, 0f, 0f);
     }
 
     // Update is called once per frame

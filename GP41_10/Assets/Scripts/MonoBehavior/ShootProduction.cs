@@ -22,7 +22,7 @@ public class ShootProduction : MonoBehaviour
         Remaintime = ProductionTime;
         CutIn = transform.GetChild(0).GetComponent<Image>();
         Shoot = transform.GetChild(1).GetComponent<Text>();
-        EndPos = new Vector3(-21f, 0f, 0f);
+        EndPos = new Vector3(-66f, 0f, 0f);
     }
 
     // Update is called once per frame

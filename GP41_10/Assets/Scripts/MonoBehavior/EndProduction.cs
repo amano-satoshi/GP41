@@ -22,7 +22,7 @@ public class EndProduction : MonoBehaviour
         Remaintime = ProductionTime;
         CutIn = transform.GetChild(0).GetComponent<Image>();
         End = transform.GetChild(1).GetComponent<Text>();
-        EndPos = new Vector3(-21f, 0f, 0f);
+        EndPos = new Vector3(-66f, 0f, 0f);
         Startflg = false;
         Endflg = false;
         Delflg = false;

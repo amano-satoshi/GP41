@@ -8,7 +8,7 @@ public class WaveShape : MonoBehaviour
     public GameObject stageSpawner;
     private StageSpawner stageSpawnerObj;
     [SerializeField, Header("波のスプライト")]
-    private Sprite[] waveImages = new Sprite[12];
+    private Sprite[] waveImages = new Sprite[20];
     [SerializeField, Header("波形イメージ")]
     private Image waveShape;
     [SerializeField, Header("アニメーションスピード")]
@@ -37,7 +37,7 @@ public class WaveShape : MonoBehaviour
         {
             if (currentSpeed == SeaAreaSpeed[0])
             {
-                if(currentWavenum > 3)
+                if(currentWavenum > 7)
                 {
                     currentWavenum = 0;
                     waveShape.sprite = waveImages[currentWavenum];
@@ -45,7 +45,7 @@ public class WaveShape : MonoBehaviour
                 else
                 {
                     currentWavenum++;
-                    if(currentWavenum > 3)
+                    if(currentWavenum > 7)
                     {
                         currentWavenum = 0;
                         waveShape.sprite = waveImages[currentWavenum];
@@ -58,17 +58,17 @@ public class WaveShape : MonoBehaviour
             }
             else if (currentSpeed == SeaAreaSpeed[1])
             {
-                if (currentWavenum > 7 || currentWavenum < 4)
+                if (currentWavenum > 15 || currentWavenum < 8)
                 {
-                    currentWavenum = 4;
+                    currentWavenum = 8;
                     waveShape.sprite = waveImages[currentWavenum];
                 }
                 else
                 {
                     currentWavenum++;
-                    if (currentWavenum > 7)
+                    if (currentWavenum > 15)
                     {
-                        currentWavenum = 4;
+                        currentWavenum = 8;
                         waveShape.sprite = waveImages[currentWavenum];
                     }
                     else
@@ -79,17 +79,17 @@ public class WaveShape : MonoBehaviour
             }
             else if (currentSpeed == SeaAreaSpeed[2])
             {
-                if (currentWavenum < 8)
+                if (currentWavenum < 16)
                 {
-                    currentWavenum = 8;
+                    currentWavenum = 16;
                     waveShape.sprite = waveImages[currentWavenum];
                 }
                 else
                 {
                     currentWavenum++;
-                    if (currentWavenum > 11)
+                    if (currentWavenum > 19)
                     {
-                        currentWavenum = 8;
+                        currentWavenum = 16;
                         waveShape.sprite = waveImages[currentWavenum];
                     }
                     else
