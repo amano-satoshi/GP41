@@ -8,7 +8,7 @@ public class TorpedoLearning : MonoBehaviour
     [SerializeField, Header("カウントダウンのImage")]
     Image image;
     [SerializeField, Header("学習項目のImage")]
-    Image[] images = new Image[3];
+    Image[] images = new Image[2];
     [SerializeField, Header("数字のスプライト（０から９）")]
     Sprite[] numberSprites = new Sprite[10];
     [SerializeField, Header("制限時間")]
@@ -28,8 +28,8 @@ public class TorpedoLearning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CutIn = transform.GetChild(6).GetComponent<Image>();
-        StatusUp = transform.GetChild(7).GetComponent<Text>();
+        CutIn = transform.GetChild(2).GetComponent<Image>();
+        StatusUp = transform.GetChild(3).GetComponent<Text>();
 
         // 残り時間を設定
         currentTime = gameTime;
@@ -99,15 +99,15 @@ public class TorpedoLearning : MonoBehaviour
             Choice--;
             if (Choice < 0)
             {
-                Choice += 3;
+                Choice += 2;
             }
         }
         if (Input.GetKeyDown(KeyCode.D))         // 右
         {
             Choice++;
-            if (Choice > 2)
+            if (Choice > 1)
             {
-                Choice -= 3;
+                Choice -= 2;
             }
         }
         if (Input.GetKeyDown(KeyCode.Return) || currentTime <= 0f)    // 決定
@@ -122,35 +122,23 @@ public class TorpedoLearning : MonoBehaviour
                 StageData.SetBuffRange(1f);
                 ProductionNum = 1;
             }
-            else if (Choice == 2)
-            {
-                int choice = Random.Range(0, 2);
-                if (choice == 0)
-                {
-                    StageData.SetBuffSpeed(1f);
-                    ProductionNum = 0;
-                }
-                else if (choice == 1)
-                {
-                    StageData.SetBuffRange(1f);
-                    ProductionNum = 1;
-                }
-            }
             ProductionFlg = true;
         }
     }
 
     void SetPanel()
     {
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             if (i == Choice)
             {
-                images[i].rectTransform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                images[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
+                images[i].transform.GetChild(1).GetComponent<Image>().enabled = true;
             }
             else
             {
-                images[i].rectTransform.localScale = new Vector3(1f, 1f, 1f);
+                images[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
+                images[i].transform.GetChild(1).GetComponent<Image>().enabled = false;
             }
         }
     }

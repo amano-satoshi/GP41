@@ -1,21 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LearningGauge : MonoBehaviour
 {
-    Slider _slider;
+    private Vector3[] vertpos = new Vector3[4];
+    private int gauge = 0;
+    // Start is called before the first frame update
     void Start()
     {
-        // スライダーを取得する
-        _slider = GameObject.Find("Slider").GetComponent<Slider>();
+        vertpos[0] = new Vector3(85f, -10f);
+        vertpos[1] = new Vector3(90f, 10f);
+        vertpos[2] = new Vector3(90f, 10f);
+        vertpos[3] = new Vector3(85f, -10f);
     }
 
-    float _hp = 0;
+    // Update is called once per frame
     void Update()
     {
-        // ゲージに値を設定
-        _slider.value = StageData.GetLearningGauge() / 10f;
+        gauge = StageData.GetLearningGauge();
+        vertpos[0] = new Vector3(85f - gauge * 16.5f, -10f);
+        vertpos[1] = new Vector3(90f - gauge * 15.5f, 10f + gauge * 1f);
+        GetComponent<createImage>().SetVertPos(vertpos);
     }
 }

@@ -393,10 +393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70acccf30174ccd4990ee8b6a2108ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TorpedoSpeed: 6
-  TorpedoMaxSpeed: 6
+  TorpedoSpeed: 10
+  TorpedoMaxSpeed: 10
   TorpedoMinSpeed: 2
-  TorpedoChangeSpeed: 0.2
+  TorpedoChangeSpeed: 0.4
   TorpedoMaxRot: 180
   TorpedoRotSpeed: 15
   distance: 10

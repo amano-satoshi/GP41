@@ -76,7 +76,7 @@ Material:
     - _SinColorDistant: 0.198
     - _SinSpeed: 0.203
     - _SinWave: 0.399
-    - _SinWidth: 0.3
+    - _SinWidth: 0.15
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

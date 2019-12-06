@@ -30,7 +30,8 @@ public class StageSpawner : MonoBehaviour
     private Vector3[] ShipPos = new Vector3[4];
     [SerializeField, Header("カメラと魚雷とのオフセット（x:左右、y:上下、z:前後）")]
     private Vector3 offset = new Vector3(0f, 0f, 0f); // オフセット
-    private int AddPersonLimit;
+    private bool AddPersonLimit = false;
+    private int AddPersonLimitNum = 3;
     private GameObject SeaAreaObj;
     private GameObject Bowobj;
     private GameObject Cubeobj;
@@ -63,8 +64,7 @@ public class StageSpawner : MonoBehaviour
                     DrowingPersons.Add(Cubeobj);
                 }
             }
-
-        AddPersonLimit = 2;
+        AddPersonLimit = true;
 
         // 海域
         SeaAreaObj = Instantiate(SeaArea, Vector3.zero, Quaternion.identity);
@@ -115,22 +115,23 @@ public class StageSpawner : MonoBehaviour
     {
         int times = stageTimer.GetComponent<RemainTime>().GetRemainTime();
         
-        if ((times == 120 && AddPersonLimit == 2) || (times == 60 && AddPersonLimit == 1))
+        if (times % 10 == 0 && !AddPersonLimit)
         {
             // おぼれている人追加
-            for (int z = 0; z < 5; ++z)
-                for (int x = 0; x < 10; ++x)
-                {
-                    if (Random.Range(0, 5) == 1)
-                    {
-                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
-                        Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
-                        DrowingPersons.Add(Cubeobj);
-                    }
-                }
-            AddPersonLimit--;
+            for (int i = 0; i < AddPersonLimitNum; ++i)
+            {
+                Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, 3) * 15f + i * 50f - 65f, 0f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
+                Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
+                DrowingPersons.Add(Cubeobj);
+            }
+            AddPersonLimit = true;
+        }
+        else if(times % 10 != 0 && AddPersonLimit)
+        {
+            AddPersonLimit = false;
         }
 
+        // 波の荒さ変更
         if((times == RandomWave[0] && WaveSpeedChange == 5) || (times == RandomWave[1] && WaveSpeedChange == 4) || 
             (times == RandomWave[2] && WaveSpeedChange == 3) || (times == RandomWave[3] && WaveSpeedChange == 2) ||
             (times == RandomWave[4] && WaveSpeedChange == 1))
@@ -211,6 +212,11 @@ public class StageSpawner : MonoBehaviour
     public float GetOceanCurrentSpeed()
     {
         return SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed();
+    }
+
+    public float[] GetSeaAreaSpeed()
+    {
+        return SeaAreaSpeed;
     }
 
     public void SpawnTarget()
