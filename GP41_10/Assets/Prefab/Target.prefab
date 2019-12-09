@@ -105,4 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fb271fa0073f24ab819276a096079e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SuccessRange: 3
+  SuccessRange: 10

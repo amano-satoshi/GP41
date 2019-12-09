@@ -81,7 +81,8 @@ public class DrowningPersonBehavior : MonoBehaviour
     {
         if (collider.gameObject.tag == "Rader" && !Rescue)
         {
-            DrowingPerson = Instantiate(DispPerson, transform.position, Quaternion.identity);
+            Vector3 pos = new Vector3(transform.position.x, 5f, transform.position.z);
+            DrowingPerson = Instantiate(DispPerson, pos, Quaternion.identity);
             DrowingPerson.GetComponent<MeshRenderer>().material.color = Color.red;
             DispTime = DispMaxTime;
         }

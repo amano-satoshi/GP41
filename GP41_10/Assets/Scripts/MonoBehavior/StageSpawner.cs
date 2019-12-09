@@ -60,7 +60,6 @@ public class StageSpawner : MonoBehaviour
                 if (Random.Range(0, 5) == 1)
                 {
                     Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
-                    Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
                     DrowingPersons.Add(Cubeobj);
                 }
             }
@@ -121,7 +120,6 @@ public class StageSpawner : MonoBehaviour
             for (int i = 0; i < AddPersonLimitNum; ++i)
             {
                 Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, 3) * 15f + i * 50f - 65f, 0f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
-                Cubeobj.GetComponent<MeshRenderer>().material.color = Color.red;
                 DrowingPersons.Add(Cubeobj);
             }
             AddPersonLimit = true;

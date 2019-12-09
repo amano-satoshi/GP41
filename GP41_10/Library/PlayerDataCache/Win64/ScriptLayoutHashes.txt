@@ -2,7 +2,8 @@ Win64
 PlayerPath?
 C:/Users/satoshi/Documents/GP41_10.exe
 SceneListBegin?
-Assets/Scenes/prototype.unity
+Assets/Scenes/GameMain.unity
+Assets/Scenes/ResultScene.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 6507a913cf03b5b56b5bcfc0f65157ff Assembly-CSharp.dll:.StageState
@@ -65,6 +66,8 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 98ad81e9f689a492509f07e75b810aaa Unity.TextMeshPro.dll:TMPro.TMP_InputField
 f6633ace6e530c0000f2ac6da4269c52 Unity.ProBuilder.dll:UnityEngine.ProBuilder.PolyShape
+71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
+71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 17f9eee4c6bda25af6983494f5ed863a Assembly-CSharp.dll:Crest.SimSettingsAnimatedWaves
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -98,6 +101,7 @@ fc108ce7d98c40ac0907e8ca7f500c76 UnityEngine.UI.dll:UnityEngine.UI.Text
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Flashing
 70d77679420f111bc04dfe6fe61a7c7c Assembly-CSharp.dll:Crest.UnderwaterEffect
 36f96c190e244321e128769d9c5120ac Unity.ProBuilder.dll:UnityEngine.ProBuilder.ProBuilderMesh
 590c002c8ed26e3b56d0db5e86b54e71 Assembly-CSharp.dll:.Sleeper
@@ -163,6 +167,7 @@ c34032e6bd347e96291c5ddfd67e6a5b Assembly-CSharp.dll:.RemainTime
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:Crest.SimSettingsBase
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 7e49ad7c7a9c20d987bfb38a0977bfa2 Assembly-CSharp.dll:Crest.RenderAlphaOnSurface
+19e3da00a18face443ade2c17b4cfc62 Assembly-CSharp.dll:.createImage
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -247,5 +252,3 @@ e29d018e2a275244d389cb7971cb711d Assembly-CSharp.dll:Crest.RegisterSeaFloorDepth
 1c80bf3855862874130ee0c455e32c5b Assembly-CSharp.dll:.BoatAlignNormal
 b18e85df7e4c697f5474b81ae1116090 Assembly-CSharp.dll:.TorpedoNPCBehavior
 2b5f4317ba33eb9274f0cf4cc1fe00eb Assembly-CSharp.dll:Crest.OceanRenderer
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Flashing
-19e3da00a18face443ade2c17b4cfc62 Assembly-CSharp.dll:.createImage

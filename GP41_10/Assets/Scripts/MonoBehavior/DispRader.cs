@@ -15,6 +15,6 @@ public class DispRader : MonoBehaviour
     void Update()
     {
         transform.position = Rader.transform.position;
-        transform.position += new Vector3(0f, 0.1f, 0f);
+        transform.position += new Vector3(0f, 5f, 0f);
     }
 }

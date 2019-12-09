@@ -31,7 +31,7 @@ public class TargetBehavior : MonoBehaviour
         DrowingPersons = stageSpawer.GetComponent<StageSpawner>().GetDrowingPersons();
         for(int i = 0; i < DrowingPersons.Count; ++i)
         {
-            if(!DrowingPersons[i].GetComponent<DrowningPersonBehavior>().GetRescued() && ((DrowingPersons[i].transform.position - transform.position).magnitude <= SuccessRange))
+            if(!DrowingPersons[i].GetComponent<DrowningPersonBehavior>().GetRescued() && ((DrowingPersons[i].transform.position - new Vector3(transform.position.x, transform.position.y - 5f, transform.position.z)).magnitude <= SuccessRange))
             {
                 GetComponent<MeshRenderer>().material.color = Color.blue;
                 DrowingPersons[i].GetComponent<DrowningPersonBehavior>().Rescued();

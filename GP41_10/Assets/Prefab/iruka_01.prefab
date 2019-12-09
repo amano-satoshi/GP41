@@ -372,7 +372,7 @@ Animator:
   m_GameObject: {fileID: 6899597131836407446}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 732a76810472dc440b6ef52c7d552ee2, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ad0db19d9dd0584ba0e3e2efd7f8744, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -398,6 +398,6 @@ MonoBehaviour:
   TorpedoMinSpeed: 2
   TorpedoChangeSpeed: 0.4
   TorpedoMaxRot: 180
-  TorpedoRotSpeed: 15
-  distance: 10
+  TorpedoRotSpeed: 30
+  distance: 20
   range: 0.5

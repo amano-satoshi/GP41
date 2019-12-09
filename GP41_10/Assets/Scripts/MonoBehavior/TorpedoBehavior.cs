@@ -33,6 +33,7 @@ public class TorpedoBehavior : MonoBehaviour
 
         MAX_STATE
     }
+    private GameObject stageState;
     [SerializeField,Header("前進する速度")]
     private float TorpedoSpeed = 0; // 前進する速度
     [SerializeField, Header("前進する最大速度")]
@@ -61,6 +62,7 @@ public class TorpedoBehavior : MonoBehaviour
     private TorpedoState torpedoState = TorpedoState.SEARCH;
     private bool[] SearchDirection = new bool[(int)CheckPlace.MAX_PLACE];
     private bool destflg = false;
+    private bool SuccessFlg = false;
 
     private List<GameObject> DrowningPersonList = new List<GameObject>();
     private GameObject StageInfo;
@@ -71,6 +73,7 @@ public class TorpedoBehavior : MonoBehaviour
     void Start()
     {
         StageInfo = GameObject.Find("StageSpawner");
+        stageState = GameObject.Find("StageState");
         TorpedoSpeed += StageData.GetBuffSpeed();
         TorpedoMaxSpeed += StageData.GetBuffSpeed();
     }
@@ -78,6 +81,10 @@ public class TorpedoBehavior : MonoBehaviour
     // ===================== Update =======================
     void Update()
     {
+        if(stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT)
+        {
+            return;
+        }
         // 加速・減速間隔計算用
         timeElapsed += Time.deltaTime;
         
@@ -480,33 +487,73 @@ public class TorpedoBehavior : MonoBehaviour
 
     void Search()
     {
-        if((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
+        if(SuccessFlg)
         {
-            if(target.tag == "DrowingPerson")
+            if ((target.transform.position - (transform.position + transform.up)).magnitude < 0.3f)
             {
-                torpedoState = TorpedoState.RESCUE;
-                target.GetComponent<DrowningPersonBehavior>().Rescued();
-                StageData.IncreaseRescuePersonCnt();
+                if (target.tag == "DrowingPerson")
+                {
+                    torpedoState = TorpedoState.RESCUE;
+                    target.GetComponent<DrowningPersonBehavior>().Rescued();
+                    StageData.IncreaseRescuePersonCnt();
+                }
+                else
+                {
+                    torpedoState = TorpedoState.FAILED;
+                }
             }
-            else
+            else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
             {
-                torpedoState = TorpedoState.FAILED;
+                if (TorpedoSpeed > TorpedoMinSpeed) decel();
+                timeElapsed = 0.0f;
+            }
+            else if ((target.transform.position - (transform.position + transform.up)).magnitude < 30f && timeElapsed >= timeOut)
+            {
+                if (TorpedoSpeed > TorpedoMaxSpeed / 2f) decel();
+                else if (TorpedoSpeed < TorpedoMaxSpeed / 2f) accel();
+                timeElapsed = 0.0f;
+            }
+            else if ((target.transform.position - (transform.position + transform.up)).magnitude > 30f)
+            {
+                accel();
             }
         }
-        else if ((target.transform.position - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
+        else
         {
-            if (TorpedoSpeed > TorpedoMinSpeed) decel();
-            timeElapsed = 0.0f;
+            if ((new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude < 1f)
+            {
+                if (target.tag == "DrowingPerson")
+                {
+                    torpedoState = TorpedoState.RESCUE;
+                    target.GetComponent<DrowningPersonBehavior>().Rescued();
+                    StageData.IncreaseRescuePersonCnt();
+                }
+                else
+                {
+                    torpedoState = TorpedoState.FAILED;
+                }
+            }
+            else if ((new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude < 10f && timeElapsed >= timeOut2)
+            {
+                if (TorpedoSpeed > TorpedoMinSpeed) decel();
+                timeElapsed = 0.0f;
+            }
+            else if ((new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude < 30f && timeElapsed >= timeOut)
+            {
+                if (TorpedoSpeed > TorpedoMaxSpeed / 2f) decel();
+                else if (TorpedoSpeed < TorpedoMaxSpeed / 2f) accel();
+                timeElapsed = 0.0f;
+            }
+            else if ((new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude > 30f)
+            {
+                accel();
+            }
         }
-        else if ((target.transform.position - (transform.position + transform.up)).magnitude < 30f && timeElapsed >= timeOut)
+
+        if(transform.position.y > 0.5f || transform.position.x > 80f || transform.position.x < -80f || transform.position.z > 40f ||
+            transform.position.z < -40f)
         {
-            if (TorpedoSpeed > TorpedoMaxSpeed / 2f) decel();
-            else if (TorpedoSpeed < TorpedoMaxSpeed / 2f) accel();
-            timeElapsed = 0.0f;
-        }
-        else if((target.transform.position - (transform.position + transform.up)).magnitude > 30f)
-        {
-            accel();
+            torpedoState = TorpedoState.FAILED;
         }
         // --------------- 移動 -----------------
         transform.position += transform.forward * TorpedoSpeed * Time.deltaTime;
@@ -518,7 +565,16 @@ public class TorpedoBehavior : MonoBehaviour
         // 障害物なし
         if (!hitplace[(int)CheckPlace.Down] && !hitplace[(int)CheckPlace.Left] && !hitplace[(int)CheckPlace.UP] && !hitplace[(int)CheckPlace.Right])
         {
-            Vector3 vec = (target.transform.position - (transform.position + transform.up)).normalized;
+            Vector3 vec;
+            if (SuccessFlg)
+            {
+                vec = (target.transform.position - (transform.position + transform.up)).normalized;
+            }
+            else
+            {
+                vec = (new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).normalized;
+            }
+            
             // 救出者が右にいる
             if (Vector3.Dot(vec, transform.right) <= 1f && Vector3.Dot(vec, transform.right) > 0.1f)
             {
@@ -607,6 +663,7 @@ public class TorpedoBehavior : MonoBehaviour
         }
         target = DrowningPersonList[0];
         transform.LookAt(target.transform.position);
+        SuccessFlg = true;
     }
 
     // おぼれている人の情報削除
@@ -628,6 +685,7 @@ public class TorpedoBehavior : MonoBehaviour
     {
         target = Target;
         transform.LookAt(target.transform.position);
+        SuccessFlg = false;
     }
 
     public void DestTorpedo()
