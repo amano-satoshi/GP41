@@ -5,9 +5,10 @@ using UnityEngine;
 public class IwashiManager : MonoBehaviour
 {
     public GameObject fishPrefab;
+    public GameObject fish;
     public int numFish = 20;
     public GameObject[] allFish;
-    public Vector3 swimLimits = new Vector3(5, 5, 5);
+    public Vector3 swimLimits = new Vector3(10, 10, 5);
 
     [Header("Fish Settings")]
     [Range(0.0f, 5.0f)]
@@ -28,10 +29,11 @@ public class IwashiManager : MonoBehaviour
             Vector3 pos = this.transform.position + new Vector3(Random.Range(-swimLimits.x, swimLimits.x),
                                                                 Random.Range(-swimLimits.y, swimLimits.y),
                                                                 Random.Range(-swimLimits.z, swimLimits.z));
-            allFish[i] = (GameObject)Instantiate(fishPrefab, pos, Quaternion.identity);
-            allFish[i].GetComponent<Iwashi>().myManager = this;
-        }
 
+            allFish[i] = (GameObject)Instantiate(fish, pos, fish.transform.rotation);
+            allFish[i].GetComponent<Iwashi>().myManager = this;
+            allFish[i].transform.parent = fishPrefab.transform;
+        }
     }
 
     // Update is called once per frame
