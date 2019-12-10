@@ -7,6 +7,8 @@ public class PlayerSelect : MonoBehaviour
     public GameObject OneSprite;
     public GameObject TwoSprite;
 
+    public GameObject Alpha;
+
     public GameObject OneModel;
     public GameObject TwoModel;
 
@@ -18,7 +20,7 @@ public class PlayerSelect : MonoBehaviour
     public int nStatePlayer;        // 0: 1人 1: 2人
 
     float fScaleSpeed;
-    const float Speed = 0.3f;
+    const float Speed = 0.003f;
 
     public int nBigMaxTime;
     private int nBigTime;
@@ -84,6 +86,11 @@ public class PlayerSelect : MonoBehaviour
                     // 1人が選ばれている
                     if(!bOne)
                     {
+                        // 描画順を前に
+                        Alpha.gameObject.transform.SetSiblingIndex(1);
+                        OneSprite.gameObject.transform.SetSiblingIndex(2);
+                        TwoSprite.gameObject.transform.SetSiblingIndex(0);
+
                         OneSprite.gameObject.transform.localScale += new Vector3(
                         BigScale,
                         BigScale,
@@ -98,8 +105,10 @@ public class PlayerSelect : MonoBehaviour
                             TwoModel.gameObject.transform.position = new Vector3(-2.156564f, -1.096563f, 0f);
                         }
 
-                        nMoveCurrentTime = 0.0f;
                     }
+                    nMoveCurrentTime = 0.0f;
+
+
                     OneSprite.gameObject.transform.localScale += new Vector3(
                         fScaleSpeed,
                         fScaleSpeed,
@@ -121,6 +130,11 @@ public class PlayerSelect : MonoBehaviour
                     // 2人が選ばれている
 
                     bOneOne = true;
+
+                    // 描画順を前に
+                    Alpha.gameObject.transform.SetSiblingIndex(1);
+                    OneSprite.gameObject.transform.SetSiblingIndex(0);
+                    TwoSprite.gameObject.transform.SetSiblingIndex(2);
 
                     OneSprite.gameObject.transform.localScale = new Vector3(
                        OneDefaultScale.x,
