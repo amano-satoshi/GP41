@@ -106,6 +106,7 @@ Shader "Crest/Underwater Curtain"
 					+ up * input.positionOS.z * _ProjectionParams.y;
 
 				// Isolate topmost edge
+				// 変更
 				if (input.positionOS.z > 0.45)
 				{
 					const float3 posOnNearPlane = o.positionWS;
@@ -200,7 +201,9 @@ Shader "Crest/Underwater Curtain"
 				}
 #endif // _CAUSTICS_ON
 
-				half3 col = lerp(sceneColour, scatterCol, 1.0 - exp(-_DepthFogDensity.xyz * sceneZ));
+				// 変更
+				//half3 col = lerp(sceneColour, scatterCol, 1.0 - exp(-_DepthFogDensity.xyz * sceneZ));
+				half3 col = lerp(sceneColour, scatterCol, 1.0 - exp(-_DepthFogDensity.xyz * sceneZ) - 0.3f);
 
 				return half4(col, 1.0);
 			}

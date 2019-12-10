@@ -11,40 +11,57 @@ public class Iwashi : MonoBehaviour
     float intTime;
 
     GameObject[] gos;
+    Vector3 rand;
     // Use this for initialization
     void Start()
     {
+
+        rand = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-15.5f, 15.5f), Random.Range(-0.5f, 0.5f));
         intTime = Random.Range(2.0f, 4.0f);
 
         gos = myManager.allFish;
         //    speed = Random.Range(myManager.minSpeed,
         //                         myManager.maxSpeed);
-
     }
-
     // Update is called once per frame
     void Update()
     {
         transform.position += transform.forward * Time.deltaTime * speed;       // まっすぐ進む
 
-        time -= 0.1f;
         if (time < 0.0f)
         {
-            iwashi.transform.rotation = Quaternion.Euler(new Vector3(iwashi.transform.rotation.x + Random.Range(-0.5f, 0.5f),
-                iwashi.transform.rotation.y + Random.Range(-15.5f, 15.5f),
-                iwashi.transform.rotation.z + Random.Range(-0.5f, 0.5f)));
+            rand = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-15.5f, 15.5f), Random.Range(-0.5f, 0.5f));
             time = 5.0f;
         }
+        time -= 0.1f;
+       
 
         foreach (GameObject go in gos)
         {
-            go.transform.rotation = iwashi.transform.rotation;
+            //   go.transform.rotation = iwashi.transform.rotation;
+
+            go.transform.rotation = Quaternion.Euler(go.transform.rotation.x + rand.x,
+                go.transform.rotation.y + rand.y,
+                go.transform.rotation.z + rand.z);
+            
+            if (go.transform.position.x > 20f || go.transform.position.x < -20f)
+            {
+                go.transform.position = new Vector3(go.transform.position.x + 180, go.transform.position.y, go.transform.position.z);
+            }
+
+            if (go.transform.position.y > 1.5f)
+            {
+                go.transform.position = new Vector3(go.transform.position.x, 1.5f, go.transform.position.z);
+            }
+
+            if (go.transform.position.z > 70)
+            {
+                go.transform.rotation = Quaternion.Euler(go.transform.rotation.x, go.transform.rotation.y + 180, go.transform.rotation.z);
+                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, go.transform.position.z - 10.0f);
+            }
         }
 
-        if(transform.position.y > 1.5f)
-        {
-            transform.position = new Vector3(transform.position.x, 1.5f, transform.position.z);
-        }
+        
 
         //    transform.Translate(Time.deltaTime * speed, Time.deltaTime * speed, Time.deltaTime * speed);
         // ApplyRules();

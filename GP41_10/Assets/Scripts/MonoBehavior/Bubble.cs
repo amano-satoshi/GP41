@@ -38,7 +38,7 @@ public class Bubble : MonoBehaviour
 
             bubbles[i].nNum = i;
             bubbles[i].bMoveEnd = false;
-            bubbles[i].gameobject.transform.localPosition = new Vector3(Random.Range(-900, 900), Random.Range(-1500, -600), 0.0f);
+            bubbles[i].gameobject.transform.localPosition = new Vector3(Random.Range(-900, 900), Random.Range(-1700, -800), 0.0f);
             float RandScl = Random.Range(10, 65);
             bubbles[i].gameobject.transform.localScale = new Vector3(RandScl / 10, RandScl / 10, 1.0f);
             bubbles[i].fMoveTime = 0.0f;
