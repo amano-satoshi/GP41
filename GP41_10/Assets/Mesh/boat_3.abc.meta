@@ -1,0 +1,48 @@
+fileFormatVersion: 2
+guid: 7079d2b59521a7a41ab376bd41b6e0e6
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: boat_3/boat_3
+    100002: boat_3/boat_3/boat_2:boat01
+    100004: boat_3/boat_3/boat_2:boat01/boat_2:outputCloth2
+    400000: boat_3/boat_3/Transform
+    400002: boat_3/boat_3/boat_2:boat01/Transform
+    400004: boat_3/boat_3/boat_2:boat01/boat_2:outputCloth2/Transform
+    2100000: Default Material
+    2300000: boat_3/boat_3/boat_2:boat01/boat_2:outputCloth2/MeshRenderer
+    3300000: boat_3/boat_3/boat_2:boat01/boat_2:outputCloth2/MeshFilter
+    4300000: /boat_2:boat01/boat_2:outputCloth2
+    7400000: Default Animation
+    7400002: boat_3_Frames
+    11400000: boat_3/boat_3/MonoBehaviour-UTJ.Alembic.AlembicStreamPlayer
+    11400002: boat_3_ABCDesc
+    100100000: boat_3
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f53f5fc499d31e44b9deee84d28a9ee8, type: 3}
+  streamSettings:
+    normals: 1
+    tangents: 1
+    cameraAspectRatio: 2
+    scaleFactor: 0.01
+    swapHandedness: 1
+    flipFaces: 0
+    turnQuadEdges: 0
+    interpolateSamples: 1
+    importPointPolygon: 1
+    importLinePolygon: 1
+    importTrianglePolygon: 1
+    importXform: 1
+    importCameras: 1
+    importMeshes: 1
+    importPoints: 1
+    importVisibility: 1
+  abcStartTime: 0.041666666666666664
+  abcEndTime: 4.166666666666667
+  startTime: 0.041666666666666664
+  endTime: 4.166666666666667
+  importWarning: 
+  varyingTopologyMeshNames: []
+  splittingMeshNames: []
