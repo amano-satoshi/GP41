@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2514315882919919663}
   - component: {fileID: 4212946275674439555}
-  - component: {fileID: 911294456390416697}
   - component: {fileID: 3805449394078605897}
   m_Layer: 0
   m_Name: TorpedoCamera
@@ -77,14 +76,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &911294456390416697
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5757127274633118695}
-  m_Enabled: 1
 --- !u!114 &3805449394078605897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,8 +89,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 3
+  DispPos: {x: 150, y: 75}
   success: {fileID: 3107628807715002182, guid: 170ef9de1ea0abf4080f8c8cee10f448, type: 3}
   failed: {fileID: 6059939991266627106, guid: 4f0c4851eee14d74e99ee553e7cb495d, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 25df7f1fd6b6aa544a3db51c8e1d5fab, type: 3}
+  - {fileID: 0}
 --- !u!1001 &3271725036865119970
 PrefabInstance:
   m_ObjectHideFlags: 0

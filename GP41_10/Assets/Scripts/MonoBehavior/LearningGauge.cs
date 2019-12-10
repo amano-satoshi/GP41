@@ -19,8 +19,8 @@ public class LearningGauge : MonoBehaviour
     void Update()
     {
         gauge = StageData.GetLearningGauge();
-        vertpos[0] = new Vector3(85f - gauge * 16.5f, -10f);
-        vertpos[1] = new Vector3(90f - gauge * 15.5f, 10f + gauge * 1f);
+        vertpos[0] = Vector3.Lerp(vertpos[0], new Vector3(85f - gauge * 16.5f, -10f), 1f * Time.deltaTime);
+        vertpos[1] = Vector3.Lerp(vertpos[1], new Vector3(90f - gauge * 15.5f, 10f + gauge * 1f), 1f * Time.deltaTime);
         GetComponent<createImage>().SetVertPos(vertpos);
     }
 }

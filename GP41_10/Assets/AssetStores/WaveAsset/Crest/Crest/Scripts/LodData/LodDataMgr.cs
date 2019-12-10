@@ -178,7 +178,6 @@ namespace Crest
                 draw.Draw(buf, 1f, 0);
                 i++;
             }
-            Debug.Log(i);
         }
 
         protected void SubmitDrawsFiltered(int lodIdx, CommandBuffer buf, IDrawFilter filter)

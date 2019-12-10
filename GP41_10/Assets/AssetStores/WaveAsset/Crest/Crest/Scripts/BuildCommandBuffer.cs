@@ -38,7 +38,6 @@ namespace Crest
 
         void Build(OceanRenderer ocean, CommandBuffer buf)
         {
-            Debug.Log("そのつぎ");
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // --- Ocean depths

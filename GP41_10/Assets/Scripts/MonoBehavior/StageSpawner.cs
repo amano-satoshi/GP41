@@ -30,6 +30,10 @@ public class StageSpawner : MonoBehaviour
     private Vector3[] ShipPos = new Vector3[4];
     [SerializeField, Header("カメラと魚雷とのオフセット（x:左右、y:上下、z:前後）")]
     private Vector3 offset = new Vector3(0f, 0f, 0f); // オフセット
+    [SerializeField, Header("矢印の大きさの幅")]
+    private float BowSize = 2.5f;
+    [SerializeField, Header("矢印の拡大縮小速度")]
+    private float BowChangeSpeed = 10f;
     private bool AddPersonLimit = false;
     private int AddPersonLimitNum = 3;
     private GameObject SeaAreaObj;
@@ -44,14 +48,23 @@ public class StageSpawner : MonoBehaviour
     private List<GameObject> RescueTarget = new List<GameObject>();
     private List<GameObject> cameraList = new List<GameObject>();
     private List<GameObject> TorpedoList = new List<GameObject>();
+    private List<GameObject> BowList = new List<GameObject>();
     private int[] RandomWave = new int[5];
     private int WaveSpeedChange = 5;
+    private bool[] BowUpFlg = { false, false, false, false, false };
+
+    public GameObject mapCamera;
+
+    public AudioClip[] sounds = new AudioClip[3];
+    AudioSource[] audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         // ステージ情報リセット
         StageData.Reset();
+
+        audioSource = mapCamera.GetComponents<AudioSource>();
 
         // おぼれている人
         for (int z = 0; z < 5; ++z)
@@ -69,7 +82,10 @@ public class StageSpawner : MonoBehaviour
         SeaAreaObj = Instantiate(SeaArea, Vector3.zero, Quaternion.identity);
         for (int i = 0; i < 5; ++i)
         {
-            Instantiate(Bow, SeaAreaBowPos[i], Quaternion.Euler(0f, -SeaAreaAngle[i] + 90f, 0f));
+            // 矢印
+            Bowobj = Instantiate(Bow, SeaAreaBowPos[i], Quaternion.Euler(0f, -SeaAreaAngle[i] + 90f, 0f));
+            BowList.Add(Bowobj);
+
             // 角度をラジアンに変換
             float rad = SeaAreaAngle[i] * Mathf.Deg2Rad;
 
@@ -83,6 +99,9 @@ public class StageSpawner : MonoBehaviour
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
         }
         Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
+        audioSource[1].clip = sounds[0];
+        audioSource[1].loop = true;
+        audioSource[1].Play();
 
         // 障害物
         for (int x = 0; x < 16; ++x)
@@ -113,7 +132,7 @@ public class StageSpawner : MonoBehaviour
     void Update()
     {
         int times = stageTimer.GetComponent<RemainTime>().GetRemainTime();
-        
+
         if (times % 10 == 0 && !AddPersonLimit)
         {
             // おぼれている人追加
@@ -135,12 +154,37 @@ public class StageSpawner : MonoBehaviour
             (times == RandomWave[4] && WaveSpeedChange == 1))
         {
             int randomwave = Random.Range(0, 3);
-            for(int i = 0; i < 5; ++i)
+            audioSource[1].Stop();
+            for (int i = 0; i < 5; ++i)
             {
                 SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[randomwave]);
             }
+            audioSource[1].clip = sounds[randomwave];
+            audioSource[1].loop = true;
+            audioSource[1].Play();
             Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
             WaveSpeedChange--;
+        }
+
+        // 矢印の拡大縮小
+        for(int i = 0; i < BowList.Count; ++i)
+        {
+            if(BowUpFlg[i])
+            {
+                BowList[i].transform.localScale += new Vector3(BowChangeSpeed * Time.deltaTime, 0f, BowChangeSpeed * Time.deltaTime);
+                if(BowList[i].transform.localScale.x > 5f + BowSize)
+                {
+                    BowUpFlg[i] = false;
+                }
+            }
+            else
+            {
+                BowList[i].transform.localScale -= new Vector3(BowChangeSpeed * Time.deltaTime, 0f, BowChangeSpeed * Time.deltaTime);
+                if (BowList[i].transform.localScale.x < 5f - BowSize)
+                {
+                    BowUpFlg[i] = true;
+                }
+            }
         }
 
         if(stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT && ShootProductionObj == null)
@@ -297,6 +341,7 @@ public class StageSpawner : MonoBehaviour
             TorpedoList.Add(TorpedoObj);
             TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
             TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
+            TorpedocameraObj.GetComponent<TorpedoCamera>().SetCamID(i);
             cameraList.Add(TorpedocameraObj);
         }
 

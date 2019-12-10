@@ -146,9 +146,9 @@ public class StageState : MonoBehaviour
         }
         if(stageState == STAGE_STATE.LEARNING)
         {
-            if (stageSpawner.GetTorpedoLearning() != null && stageSpawner.GetTorpedoLearning().GetComponent<TorpedoLearning>().GetEnd())
+            if (stageSpawner.GetTorpedoLearning() != null && stageSpawner.GetTorpedoLearning().GetComponent<TorpedoLearningMain>().GetEnd())
             {
-                stageSpawner.GetTorpedoLearning().GetComponent<TorpedoLearning>().DelLearning();
+                stageSpawner.GetTorpedoLearning().GetComponent<TorpedoLearningMain>().DelLearning();
                 stageSpawner.ResetTorpedoCamera();
                 stageSpawner.ResetTorpedo();
                 stageSpawner.RescueDrowningPerson();

@@ -24,6 +24,10 @@ public class TorpedoLearning : MonoBehaviour
     private int count;
     private int ProductionNum;
     private Vector3 EndPos;
+    private GameObject mapCamera;
+
+    public AudioClip[] sounds = new AudioClip[2];
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,9 @@ public class TorpedoLearning : MonoBehaviour
         count = 1;
         ProductionNum = 0;
         EndPos = new Vector3(-66f, 0f, 0f);
+
+        mapCamera = GameObject.Find("MapCamera");
+        audioSource = mapCamera.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -101,6 +108,7 @@ public class TorpedoLearning : MonoBehaviour
             {
                 Choice += 2;
             }
+            audioSource.PlayOneShot(sounds[0]);
         }
         if (Input.GetKeyDown(KeyCode.D))         // 右
         {
@@ -109,6 +117,7 @@ public class TorpedoLearning : MonoBehaviour
             {
                 Choice -= 2;
             }
+            audioSource.PlayOneShot(sounds[0]);
         }
         if (Input.GetKeyDown(KeyCode.Return) || currentTime <= 0f)    // 決定
         {
@@ -123,6 +132,7 @@ public class TorpedoLearning : MonoBehaviour
                 ProductionNum = 1;
             }
             ProductionFlg = true;
+            audioSource.PlayOneShot(sounds[1]);
         }
     }
 

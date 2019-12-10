@@ -26,6 +26,10 @@ public class RemainTime : MonoBehaviour
     private bool SizeUp;
     private bool CountFlg;
     private bool EndFlg;
+    public GameObject mapCamera;
+
+    public AudioClip sound1;
+    AudioSource[] audioSource;
 
     void Start()
     {
@@ -35,6 +39,7 @@ public class RemainTime : MonoBehaviour
         EndFlg = false;
         // 残り時間を設定
         currentTime = gameTime;
+        audioSource = mapCamera.GetComponents<AudioSource>();
     }
 
     void Update()
@@ -105,11 +110,15 @@ public class RemainTime : MonoBehaviour
                     images[i].color = Color.red;
                 }
             }
-                CountFlg = true;
+            audioSource[2].clip = sound1;
+            audioSource[2].loop = true;
+            audioSource[2].Play();
+            CountFlg = true;
         }
 
         if (times <= 0 && !EndFlg)
         {
+            audioSource[2].Stop();
             EndFlg = true;
         }
     }

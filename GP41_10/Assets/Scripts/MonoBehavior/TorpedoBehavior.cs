@@ -489,7 +489,7 @@ public class TorpedoBehavior : MonoBehaviour
     {
         if(SuccessFlg)
         {
-            if ((target.transform.position - (transform.position + transform.up)).magnitude < 0.3f)
+            if ((target.transform.position - (transform.position + transform.up)).magnitude < 1f)
             {
                 if (target.tag == "DrowingPerson")
                 {

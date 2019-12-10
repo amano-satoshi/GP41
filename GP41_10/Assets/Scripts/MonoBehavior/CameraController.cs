@@ -54,6 +54,18 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public List<GameObject> GetCameraList()
+    {
+        if (CameraList != null)
+        {
+            return CameraList;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     void ResetCameraState()
     {
         camerastate = CameraState.DEFAULT;
