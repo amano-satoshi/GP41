@@ -554,7 +554,7 @@ MonoBehaviour:
   nBigMaxTime: 50
   MoveSpeed: {x: -15, y: -15, z: 0}
   TowModelDefaultPos: {x: 8.29, y: 9.35, z: 0}
-  nMoveTime: 2.5
+  nMoveTime: 3.5
 --- !u!4 &511708367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4720579618361426, guid: 1ab0847a8e46b4c4fa728256231f88eb,
