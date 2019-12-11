@@ -13,16 +13,20 @@ public class ShootProduction : MonoBehaviour
     private int count = 1;
     private Vector3 EndPos;
     private Image CutIn;
-    private Text Shoot;
     [SerializeField, Header("カットインスピード")]
     private float CutInSpeed = 1242f;
+    private GameObject mapCamera;
+
+    public AudioClip sound1;
+    AudioSource[] audioSource;
     // Start is called before the first frame update
     void Start()
     {
         Remaintime = ProductionTime;
         CutIn = transform.GetChild(0).GetComponent<Image>();
-        Shoot = transform.GetChild(1).GetComponent<Text>();
         EndPos = new Vector3(-66f, 0f, 0f);
+        mapCamera = GameObject.Find("MapCamera");
+        audioSource = mapCamera.GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,14 +38,13 @@ public class ShootProduction : MonoBehaviour
             Remaintime = 0f;
         }
         if (Mathf.FloorToInt(Remaintime) == 3 && count == 1)
-        { 
-            Shoot.text = "発射!!";
+        {
+            audioSource[2].PlayOneShot(sound1);
             count--;
             Startflg = true;
         }
         else if (Mathf.FloorToInt(Remaintime) == 0 && count == 0)
         {
-            Destroy(Shoot.gameObject);
             Destroy(CutIn.gameObject);
             Endflg = true;
             count--;
@@ -71,11 +74,9 @@ public class ShootProduction : MonoBehaviour
     void MoveProduction()
     {
         CutIn.rectTransform.position -= new Vector3(CutInSpeed * Time.deltaTime, 0f, 0f);
-        Shoot.rectTransform.position -= new Vector3(CutInSpeed * Time.deltaTime, 0f, 0f);
         if(CutIn.rectTransform.localPosition.x <= EndPos.x)
         {
             CutIn.rectTransform.localPosition = EndPos;
-            Shoot.rectTransform.localPosition = EndPos;
             Startflg = false;
         }
     }

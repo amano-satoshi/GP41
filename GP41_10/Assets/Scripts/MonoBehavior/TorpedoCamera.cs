@@ -30,14 +30,15 @@ public class TorpedoCamera : MonoBehaviour
     private GameObject stageSpawner;
     private List<GameObject> cameraList;
 
-    public AudioClip[] sounds = new AudioClip[2];
-    AudioSource audioSource;
+    public AudioClip[] sounds = new AudioClip[3];
+    AudioSource[] audioSource;
 
     void Start()
     {
         mapCamera = GameObject.Find("MapCamera");
         stageSpawner = GameObject.Find("StageSpawner");
-        audioSource = mapCamera.GetComponent<AudioSource>();
+        audioSource = mapCamera.GetComponents<AudioSource>();
+        audioSource[2].PlayOneShot(sounds[2]);
     }
 
     void Update()
@@ -57,18 +58,19 @@ public class TorpedoCamera : MonoBehaviour
             {
                 DispResult(true);
                 TextDisp = true;
-                audioSource.PlayOneShot(sounds[0]);
+                audioSource[2].PlayOneShot(sounds[0]);
             }
             else if(target.GetComponent<TorpedoBehavior>().torpedostate == TorpedoBehavior.TorpedoState.FAILED && !TextDisp)
             {
                 DispResult(false);
                 TextDisp = true;
-                //audioSource.PlayOneShot(sounds[1]);
+                audioSource[2].PlayOneShot(sounds[1]);
             }
         }
 
         if (destflg)
         {
+            audioSource[2].Stop();
             Destroy(result.gameObject);
             Destroy(this.gameObject);
         }

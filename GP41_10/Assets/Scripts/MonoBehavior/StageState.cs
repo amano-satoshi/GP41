@@ -85,17 +85,17 @@ public class StageState : MonoBehaviour
                 comboText = Instantiate(Combo);
                 if(n == 2)
                 {
-                    comboText.gameObject.GetComponentInChildren<ComboText>().TwoCombo();
+                    comboText.GetComponent<ComboText>().TwoCombo();
                     StageData.SetLearningGauge(n + (n - 1));
                 }
                 else if (n == 3)
                 {
-                    comboText.gameObject.GetComponentInChildren<ComboText>().ThreeCombo();
+                    comboText.GetComponent<ComboText>().ThreeCombo();
                     StageData.SetLearningGauge(n + (n - 1) + (n - 2));
                 }
                 else if (n == 4)
                 {
-                    comboText.gameObject.GetComponentInChildren<ComboText>().FourCombo();
+                    comboText.GetComponent<ComboText>().FourCombo();
                     StageData.SetLearningGauge(n + (n - 1) + (n - 2) + (n - 3));
                 }
             }

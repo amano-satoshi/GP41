@@ -579,8 +579,8 @@ MonoBehaviour:
   panelPos: {x: 0, y: 0, z: 0}
   ProductionTime: 3
   sounds:
-  - {fileID: 8300000, guid: acd6801c9a2c8384296ef6e1d7f808e8, type: 3}
-  - {fileID: 8300000, guid: ab6fc4f701f737e48bfb36c73dc9de5d, type: 3}
+  - {fileID: 8300000, guid: 19f107f4c118814488706c9b03c4595e, type: 3}
+  - {fileID: 8300000, guid: de87d6933c41b334c8ce5ce19c466656, type: 3}
 --- !u!1 &3732549632479939431
 GameObject:
   m_ObjectHideFlags: 0

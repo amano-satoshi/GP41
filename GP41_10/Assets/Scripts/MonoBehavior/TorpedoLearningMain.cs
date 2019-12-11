@@ -67,7 +67,6 @@ public class TorpedoLearningMain : MonoBehaviour
             if (Mathf.FloorToInt(EraseTime) == 0)
             {
                 EndFlg = true;
-                Debug.Log("終了");
             }
             MoveProduction();
         }

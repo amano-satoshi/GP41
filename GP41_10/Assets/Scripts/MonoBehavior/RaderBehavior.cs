@@ -12,10 +12,17 @@ public class RaderBehavior : MonoBehaviour
     private Vector3 RaderGoal = new Vector3(0f, 0f, 0f);
 
     public GameObject stagestate;
+
+    public GameObject mapCamera;
+
+    public AudioClip sound;
+    AudioSource[] audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.position = RaderStart;
+        audioSource = mapCamera.GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +37,10 @@ public class RaderBehavior : MonoBehaviour
         if(transform.position.x < RaderGoal.x)
         {
             transform.position = RaderStart;
+            if(stagestate.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.PREPARE)
+            {
+                audioSource[2].PlayOneShot(sound);
+            }
         }
     }
 }

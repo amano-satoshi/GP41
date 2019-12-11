@@ -55,7 +55,7 @@ public class StageSpawner : MonoBehaviour
 
     public GameObject mapCamera;
 
-    public AudioClip[] sounds = new AudioClip[3];
+    public AudioClip[] sounds = new AudioClip[4];
     AudioSource[] audioSource;
 
     // Start is called before the first frame update
@@ -65,6 +65,8 @@ public class StageSpawner : MonoBehaviour
         StageData.Reset();
 
         audioSource = mapCamera.GetComponents<AudioSource>();
+
+        audioSource[0].Play();
 
         // おぼれている人
         for (int z = 0; z < 5; ++z)
@@ -203,6 +205,7 @@ public class StageSpawner : MonoBehaviour
         {
             // 終了演出準備
             EndProductionObj = Instantiate(EndProduction);
+            audioSource[0].Stop();
         }
     }
 
@@ -266,6 +269,7 @@ public class StageSpawner : MonoBehaviour
         GameObject target;
         target = Instantiate(Target, cursor.transform.position, Quaternion.identity);
         targets.Add(target);
+        audioSource[2].PlayOneShot(sounds[3]);
     }
 
     public void ResetTarget()

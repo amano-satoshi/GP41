@@ -5,38 +5,32 @@ using UnityEngine.UI;
 
 public class ComboText : MonoBehaviour
 {
-    private Text uiText;                                    // UIText コンポーネント
+    public Image[] images = new Image[3];                                    // Image コンポーネント
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TwoCombo()
     {
-        // Textコンポーネント取得
-        uiText = GetComponent<Text>();
-        uiText.text = "２連鎖！";
+        images[0].enabled = true;
     }
 
     public void ThreeCombo()
     {
-        // Textコンポーネント取得
-        uiText = GetComponent<Text>();
-        uiText.text = "３連鎖！";
+        images[1].enabled = true;
     }
 
     public void FourCombo()
     {
-        // Textコンポーネント取得
-        uiText = GetComponent<Text>();
-        uiText.text = "４連鎖！";
+        images[2].enabled = true;
     }
 }

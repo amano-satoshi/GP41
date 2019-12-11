@@ -89,12 +89,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 3
-  DispPos: {x: 150, y: 75}
+  DispPos: {x: 170, y: 90}
   success: {fileID: 3107628807715002182, guid: 170ef9de1ea0abf4080f8c8cee10f448, type: 3}
   failed: {fileID: 6059939991266627106, guid: 4f0c4851eee14d74e99ee553e7cb495d, type: 3}
   sounds:
-  - {fileID: 8300000, guid: 25df7f1fd6b6aa544a3db51c8e1d5fab, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 5e7272216288bb64abb6c073d5b514b0, type: 3}
+  - {fileID: 8300000, guid: 5e7272216288bb64abb6c073d5b514b0, type: 3}
+  - {fileID: 8300000, guid: 7903f31603696724594504b0534dd5a6, type: 3}
 --- !u!1001 &3271725036865119970
 PrefabInstance:
   m_ObjectHideFlags: 0

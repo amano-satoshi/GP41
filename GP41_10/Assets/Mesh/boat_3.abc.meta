@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7079d2b59521a7a41ab376bd41b6e0e6
+guid: 70d57d218ab60274fae035e67a135f55
 ScriptedImporter:
   fileIDToRecycleName:
     100000: boat_3/boat_3
@@ -41,8 +41,8 @@ ScriptedImporter:
     importVisibility: 1
   abcStartTime: 0.041666666666666664
   abcEndTime: 4.166666666666667
-  startTime: 0.0416666679084301
-  endTime: 4.166666507720947
+  startTime: 0.041666666666666664
+  endTime: 4.166666666666667
   importWarning: 
   varyingTopologyMeshNames: []
   splittingMeshNames: []

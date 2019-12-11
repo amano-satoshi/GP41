@@ -11,15 +11,17 @@ public class StartProduction : MonoBehaviour
     private bool Delflg = false;
     private int count = 2;
     private Image CutIn;
-    private Text Ready;
-    private Text Go;
+    private Image Ready;
+    private Image Go;
     // Start is called before the first frame update
     void Start()
     {
         Remaintime = ProductionTime;
         CutIn = transform.GetChild(0).GetComponent<Image>();
-        Ready = transform.GetChild(1).GetComponent<Text>();
-        Go = transform.GetChild(2).GetComponent<Text>();
+        Ready = transform.GetChild(1).GetComponent<Image>();
+        Ready.enabled = false;
+        Go = transform.GetChild(2).GetComponent<Image>();
+        Go.enabled = false;
     }
 
     // Update is called once per frame
@@ -32,13 +34,13 @@ public class StartProduction : MonoBehaviour
         }
         if (Mathf.FloorToInt(Remaintime) == 2 && count == 2)
         {
-            Ready.text = "READY";
+            Ready.enabled = true;
             count--;
         }
         else if(Mathf.FloorToInt(Remaintime) == 1 && count == 1)
         {
             Destroy(Ready.gameObject);
-            Go.text = "GO!!";
+            Go.enabled = true;
             count--;
         }
         else if(Mathf.FloorToInt(Remaintime) == 0 && count == 0)
