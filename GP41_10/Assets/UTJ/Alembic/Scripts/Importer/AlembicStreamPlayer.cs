@@ -57,7 +57,6 @@ namespace UTJ.Alembic
         {
             if (abcStream == null || streamDescriptor == null)
                 return;
-
             ClampTime();
             if (lastUpdateTime != currentTime || forceUpdate)
             {

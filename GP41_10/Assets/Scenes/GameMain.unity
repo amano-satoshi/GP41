@@ -355,6 +355,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1775659138}
     m_Modifications:
+    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
+      propertyPath: m_Name
+      value: UnderWaterMeniscus
+      objectReference: {fileID: 0}
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -398,10 +402,6 @@ PrefabInstance:
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
-      propertyPath: m_Name
-      value: UnderWaterMeniscus
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
@@ -982,7 +982,7 @@ PrefabInstance:
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: ShipPos.Array.data[0].y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
@@ -992,27 +992,27 @@ PrefabInstance:
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: ShipPos.Array.data[1].y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: ShipPos.Array.data[1].z
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: ShipPos.Array.data[2].y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: ShipPos.Array.data[3].y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: ShipPos.Array.data[2].x
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
@@ -1023,7 +1023,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Ship
       value: 
-      objectReference: {fileID: 8369961501798749888, guid: a2c03718f18996b47ad1ab35203a30ee,
+      objectReference: {fileID: 6816832072452144147, guid: da2c1e2ee89a3ab469d4525ca6fdf85c,
         type: 3}
     - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
@@ -1167,6 +1167,16 @@ PrefabInstance:
         type: 3}
       propertyPath: BowChangeSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: ShipPos.Array.data[1].x
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: ShipPos.Array.data[2].z
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe79e9bf93d72b45b0458b35551312d, type: 3}

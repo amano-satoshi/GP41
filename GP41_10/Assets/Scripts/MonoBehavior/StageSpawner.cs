@@ -114,7 +114,7 @@ public class StageSpawner : MonoBehaviour
         // 船
         for(int i = 0; i < 4; ++i)
         {
-            Instantiate(Ship, ShipPos[i], Quaternion.identity);
+            Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f,0f));
         }
 
         // 波の変化のタイミング

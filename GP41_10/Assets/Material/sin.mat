@@ -74,9 +74,9 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SinColorDistant: 0.218
-    - _SinSpeed: 0.203
-    - _SinWave: 0.215
-    - _SinWidth: 0.371
+    - _SinSpeed: 0.184
+    - _SinWave: 0.131
+    - _SinWidth: 0.217
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
