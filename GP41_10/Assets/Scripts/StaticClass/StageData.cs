@@ -55,15 +55,27 @@ public static class StageData
         BuffSpeed += speed;
     }
 
-    // ============ 拡大範囲取得 =============
+    // ============ 検知範囲取得 =============
     static public float GetBuffRange()
     {
         return BuffRange;
     }
 
-    // ============ 強化スピード数増減 =============
+    // ============ 検知範囲増減 =============
     static public void SetBuffRange(float Range)
     {
         BuffRange += Range;
+    }
+
+    // ============ プレイ人数取得 =============
+    static public int GetPlayerNum()
+    {
+        return PlayerNum;
+    }
+
+    // ============ プレイ人数セット =============
+    static public void SetPlayerNum(int Num)
+    {
+        PlayerNum = Num;
     }
 }

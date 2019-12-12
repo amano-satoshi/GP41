@@ -187,4 +187,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutInSpeed: 4500
-  sound1: {fileID: 8300000, guid: de87d6933c41b334c8ce5ce19c466656, type: 3}
+  sound1: {fileID: 8300000, guid: df174198bf428a142887a773c895e5fe, type: 3}
