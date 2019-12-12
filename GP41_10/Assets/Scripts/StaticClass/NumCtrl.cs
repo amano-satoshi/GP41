@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NumCtrl : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class NumCtrl : MonoBehaviour
 
         if (no > 9 || no < 0) no = 0;
 
-        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sp[no];
+        Image image = gameObject.GetComponent<Image>();
+        image.sprite = sp[no];
 
     }
 }

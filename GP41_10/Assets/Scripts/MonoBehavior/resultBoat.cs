@@ -28,13 +28,18 @@ public class resultBoat : MonoBehaviour
     [SerializeField]
     public float textStartTime, textAlphaSpeed;
 
+    [SerializeField]
+    public Canvas canvas;
+
 
     private BoatAlignNormal[] boatAlignNormal = new BoatAlignNormal[3]; // ボート格納用
-    private Graphic graphic0, graphic1, graphic2; // 格納用
+    private Graphic graphic0, graphic1; // 格納用
     private float elapsedTime;
     private float textAlpha;
     private int boatNum;
     private bool isEnd;
+
+    private List<GameObject> WorkList = new List<GameObject>();
     string rescueNumText;
 
     // Start is called before the first frame update
@@ -104,7 +109,11 @@ public class resultBoat : MonoBehaviour
             }
             SetAlpha(graphic0, textAlpha);
             SetAlpha(graphic1, textAlpha);
-            SetAlpha(graphic2, textAlpha);
+            for(int i = 0; i < WorkList.Count; ++i)
+            {
+                WorkList[i].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, textAlpha);
+            }
+            
         }
     }
 
@@ -128,13 +137,15 @@ public class resultBoat : MonoBehaviour
 
             GameObject numObj = Instantiate(numSprite) as GameObject;
 
-            //numObj = GetComponent<SpriteRenderer>();
+            //numObj.gameObject.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 0.6f);
+
+            
 
             //graphic2 = numObj.GetComponent<Image>();
 
 
             //子供として登録
-            numObj.transform.parent = transform;
+            numObj.transform.parent = canvas.transform;
 
 
             //現在チェックしている桁の数字を割り出す
@@ -143,15 +154,14 @@ public class resultBoat : MonoBehaviour
             //ポイントから数字を切り替える
             numObj.GetComponent<NumCtrl>().ChangeSprite(digNum);
 
-            //サイズをゲットする
-            float size_w = numObj.GetComponent<SpriteRenderer>().bounds.size.x;
+            Vector3 pos = new Vector3(-100 - i * 500, 229f, 0f);
+            numObj.transform.localPosition = pos;
+            numObj.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 
-            //位置をずらす
-            float ajs_x = size_w * i - (size_w * digit) / 10;
-            Vector3 pos = new Vector3(-30f - ajs_x, 15f, 50f);
-            numObj.transform.position = pos;
-
-            numObj = null;
+            //          numObj = null;
+            WorkList.Add(numObj);
         }
+
+        Destroy(numSprite);
     }
 }
