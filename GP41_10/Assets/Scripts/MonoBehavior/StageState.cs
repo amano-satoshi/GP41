@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageState : MonoBehaviour
 {
@@ -52,7 +53,6 @@ public class StageState : MonoBehaviour
             stageState != STAGE_STATE.TORPEDO_RESULT && stageState != STAGE_STATE.SHOOT)
         {
             stageState = STAGE_STATE.TIME_UP;
-            Debug.Log(StageData.GetRescuePersonCnt());
         }
         if(stageState == STAGE_STATE.SHOOT)
         {
@@ -162,14 +162,14 @@ public class StageState : MonoBehaviour
             {
                 //stageSpawner.GetEndProduction().GetComponent<EndProduction>().DelProduction();
                 // リザルトへ
-
+                SceneManager.LoadScene("ResultScene");
             }
         }
     }
     // ============ ステージ状態リセット ===========
     public void Reset()
     {
-        stageState = STAGE_STATE.PREPARE;
+        stageState = STAGE_STATE.START;
     }
 
     // ============ ステージ状態取得 =============

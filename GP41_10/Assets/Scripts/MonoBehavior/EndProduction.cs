@@ -14,7 +14,7 @@ public class EndProduction : MonoBehaviour
     private Vector3 EndPos;
     private Image CutIn;
     [SerializeField, Header("カットインスピード")]
-    private float CutInSpeed = 1242f;
+    private float CutInSpeed = 2500f;
     // Start is called before the first frame update
     void Start()
     {
