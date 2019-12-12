@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Bubble : MonoBehaviour
 {
@@ -22,6 +24,9 @@ public class Bubble : MonoBehaviour
     BUBBLE[] bubbles = new BUBBLE[MAX_BUBBLE];
 
     bool bNext;
+
+    public float fNextTime;
+    private float fCureentTime;
 
     // Start is called before the first frame update
     void Start()
@@ -45,13 +50,14 @@ public class Bubble : MonoBehaviour
         }
 
         bNext = false;
+        fCureentTime = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Pad1_A") || 
-            Input.GetKeyDown(KeyCode.A))
+            Input.GetKeyDown(KeyCode.Return))
         {
             bNext = true;
         }
@@ -71,6 +77,15 @@ public class Bubble : MonoBehaviour
                 {
                     bubbles[i].bMoveEnd = true;
                 }
+            }
+        }
+
+        if(bubbles[MAX_BUBBLE - 1].bMoveEnd)
+        {
+            fCureentTime += Time.deltaTime;
+            if (fCureentTime > fNextTime)
+            {
+                SceneManager.LoadScene("PlayerSelect");
             }
         }
 

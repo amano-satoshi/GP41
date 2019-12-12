@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class resultBoat : MonoBehaviour
 {
@@ -52,9 +54,8 @@ public class resultBoat : MonoBehaviour
         graphic1 = text1.GetComponent<Text>();
 
         elapsedTime = 0.0f;
-        //rescueNum = 0;
+        rescueNum = StageData.GetRescuePersonCnt();
 
-        // ここを変更
         CreateNum(rescueNum);
 
         rescueNumText = (rescueNum).ToString();
@@ -66,7 +67,13 @@ public class resultBoat : MonoBehaviour
     void Update()
     {
         if (isEnd)
+        {
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Title");
+            }
             return;
+        }
 
         elapsedTime += Time.deltaTime;
 
@@ -154,7 +161,7 @@ public class resultBoat : MonoBehaviour
             //ポイントから数字を切り替える
             numObj.GetComponent<NumCtrl>().ChangeSprite(digNum);
 
-            Vector3 pos = new Vector3(-100 - i * 500, 229f, 0f);
+            Vector3 pos = new Vector3(-500 - i * 200, 229f, 0f);
             numObj.transform.localPosition = pos;
             numObj.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 

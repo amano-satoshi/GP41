@@ -125,14 +125,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2013027279}
     m_Modifications:
-    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
-      propertyPath: m_Name
-      value: UnderWaterMeniscus
-      objectReference: {fileID: 0}
-    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -176,6 +168,14 @@ PrefabInstance:
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
+      propertyPath: m_Name
+      value: UnderWaterMeniscus
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23339501637627632, guid: 6d79ad5f5edb537448c2c13e54ffac88,
         type: 3}
@@ -554,7 +554,7 @@ MonoBehaviour:
   nBigMaxTime: 50
   MoveSpeed: {x: -15, y: -15, z: 0}
   TowModelDefaultPos: {x: 8.29, y: 9.35, z: 0}
-  nMoveTime: 3.5
+  nMoveTime: 2
 --- !u!4 &511708367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4720579618361426, guid: 1ab0847a8e46b4c4fa728256231f88eb,
@@ -1140,11 +1140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41b1a75d21776a44399d3cdbc9afb487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.9
+      value: 20.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41b1a75d21776a44399d3cdbc9afb487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.1
+      value: 13.8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41b1a75d21776a44399d3cdbc9afb487, type: 3}
       propertyPath: m_LocalPosition.z

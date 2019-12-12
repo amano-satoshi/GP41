@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSelect : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class PlayerSelect : MonoBehaviour
             nStatePlayer = 0;
             bOne = false;
             fScaleSpeed = Speed;
+            nMoveCurrentTime = 0.0f;
         }
 
         if (Input.GetKeyDown(KeyCode.S) && nStatePlayer != 1)
@@ -70,13 +72,15 @@ public class PlayerSelect : MonoBehaviour
             nStatePlayer = 1;
             bOne = false;
             fScaleSpeed = Speed;
+            nMoveCurrentTime = 0.0f;
 
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             bSelectedPlayer = true;
-            //StageData
+            StageData.SetPlayerNum(nStatePlayer);
+            SceneManager.LoadScene("GameMain");
         }
 
         if (!bSelectedPlayer)
