@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 688945959858244649}
   - component: {fileID: 2316813885958214182}
   - component: {fileID: 234023159955279872}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane7
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2458768402573520337}
   - component: {fileID: 3821857650670331816}
   - component: {fileID: 8964040974981586360}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane5
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 432408044793963516}
   - component: {fileID: 3007010227153328067}
   - component: {fileID: 6847052153784715078}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane9
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 4314143862862267077}
   - component: {fileID: 655181443787548621}
   - component: {fileID: 5953467559302963305}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane6
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 666620673056586885}
   - component: {fileID: 6377356498157418085}
   - component: {fileID: 7931191961593146994}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane10
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2753188594473177428}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: rock_05
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 4261070234898251919}
   - component: {fileID: 6419378573984262549}
   - component: {fileID: 4977261138188477556}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane8
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 2887238741868715800}
   - component: {fileID: 8175737252421291067}
   - component: {fileID: 3849615965912792334}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane3
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 3106617250019114018}
   - component: {fileID: 4546292488618294387}
   - component: {fileID: 4455754558674675100}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane4
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

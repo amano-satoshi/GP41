@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private StageSpawner stageSpawner;
     public GameObject stageState;
     private StageState state;
+    private float Vertical = 0f;
+    private float Holizon = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -59,14 +61,31 @@ public class PlayerController : MonoBehaviour
             cursorBehavior.CursorMove(KeyCode.D);
         }
 
+        Vertical = Input.GetAxis("Pad1_LStick_H");
+        Holizon = Input.GetAxis("Pad1_LStick_W");
+        
+        if (Mathf.Abs(Vertical) >= 0.7f || Mathf.Abs(Holizon) >= 0.7f)
+        {
+            cursorBehavior.CursorMoveStick(Vertical, Holizon);
+        }
+
         //---------- ターゲット生成 ----------
         if(Input.GetKeyDown(KeyCode.Space) && stageSpawner.GetTargets().Count < 4)
         {
             stageSpawner.SpawnTarget();
         }
 
+        if(Input.GetButtonDown("Pad1_A") && stageSpawner.GetTargets().Count < 4)
+        {
+            stageSpawner.SpawnTarget();
+        }
         //---------- 魚雷発射 ----------
         if(Input.GetKeyDown(KeyCode.Return) && stageSpawner.GetTargets().Count != 0)
+        {
+            stageSpawner.TorpedoShoot();
+            state.SetStageState(StageState.STAGE_STATE.SHOOT);
+        }
+        if (Input.GetButtonDown("Pad1_B") && stageSpawner.GetTargets().Count != 0)
         {
             stageSpawner.TorpedoShoot();
             state.SetStageState(StageState.STAGE_STATE.SHOOT);

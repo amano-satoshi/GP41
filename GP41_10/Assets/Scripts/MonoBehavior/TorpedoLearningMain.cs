@@ -29,6 +29,9 @@ public class TorpedoLearningMain : MonoBehaviour
     private Image RangeUp;
     private int ProductionNum;
     private Vector3 EndPos;
+    [SerializeField, Header("入力受付間隔")]
+    private float StickTime = 0f;
+    private float WaitTime = 0f;
 
     private GameObject mapCamera;
 
@@ -90,8 +93,13 @@ public class TorpedoLearningMain : MonoBehaviour
 
     void ChoicePanel()
     {
+        WaitTime -= Time.deltaTime;
+        if(WaitTime < 0f)
+        {
+            WaitTime = 0f;
+        }
         // 選択
-        if (Input.GetKeyDown(KeyCode.A))         // 左
+        if ((Input.GetAxis("Pad1_LStick_W") <= -0.8f || Input.GetAxis("Pad1_W") <= -0.6f) && WaitTime <= 0f)         // 左
         {
             Choice--;
             if (Choice < 0)
@@ -99,8 +107,9 @@ public class TorpedoLearningMain : MonoBehaviour
                 Choice += 2;
             }
             audioSource[1].PlayOneShot(sounds[0]);
+            WaitTime = StickTime;
         }
-        if (Input.GetKeyDown(KeyCode.D))         // 右
+        if ((Input.GetAxis("Pad1_LStick_W") >= 0.8f || Input.GetAxis("Pad1_W") >= 0.6f) && WaitTime <= 0f)         // 右
         {
             Choice++;
             if (Choice > 1)
@@ -108,8 +117,24 @@ public class TorpedoLearningMain : MonoBehaviour
                 Choice -= 2;
             }
             audioSource[1].PlayOneShot(sounds[0]);
+            WaitTime = StickTime;
         }
         if (Input.GetKeyDown(KeyCode.Return) || currentTime <= 0f)    // 決定
+        {
+            if (Choice == 0)
+            {
+                StageData.SetBuffSpeed(1f);
+                ProductionNum = 0;
+            }
+            else if (Choice == 1)
+            {
+                StageData.SetBuffRange(1f);
+                ProductionNum = 1;
+            }
+            ProductionFlg = true;
+            audioSource[1].PlayOneShot(sounds[1]);
+        }
+        if (Input.GetButtonDown("Pad1_B") || currentTime <= 0f)    // 決定
         {
             if (Choice == 0)
             {

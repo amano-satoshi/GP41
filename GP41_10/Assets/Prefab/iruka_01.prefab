@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70acccf30174ccd4990ee8b6a2108ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boat: {fileID: 3373105122602120277, guid: fe7f9aa9cabc4e74c9e8baaee617638d, type: 3}
   TorpedoSpeed: 10
   TorpedoMaxSpeed: 10
   TorpedoMinSpeed: 2

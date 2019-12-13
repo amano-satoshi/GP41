@@ -54,4 +54,11 @@ public class CursorBehavior : MonoBehaviour
             transform.position += new Vector3(CursorSpeed * Time.deltaTime, 0f, 0f);
         }
     }
+
+    public void CursorMoveStick(float vertical, float holizon)
+    {
+        Vector3 vec = new Vector3(holizon, 0f, -vertical);
+        vec = vec.normalized;
+        transform.position += vec * CursorSpeed * Time.deltaTime;
+    }
 }

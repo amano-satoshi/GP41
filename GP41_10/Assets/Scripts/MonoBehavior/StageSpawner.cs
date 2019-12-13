@@ -15,6 +15,7 @@ public class StageSpawner : MonoBehaviour
     public GameObject cameraController;
     public GameObject stageTimer;
     public GameObject stageState;
+    public GameObject oceanInput;
     public Canvas startProduction;
     public Canvas ShootProduction;
     public Canvas TorpedoLearning;
@@ -100,6 +101,7 @@ public class StageSpawner : MonoBehaviour
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
         }
+        oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.2f;
         Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
         audioSource[1].clip = sounds[0];
         audioSource[1].loop = true;
@@ -164,6 +166,18 @@ public class StageSpawner : MonoBehaviour
             audioSource[1].clip = sounds[randomwave];
             audioSource[1].loop = true;
             audioSource[1].Play();
+            if(randomwave == 0)
+            {
+                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.2f;
+            }
+            else if (randomwave == 1)
+            {
+                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.5f;
+            }
+            else if (randomwave == 2)
+            {
+                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.8f;
+            }
             Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
             WaveSpeedChange--;
         }
@@ -330,7 +344,7 @@ public class StageSpawner : MonoBehaviour
         for (int i = 0; i < targets.Count; ++i)
         {
             RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
-            TorpedoObj = Instantiate(Torpedo, ShipPos[i], Quaternion.Euler(0f, 0f, 0f));
+            TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 5f, 0f), Quaternion.Euler(0f, 0f, 0f));
             if (RescueTarget != null)
             {
                 for (int j = 0; j < RescueTarget.Count; ++j)
