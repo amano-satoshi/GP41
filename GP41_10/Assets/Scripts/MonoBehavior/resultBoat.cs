@@ -63,7 +63,6 @@ public class resultBoat : MonoBehaviour
 
         elapsedTime = 0.0f;
         rescueNum = StageData.GetRescuePersonCnt();
-        rescueNum = 13;
         CreateNum(rescueNum);
         
 
