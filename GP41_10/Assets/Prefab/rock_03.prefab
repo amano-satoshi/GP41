@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8928020066881858644}
   - component: {fileID: 5139013901146790060}
   - component: {fileID: 4721304281201218648}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane11
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6309461662207509719}
   - component: {fileID: 6111798400754098885}
   - component: {fileID: 2950993379007823335}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: pPlane1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 604911955395385641}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: rock_03
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

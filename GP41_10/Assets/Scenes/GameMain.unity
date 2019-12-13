@@ -1187,7 +1187,12 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: de87d6933c41b334c8ce5ce19c466656, type: 3}
+      objectReference: {fileID: 8300000, guid: f4da20567433276448b1c2e6a0461be4, type: 3}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: oceanInput
+      value: 
+      objectReference: {fileID: 1582519407}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe79e9bf93d72b45b0458b35551312d, type: 3}
 --- !u!1 &421588576 stripped
@@ -1936,6 +1941,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579302730}
   m_CullTransparentMesh: 0
+--- !u!1 &1582519407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3042060748591619971, guid: 87044156f70bd7248aabfb969ece8fc5,
+    type: 3}
+  m_PrefabInstance: {fileID: 757033908}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1587066071
 GameObject:
   m_ObjectHideFlags: 0
@@ -4210,7 +4221,7 @@ PrefabInstance:
     - target: {fileID: 7642857804794488242, guid: 9ea854e7720125043908a850013afc87,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 121143
+      value: 121139
       objectReference: {fileID: 0}
     - target: {fileID: 7642857804794488242, guid: 9ea854e7720125043908a850013afc87,
         type: 3}

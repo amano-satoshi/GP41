@@ -33,6 +33,9 @@ public class TorpedoBehavior : MonoBehaviour
 
         MAX_STATE
     }
+
+    public GameObject Boat;
+    private GameObject BoatObj = null;
     private GameObject stageState;
     [SerializeField,Header("前進する速度")]
     private float TorpedoSpeed = 0; // 前進する速度
@@ -81,7 +84,7 @@ public class TorpedoBehavior : MonoBehaviour
     // ===================== Update =======================
     void Update()
     {
-        if(stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT)
+        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT)
         {
             return;
         }
@@ -140,6 +143,10 @@ public class TorpedoBehavior : MonoBehaviour
 
         if(destflg)
         {
+            if(BoatObj != null)
+            {
+                Destroy(BoatObj);
+            }
             Destroy(this.gameObject);
         }
     }
@@ -512,6 +519,10 @@ public class TorpedoBehavior : MonoBehaviour
                 if (TorpedoSpeed > TorpedoMaxSpeed / 2f) decel();
                 else if (TorpedoSpeed < TorpedoMaxSpeed / 2f) accel();
                 timeElapsed = 0.0f;
+                if(BoatObj == null)
+                {
+                    BoatObj = Instantiate(Boat, transform.position - transform.up * 0.5f, transform.rotation);
+                }
             }
             else if ((target.transform.position - (transform.position + transform.up)).magnitude > 30f)
             {
@@ -557,7 +568,11 @@ public class TorpedoBehavior : MonoBehaviour
         }
         // --------------- 移動 -----------------
         transform.position += transform.forward * TorpedoSpeed * Time.deltaTime;
-       
+        if(BoatObj != null)
+        {
+            BoatObj.transform.position = transform.position - transform.up * 0.5f;
+            BoatObj.transform.rotation = transform.rotation;
+        }
 
         // --------- 障害物感知 ---------
         HitCheck();
@@ -627,6 +642,12 @@ public class TorpedoBehavior : MonoBehaviour
             transform.rotation = q * transform.rotation; // クォータニオンで回転させる
             TorpedoRotUD -= TorpedoRotUD;
         }
+        BoatObj.transform.position += new Vector3(0f, 1f, 0f) * Time.deltaTime;
+        if (BoatObj.transform.position.y > -0.5f)
+        {
+            BoatObj.transform.position = new Vector3(BoatObj.transform.position.x, -0.5f, BoatObj.transform.position.z);
+        }
+        BoatObj.transform.rotation = Quaternion.identity;
     }
 
     void Failed()
