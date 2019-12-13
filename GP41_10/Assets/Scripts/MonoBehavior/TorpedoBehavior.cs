@@ -521,7 +521,7 @@ public class TorpedoBehavior : MonoBehaviour
                 timeElapsed = 0.0f;
                 if(BoatObj == null)
                 {
-                    BoatObj = Instantiate(Boat, transform.position - transform.up * 0.5f, transform.rotation);
+                    BoatObj = Instantiate(Boat, transform.position - new Vector3(0f, 0.6f, 0f), transform.rotation);
                 }
             }
             else if ((target.transform.position - (transform.position + transform.up)).magnitude > 30f)
@@ -570,7 +570,7 @@ public class TorpedoBehavior : MonoBehaviour
         transform.position += transform.forward * TorpedoSpeed * Time.deltaTime;
         if(BoatObj != null)
         {
-            BoatObj.transform.position = transform.position - transform.up * 0.5f;
+            BoatObj.transform.position = transform.position - new Vector3(0f, 0.6f, 0f);
             BoatObj.transform.rotation = transform.rotation;
         }
 
@@ -642,12 +642,18 @@ public class TorpedoBehavior : MonoBehaviour
             transform.rotation = q * transform.rotation; // クォータニオンで回転させる
             TorpedoRotUD -= TorpedoRotUD;
         }
-        BoatObj.transform.position += new Vector3(0f, 1f, 0f) * Time.deltaTime;
-        if (BoatObj.transform.position.y > -0.5f)
+        transform.position = target.transform.position - new Vector3(0f, 0f, 0f);
+        if (BoatObj != null)
         {
-            BoatObj.transform.position = new Vector3(BoatObj.transform.position.x, -0.5f, BoatObj.transform.position.z);
+            BoatObj.transform.position = transform.position - new Vector3(0f, 0.6f, 0f);
+            BoatObj.transform.rotation = transform.rotation;
         }
-        BoatObj.transform.rotation = Quaternion.identity;
+        //BoatObj.transform.position += new Vector3(0f, 1f, 0f) * Time.deltaTime;
+        //if (BoatObj.transform.position.y > -0.5f)
+        //{
+        //    BoatObj.transform.position = new Vector3(BoatObj.transform.position.x, -0.5f, BoatObj.transform.position.z);
+        //}
+        //BoatObj.transform.rotation = Quaternion.identity;
     }
 
     void Failed()

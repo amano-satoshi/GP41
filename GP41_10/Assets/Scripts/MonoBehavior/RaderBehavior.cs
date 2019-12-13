@@ -39,7 +39,7 @@ public class RaderBehavior : MonoBehaviour
             transform.position = RaderStart;
             if(stagestate.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.PREPARE)
             {
-                audioSource[2].PlayOneShot(sound);
+                //audioSource[2].PlayOneShot(sound);
             }
         }
     }

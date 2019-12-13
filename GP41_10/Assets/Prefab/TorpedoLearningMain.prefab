@@ -578,6 +578,7 @@ MonoBehaviour:
   panelScale: 1.5
   panelPos: {x: 0, y: 0, z: 0}
   ProductionTime: 3
+  StickTime: 0.15
   sounds:
   - {fileID: 8300000, guid: 19f107f4c118814488706c9b03c4595e, type: 3}
   - {fileID: 8300000, guid: de87d6933c41b334c8ce5ce19c466656, type: 3}

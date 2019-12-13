@@ -6,6 +6,8 @@ public class LearningGauge : MonoBehaviour
 {
     private Vector3[] vertpos = new Vector3[4];
     private int gauge = 0;
+    [SerializeField, Header("ゲージ移動速度")]
+    private float GaugeSpeed = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +21,8 @@ public class LearningGauge : MonoBehaviour
     void Update()
     {
         gauge = StageData.GetLearningGauge();
-        vertpos[0] = Vector3.Lerp(vertpos[0], new Vector3(85f - gauge * 16.5f, -10f), 1f * Time.deltaTime);
-        vertpos[1] = Vector3.Lerp(vertpos[1], new Vector3(90f - gauge * 15.5f, 10f + gauge * 1f), 1f * Time.deltaTime);
+        vertpos[0] = Vector3.Lerp(vertpos[0], new Vector3(85f - gauge * 16.5f, -10f), GaugeSpeed * Time.deltaTime);
+        vertpos[1] = Vector3.Lerp(vertpos[1], new Vector3(90f - gauge * 15.5f, 10f + gauge * 1f), GaugeSpeed * Time.deltaTime);
         GetComponent<createImage>().SetVertPos(vertpos);
     }
 }
