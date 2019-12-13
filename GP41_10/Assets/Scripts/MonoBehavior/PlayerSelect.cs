@@ -57,7 +57,12 @@ public class PlayerSelect : MonoBehaviour
             fScaleSpeed *= -1;
         }
 
-        if(Input.GetKeyDown(KeyCode.W) && nStatePlayer != 0)
+        float pd1h = Input.GetAxis("Pad1_H");
+        float pd1lsh = Input.GetAxis("Pad1_LStick_H");
+       
+        if ((pd1lsh < -0.5f ||
+            pd1h > 0.3f ||
+            Input.GetKeyDown(KeyCode.W)) && nStatePlayer != 0)
         {
             nBigTime = 0;
             nStatePlayer = 0;
@@ -66,7 +71,9 @@ public class PlayerSelect : MonoBehaviour
             nMoveCurrentTime = 0.0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && nStatePlayer != 1)
+        else if ((pd1lsh > 0.5f ||
+            pd1h < -0.3f ||
+            Input.GetKeyDown(KeyCode.S)) && nStatePlayer != 1)
         {
             nBigTime = 0;
             nStatePlayer = 1;
@@ -76,7 +83,8 @@ public class PlayerSelect : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetButtonDown("Pad1_A") ||
+            Input.GetKeyDown(KeyCode.Return))
         {
             bSelectedPlayer = true;
             StageData.SetPlayerNum(nStatePlayer);
@@ -111,8 +119,6 @@ public class PlayerSelect : MonoBehaviour
                         }
 
                     }
-                    nMoveCurrentTime = 0.0f;
-
 
                     OneSprite.gameObject.transform.localScale += new Vector3(
                         fScaleSpeed,
@@ -126,7 +132,13 @@ public class PlayerSelect : MonoBehaviour
 
                     if (bOneOne)
                     {
+  //                      TwoModel.gameObject.transform.position += MoveSpeed * Time.deltaTime;
+                    }
+
+                    if (nMoveCurrentTime < nMoveTime * 2)
+                    {// イルカが進む
                         TwoModel.gameObject.transform.position += MoveSpeed * Time.deltaTime;
+                        nMoveCurrentTime += Time.deltaTime;
                     }
 
                     break;
@@ -161,10 +173,10 @@ public class PlayerSelect : MonoBehaviour
                        fScaleSpeed,
                        fScaleSpeed);
 
-                    if (nMoveCurrentTime <= nMoveTime)
+                    if (nMoveCurrentTime < nMoveTime)
                     {// イルカが進む
                         TwoModel.gameObject.transform.position += MoveSpeed * Time.deltaTime;
-                        nMoveCurrentTime += 0.1f;
+                        nMoveCurrentTime += Time.deltaTime;
                     }
 
                     break;

@@ -11,12 +11,13 @@ public class resultBoat : MonoBehaviour
     public GameObject boat0, boat1, boat2;  // ボート
 
     [SerializeField]
-    public GameObject text0, text1;
-
-    [SerializeField]
     public GameObject numSprite;
-    public GameObject numText;
     private Text textnumText;
+    public GameObject ninkyujo;
+    public Vector3 ninkyujoSpeed;
+    public GameObject Tairyo;
+    public GameObject Iikanji;
+    public float StampSpeed;
 
     [SerializeField]
     private int rescueNum;// 助けた人数。メインからもらってくる
@@ -33,15 +34,24 @@ public class resultBoat : MonoBehaviour
     [SerializeField]
     public Canvas canvas;
 
+    [SerializeField]
+    public GameObject player;
+
 
     private BoatAlignNormal[] boatAlignNormal = new BoatAlignNormal[3]; // ボート格納用
-    private Graphic graphic0, graphic1; // 格納用
     private float elapsedTime;
     private float textAlpha;
     private int boatNum;
     private bool isEnd;
+    private bool bOne;
+
+    private bool bninkyu;
+    private bool bninzuu;
+    private bool bhyoka;
 
     private List<GameObject> WorkList = new List<GameObject>();
+
+    private List<GameObject> playerList = new List<GameObject>();
     string rescueNumText;
 
     // Start is called before the first frame update
@@ -50,17 +60,78 @@ public class resultBoat : MonoBehaviour
         boatAlignNormal[0] = boat0.GetComponent<BoatAlignNormal>();
         boatAlignNormal[1] = boat1.GetComponent<BoatAlignNormal>();
         boatAlignNormal[2] = boat2.GetComponent<BoatAlignNormal>();
-        graphic0 = text0.GetComponent<Text>();
-        graphic1 = text1.GetComponent<Text>();
 
         elapsedTime = 0.0f;
         rescueNum = StageData.GetRescuePersonCnt();
-
+        rescueNum = 13;
         CreateNum(rescueNum);
+        
 
-        rescueNumText = (rescueNum).ToString();
-        textnumText = numText.GetComponent<Text>();
-        textnumText.text = rescueNumText;
+        // 人間の生成
+        for(int i = 0, j = 0; i < rescueNum; i++, j++)
+        {
+            playerList.Add(Instantiate(player));
+
+            // 配置
+            if(i > rescueBorder2 - 1)
+            {// 3隻目
+                playerList[i].transform.parent = boat2.transform;
+                playerList[i].transform.position = new Vector3(boat2.transform.position.x + (j * 3) - 9,
+                   boat2.transform.position.y + 10,
+                   boat2.transform.position.z);
+            }
+
+            else if(i > rescueBorder1 - 1)
+            {// 2隻目
+                playerList[i].transform.parent = boat1.transform;
+                playerList[i].transform.position = new Vector3(boat1.transform.position.x + (j * 3) - 9,
+                   boat1.transform.position.y + 10,
+                   boat1.transform.position.z);
+            }
+            else
+            {// 1隻目
+                playerList[i].transform.parent = boat0.transform;
+                playerList[i].transform.position = new Vector3(boat0.transform.position.x + (j * 3) - 8,
+                   boat0.transform.position.y + 10,
+                   boat0.transform.position.z);
+            }
+
+            if(j > rescueBorder1 - 1)
+            {
+                j = 0;
+            }
+        }
+
+        Destroy(player);
+
+
+        bOne = false;
+        bninkyu = false;
+        bninzuu = false;
+        bhyoka = false;
+
+        // 評価の表示
+        if (rescueNum > rescueBorder2)
+        {// 大漁
+            Tairyo.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+            Tairyo.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.0f);
+            Destroy(Iikanji); // いい感じは削除
+        }
+
+        else if(rescueNum > rescueBorder1)
+        {// いい感じ
+            Iikanji.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+            Iikanji.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.0f);
+
+            Destroy(Tairyo); // 大漁は削除
+        }
+
+        else
+        {// 表示なし
+            Destroy(Tairyo); // 大漁は削除
+            Destroy(Iikanji); // いい感じは削除
+        }
+
     }
 
     // Update is called once per frame
@@ -68,7 +139,7 @@ public class resultBoat : MonoBehaviour
     {
         if (isEnd)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetButtonDown("Pad1_A") || Input.GetKeyDown(KeyCode.Return))
             {
                 SceneManager.LoadScene("Title");
             }
@@ -91,20 +162,81 @@ public class resultBoat : MonoBehaviour
         }
 
         if (elapsedTime > boatStopTime)
-        {
+        {   // ボートが止まった
             if (boatAlignNormal[0].rawForward != 0.0f)
                 for (int i = 0; i < boatNum; i++)
                     boatAlignNormal[i].rawForward = 0.0f;
         }
         else if (elapsedTime > boatStartTime)
-        {
+        {// ボートが動いている
             if (boatAlignNormal[0].rawForward != 1.0f)
                 for (int i = 0; i < boatNum; i++)
                     boatAlignNormal[i].rawForward = 1.0f;
+
+
         }
 
-        if (elapsedTime > textStartTime)
+        if(!bninkyu)
         {
+            ninkyujo.transform.position += ninkyujoSpeed;
+            if(ninkyujo.transform.localPosition.x < -75f)
+            {
+                bninkyu = true;
+                bninzuu = true;
+            }
+        }
+
+        if (bninzuu)
+        {
+            for (int i = 0; i < WorkList.Count; ++i)
+            {
+                WorkList[i].transform.position += new Vector3(2.3f, 0.0f, 0.0f);
+
+                if(WorkList[0].transform.localPosition.x > -510f)
+                {
+                    bninzuu = false;
+                    bhyoka = true;
+                }
+            }
+
+        }
+
+        if(bhyoka)
+        {
+            // 評価の表示
+            if (rescueNum >= rescueBorder2)
+            {// 大漁
+                Tairyo.transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
+
+                Tairyo.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1.0f);
+                if(Tairyo.transform.localScale.x <= 0.7f)
+                {
+                    Tairyo.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
+                    isEnd = true;
+                }
+            }
+
+            else if (rescueNum >= rescueBorder1)
+            {// いい感じ
+                Iikanji.transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
+                Iikanji.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1.0f);
+
+                if (Iikanji.transform.localScale.x <= 1.0f)
+                {
+                    Iikanji.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    isEnd = true;
+                }
+            }
+            else
+            {
+                isEnd = true;
+            }
+
+        }
+        
+
+        if (elapsedTime > textStartTime)
+        {   
             if (textAlpha < 1.0f)
             {
                 textAlpha += textAlphaSpeed;
@@ -112,14 +244,9 @@ public class resultBoat : MonoBehaviour
             else
             {
                 textAlpha = 1.0f;
-                isEnd = true;
             }
-            SetAlpha(graphic0, textAlpha);
-            SetAlpha(graphic1, textAlpha);
-            for(int i = 0; i < WorkList.Count; ++i)
-            {
-                WorkList[i].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, textAlpha);
-            }
+           
+          
             
         }
     }
@@ -161,9 +288,9 @@ public class resultBoat : MonoBehaviour
             //ポイントから数字を切り替える
             numObj.GetComponent<NumCtrl>().ChangeSprite(digNum);
 
-            Vector3 pos = new Vector3(-500 - i * 200, 229f, 0f);
+            Vector3 pos = new Vector3(-1300 - i * 200, 229f, 0f);
             numObj.transform.localPosition = pos;
-            numObj.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
+      //      numObj.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
 
             //          numObj = null;
             WorkList.Add(numObj);
