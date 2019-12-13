@@ -99,7 +99,7 @@ public class TorpedoLearningMain : MonoBehaviour
             WaitTime = 0f;
         }
         // 選択
-        if (Input.GetAxis("Pad1_LStick_W") <= -0.8f && WaitTime <= 0f)         // 左
+        if ((Input.GetAxis("Pad1_LStick_W") <= -0.8f || Input.GetAxis("Pad1_W") <= -0.6f) && WaitTime <= 0f)         // 左
         {
             Choice--;
             if (Choice < 0)
@@ -109,7 +109,7 @@ public class TorpedoLearningMain : MonoBehaviour
             audioSource[1].PlayOneShot(sounds[0]);
             WaitTime = StickTime;
         }
-        if (Input.GetAxis("Pad1_LStick_W") >= 0.8f && WaitTime <= 0f)         // 右
+        if ((Input.GetAxis("Pad1_LStick_W") >= 0.8f || Input.GetAxis("Pad1_W") >= 0.6f) && WaitTime <= 0f)         // 右
         {
             Choice++;
             if (Choice > 1)

@@ -522,6 +522,8 @@ public class TorpedoBehavior : MonoBehaviour
                 if(BoatObj == null)
                 {
                     BoatObj = Instantiate(Boat, transform.position - new Vector3(0f, 0.6f, 0f), transform.rotation);
+                    //BoatObj = Instantiate(Boat, transform.position, transform.rotation);
+                    BoatObj.transform.parent = transform;
                 }
             }
             else if ((target.transform.position - (transform.position + transform.up)).magnitude > 30f)
@@ -568,11 +570,11 @@ public class TorpedoBehavior : MonoBehaviour
         }
         // --------------- 移動 -----------------
         transform.position += transform.forward * TorpedoSpeed * Time.deltaTime;
-        if(BoatObj != null)
-        {
-            BoatObj.transform.position = transform.position - new Vector3(0f, 0.6f, 0f);
-            BoatObj.transform.rotation = transform.rotation;
-        }
+        //if(BoatObj != null)
+        //{
+        //    BoatObj.transform.position = transform.position - new Vector3(0f, 0.6f, 0f);
+        //    BoatObj.transform.rotation = transform.rotation;
+        //}
 
         // --------- 障害物感知 ---------
         HitCheck();
@@ -643,11 +645,11 @@ public class TorpedoBehavior : MonoBehaviour
             TorpedoRotUD -= TorpedoRotUD;
         }
         transform.position = target.transform.position - new Vector3(0f, 0f, 0f);
-        if (BoatObj != null)
-        {
-            BoatObj.transform.position = transform.position - new Vector3(0f, 0.6f, 0f);
-            BoatObj.transform.rotation = transform.rotation;
-        }
+        //if (BoatObj != null)
+        //{
+        //    BoatObj.transform.position = transform.position - new Vector3(0f, 0.6f, 0f);
+        //    BoatObj.transform.rotation = transform.rotation;
+        //}
         //BoatObj.transform.position += new Vector3(0f, 1f, 0f) * Time.deltaTime;
         //if (BoatObj.transform.position.y > -0.5f)
         //{
