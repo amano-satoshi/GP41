@@ -37,19 +37,19 @@ public class CursorBehavior : MonoBehaviour
 
     public void CursorMove(KeyCode Key)
     {
-        if (Key == KeyCode.W)
+        if (Key == KeyCode.W || Key == KeyCode.I)
         {
             transform.position += new Vector3(0f, 0f, CursorSpeed * Time.deltaTime);
         }
-        if (Key == KeyCode.S)
+        if (Key == KeyCode.S || Key == KeyCode.K)
         {
             transform.position -= new Vector3(0f, 0f, CursorSpeed * Time.deltaTime);
         }
-        if (Key == KeyCode.A)
+        if (Key == KeyCode.A || Key == KeyCode.J)
         {
             transform.position -= new Vector3(CursorSpeed * Time.deltaTime, 0f, 0f);
         }
-        if (Key == KeyCode.D)
+        if (Key == KeyCode.D || Key == KeyCode.L)
         {
             transform.position += new Vector3(CursorSpeed * Time.deltaTime, 0f, 0f);
         }

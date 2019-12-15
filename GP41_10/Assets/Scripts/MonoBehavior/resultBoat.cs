@@ -203,7 +203,7 @@ public class resultBoat : MonoBehaviour
         if(bhyoka)
         {
             // 評価の表示
-            if (rescueNum >= rescueBorder2)
+            if (rescueNum > rescueBorder2)
             {// 大漁
                 Tairyo.transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
 
@@ -215,7 +215,7 @@ public class resultBoat : MonoBehaviour
                 }
             }
 
-            else if (rescueNum >= rescueBorder1)
+            else if (rescueNum > rescueBorder1)
             {// いい感じ
                 Iikanji.transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
                 Iikanji.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1.0f);

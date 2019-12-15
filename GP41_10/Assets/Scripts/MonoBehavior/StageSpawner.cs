@@ -50,6 +50,8 @@ public class StageSpawner : MonoBehaviour
     private List<GameObject> cameraList = new List<GameObject>();
     private List<GameObject> TorpedoList = new List<GameObject>();
     private List<GameObject> BowList = new List<GameObject>();
+    private List<GameObject> CursorList = new List<GameObject>();
+    private List<int> RemainTorpedoList = new List<int>();
     private int[] RandomWave = new int[5];
     private int WaveSpeedChange = 5;
     private bool[] BowUpFlg = { false, false, false, false, false };
@@ -119,6 +121,27 @@ public class StageSpawner : MonoBehaviour
         for(int i = 0; i < 4; ++i)
         {
             Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f,0f));
+        }
+
+        // カーソル
+        if (StageData.GetPlayerNum() == 0)
+        {
+            GameObject cursorObj = Instantiate(cursor, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            CursorList.Add(cursorObj);
+            int remainTorpedo = 4;
+            RemainTorpedoList.Add(remainTorpedo);
+        }
+        else if (StageData.GetPlayerNum() == 1)
+        {
+            GameObject cursorObj = Instantiate(cursor, new Vector3(40f, 0f, 0f), Quaternion.identity);
+            cursorObj.GetComponent<MeshRenderer>().material.color = Color.red;
+            CursorList.Add(cursorObj);
+            int remainTorpedo = 2;
+            RemainTorpedoList.Add(remainTorpedo);
+            cursorObj = Instantiate(cursor, new Vector3(-40f, 0f, 0f), Quaternion.identity);
+            cursorObj.GetComponent<MeshRenderer>().material.color = Color.blue;
+            CursorList.Add(cursorObj);
+            RemainTorpedoList.Add(remainTorpedo);
         }
 
         // 波の変化のタイミング
@@ -278,12 +301,46 @@ public class StageSpawner : MonoBehaviour
         return SeaAreaSpeed;
     }
 
-    public void SpawnTarget()
+    public List<GameObject> GetCursor()
+    {
+        return CursorList;
+    }
+
+    public List<int> GetRemainTorpedo()
+    {
+        return RemainTorpedoList;
+    }
+
+    public void ResetRemainTorpedo()
+    {
+        if(StageData.GetPlayerNum() == 0)
+        {
+            RemainTorpedoList[0] = 4;
+        }
+        else if (StageData.GetPlayerNum() == 1)
+        {
+            RemainTorpedoList[0] = 2;
+            RemainTorpedoList[1] = 2;
+        }
+    }
+
+    public void SpawnTarget(int SpawnPlayer)
     {
         GameObject target;
-        target = Instantiate(Target, cursor.transform.position, Quaternion.identity);
-        targets.Add(target);
-        audioSource[2].PlayOneShot(sounds[3]);
+        if(SpawnPlayer == 1)
+        {
+            target = Instantiate(Target, CursorList[0].transform.position, Quaternion.identity);
+            targets.Add(target);
+            audioSource[2].PlayOneShot(sounds[3]);
+            RemainTorpedoList[0] -= 1;
+        }
+        else if (SpawnPlayer == 2)
+        {
+            target = Instantiate(Target, CursorList[1].transform.position, Quaternion.identity);
+            targets.Add(target);
+            audioSource[2].PlayOneShot(sounds[3]);
+            RemainTorpedoList[1] -= 1;
+        }
     }
 
     public void ResetTarget()

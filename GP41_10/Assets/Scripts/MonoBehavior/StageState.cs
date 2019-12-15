@@ -135,6 +135,7 @@ public class StageState : MonoBehaviour
                     stageSpawner.ResetTorpedo();
                     stageSpawner.RescueDrowningPerson();
                     stageSpawner.ResetTarget();
+                    stageSpawner.ResetRemainTorpedo();
                     if (comboText != null)
                     {
                         Destroy(comboText.gameObject);
@@ -153,6 +154,7 @@ public class StageState : MonoBehaviour
                 stageSpawner.ResetTorpedo();
                 stageSpawner.RescueDrowningPerson();
                 stageSpawner.ResetTarget();
+                stageSpawner.ResetRemainTorpedo();
                 stageState = STAGE_STATE.PREPARE;
             }
         }
