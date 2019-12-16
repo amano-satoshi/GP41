@@ -21,9 +21,11 @@ public class StageState : MonoBehaviour
     STAGE_STATE stageState;
     public GameObject stageTimer;
     public GameObject StageInfo;
+    public GameObject playerController;
     public Canvas Combo;
     private Canvas comboText = null;
     private StageSpawner stageSpawner;
+    private PlayerController playerControllerObj;
     [SerializeField, Header("演出待機時間")]
     private float waittime = 0f;
     private float worktime = 0f;
@@ -33,6 +35,7 @@ public class StageState : MonoBehaviour
     {
         stageState = STAGE_STATE.START;
         stageSpawner = StageInfo.GetComponent<StageSpawner>();
+        playerControllerObj = playerController.GetComponent<PlayerController>();
         worktime = waittime;
     }
 
@@ -141,6 +144,7 @@ public class StageState : MonoBehaviour
                         Destroy(comboText.gameObject);
                         comboText = null;
                     }
+                    playerControllerObj.ResetShootFlg();
                     stageState = STAGE_STATE.PREPARE;
                 }
             }
@@ -155,6 +159,7 @@ public class StageState : MonoBehaviour
                 stageSpawner.RescueDrowningPerson();
                 stageSpawner.ResetTarget();
                 stageSpawner.ResetRemainTorpedo();
+                playerControllerObj.ResetShootFlg();
                 stageState = STAGE_STATE.PREPARE;
             }
         }

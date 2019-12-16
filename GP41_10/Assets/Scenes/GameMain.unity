@@ -2256,7 +2256,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 58b19b32fd08b064b8f5670c4fa6d251, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86254b810622eb345a280729a4e4b64b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2909,7 +2909,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 58b19b32fd08b064b8f5670c4fa6d251, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86254b810622eb345a280729a4e4b64b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3577,6 +3577,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8952661818135606628, guid: 6532b34aff18f4a478d13cb108be7506,
         type: 3}
+    - target: {fileID: 1253336538888931476, guid: 264eec7a6b294184c97546719abd7c2c,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1143705564}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 264eec7a6b294184c97546719abd7c2c, type: 3}
 --- !u!1001 &2892788382099994354

@@ -55,32 +55,35 @@ public class PlayerController : MonoBehaviour
         }
 
         //---------- カーソル移動 ----------
-        if (Input.GetKey(KeyCode.W))
+        if(!ShootFlg[0])
         {
-            cursorBehaviorList[0].CursorMove(KeyCode.W);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            cursorBehaviorList[0].CursorMove(KeyCode.S);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            cursorBehaviorList[0].CursorMove(KeyCode.A);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            cursorBehaviorList[0].CursorMove(KeyCode.D);
+            if (Input.GetKey(KeyCode.W))
+            {
+                cursorBehaviorList[0].CursorMove(KeyCode.W);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                cursorBehaviorList[0].CursorMove(KeyCode.S);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                cursorBehaviorList[0].CursorMove(KeyCode.A);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                cursorBehaviorList[0].CursorMove(KeyCode.D);
+            }
+
+            Vertical = Input.GetAxis("Pad1_LStick_H");
+            Holizon = Input.GetAxis("Pad1_LStick_W");
+
+            if (Mathf.Abs(Vertical) >= 0.7f || Mathf.Abs(Holizon) >= 0.7f)
+            {
+                cursorBehaviorList[0].CursorMoveStick(Vertical, Holizon);
+            }
         }
 
-        Vertical = Input.GetAxis("Pad1_LStick_H");
-        Holizon = Input.GetAxis("Pad1_LStick_W");
-        
-        if (Mathf.Abs(Vertical) >= 0.7f || Mathf.Abs(Holizon) >= 0.7f)
-        {
-            cursorBehaviorList[0].CursorMoveStick(Vertical, Holizon);
-        }
-
-        if(StageData.GetPlayerNum() == 1)
+        if(StageData.GetPlayerNum() == 1 && !ShootFlg[1])
         {
             if (Input.GetKey(KeyCode.I))
             {
@@ -122,11 +125,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (StageData.GetPlayerNum() == 1)
         {
-            if ((Input.GetButtonDown("Pad1_A") || Input.GetKeyDown(KeyCode.Space)) && stageSpawner.GetRemainTorpedo()[0] > 0)
+            if ((Input.GetButtonDown("Pad1_A") || Input.GetKeyDown(KeyCode.Space)) && stageSpawner.GetRemainTorpedo()[0] > 0 && !ShootFlg[0])
             {
                 stageSpawner.SpawnTarget(1);
             }
-            if ((Input.GetButtonDown("Pad2_A") || Input.GetKeyDown(KeyCode.N)) && stageSpawner.GetRemainTorpedo()[1] > 0)
+            if ((Input.GetButtonDown("Pad2_A") || Input.GetKeyDown(KeyCode.N)) && stageSpawner.GetRemainTorpedo()[1] > 0 && !ShootFlg[1])
             {
                 stageSpawner.SpawnTarget(2);
             }
@@ -142,18 +145,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (StageData.GetPlayerNum() == 1)
         {
-            if ((Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Pad1_B")) && stageSpawner.GetRemainTorpedo()[0] <= 2)
+            if ((Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Pad1_B")) && stageSpawner.GetRemainTorpedo()[0] <= 2 && !ShootFlg[0])
             {
                 ShootFlg[0] = true;
             }
-            if ((Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Pad2_B")) && stageSpawner.GetRemainTorpedo()[1] <= 2)
+            if ((Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Pad2_B")) && stageSpawner.GetRemainTorpedo()[1] <= 2 && !ShootFlg[1])
             {
                 ShootFlg[1] = true;
             }
             if(ShootFlg[0] && ShootFlg[1])
             {
-                ShootFlg[0] = false;
-                ShootFlg[1] = false;
                 stageSpawner.TorpedoShoot();
                 state.SetStageState(StageState.STAGE_STATE.SHOOT);
             }
@@ -163,5 +164,11 @@ public class PlayerController : MonoBehaviour
     public bool[] GetShootFlg()
     {
         return ShootFlg;
+    }
+
+    public void ResetShootFlg()
+    {
+        ShootFlg[0] = false;
+        ShootFlg[1] = false;
     }
 }
