@@ -147,11 +147,11 @@ public class resultBoat : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
-        if (rescueNum < rescueBorder1)
+        if (rescueNum <= rescueBorder1)
         {
             boatNum = 1;
         }
-        else if (rescueNum >= rescueBorder1 && rescueNum <= rescueBorder2)
+        else if (rescueNum > rescueBorder1 && rescueNum <= rescueBorder2)
         {
             boatNum = 2;
         }
@@ -189,7 +189,7 @@ public class resultBoat : MonoBehaviour
         {
             for (int i = 0; i < WorkList.Count; ++i)
             {
-                WorkList[i].transform.position += new Vector3(2.3f, 0.0f, 0.0f);
+                WorkList[i].transform.position += new Vector3(5.3f, 0.0f, 0.0f);
 
                 if(WorkList[0].transform.localPosition.x > -510f)
                 {
