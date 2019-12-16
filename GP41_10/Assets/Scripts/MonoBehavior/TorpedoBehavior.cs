@@ -598,7 +598,7 @@ public class TorpedoBehavior : MonoBehaviour
                 MoveRight();
             }
             // 救出者が左にいる
-            else if (Vector3.Dot(vec, transform.right) >= -1f && Vector3.Dot(vec, transform.right) < 0.1f)
+            else if (Vector3.Dot(vec, transform.right) >= -1f && Vector3.Dot(vec, transform.right) < -0.1f)
             {
                 MoveLeft();
             }
@@ -608,7 +608,7 @@ public class TorpedoBehavior : MonoBehaviour
                 MoveUp();
             }
             // 救出者が下にいる
-            else if (Vector3.Dot(vec, transform.up) >= -1f && Vector3.Dot(vec, transform.up) < 0.1f)
+            else if (Vector3.Dot(vec, transform.up) >= -1f && Vector3.Dot(vec, transform.up) < -0.1f)
             {
                 MoveDown();
             }

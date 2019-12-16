@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6816832072451645491}
   - component: {fileID: 6816832072448745491}
   - component: {fileID: 6816832072449876691}
+  - component: {fileID: 2498358121616802944}
   m_Layer: 18
   m_Name: ship_01
   m_TagString: Obstacle
@@ -77,3 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2498358121616802944
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6816832072452144147}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: b6298944727590748afb43778b225c42, type: 3}
