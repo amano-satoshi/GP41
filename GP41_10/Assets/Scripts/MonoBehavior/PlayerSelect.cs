@@ -35,6 +35,8 @@ public class PlayerSelect : MonoBehaviour
     bool bOne;
     bool bOneOne;
 
+    public GameObject FadeObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,13 +84,14 @@ public class PlayerSelect : MonoBehaviour
             nMoveCurrentTime = 0.0f;
 
         }
+        Debug.Log(FadeObj.GetComponent<FadeController>().GetAlpha());
 
         if (Input.GetButtonDown("Pad1_A") ||
             Input.GetKeyDown(KeyCode.Return))
         {
+
             bSelectedPlayer = true;
             StageData.SetPlayerNum(nStatePlayer);
-            SceneManager.LoadScene("GameMain");
         }
 
         if (!bSelectedPlayer)
@@ -183,6 +186,17 @@ public class PlayerSelect : MonoBehaviour
                 default:
                     // 例外処理
                     break;
+            }
+        }
+        else
+        {
+            FadeObj.GetComponent<FadeController>().SetFadeOut(true);
+            FadeObj.GetComponent<FadeController>().SetFadeIn(false);
+
+            if (FadeObj.GetComponent<FadeController>().GetAlpha() >= 1.0f)
+            {
+                Debug.Log("入った");
+                SceneManager.LoadScene("GameMain");
             }
         }
     }

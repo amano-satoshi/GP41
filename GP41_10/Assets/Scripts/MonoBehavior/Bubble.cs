@@ -16,6 +16,7 @@ public class Bubble : MonoBehaviour
 
     public GameObject bubble;
     public GameObject BubblePrehab;
+    public GameObject FadeObj;
 
     public const int MAX_BUBBLE = 120;
 
@@ -64,6 +65,15 @@ public class Bubble : MonoBehaviour
 
         if (bNext)
         {
+            FadeObj.GetComponent<FadeController>().SetFadeOut(true);
+            FadeObj.GetComponent<FadeController>().SetFadeIn(false);
+
+            if (FadeObj.GetComponent<FadeController>().GetAlpha() >= 1.0f)
+            {
+                SceneManager.LoadScene("PlayerSelect");
+            }
+
+            /*
             for (int i = 0; i < MAX_BUBBLE; i++)
             {
                 if (bubbles[i].bMoveEnd)
@@ -78,8 +88,10 @@ public class Bubble : MonoBehaviour
                     bubbles[i].bMoveEnd = true;
                 }
             }
+            */
         }
 
+        /*
         if(bubbles[MAX_BUBBLE - 1].bMoveEnd)
         {
             fCureentTime += Time.deltaTime;
@@ -88,6 +100,7 @@ public class Bubble : MonoBehaviour
                 SceneManager.LoadScene("PlayerSelect");
             }
         }
+        */
 
         // テスト用
         if (Input.GetButtonDown("Pad1_A"))
