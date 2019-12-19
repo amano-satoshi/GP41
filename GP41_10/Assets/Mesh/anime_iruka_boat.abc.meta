@@ -1,0 +1,89 @@
+fileFormatVersion: 2
+guid: a0a6fe14bff4c76498886c4a84ec0b51
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: anime_iruka_boat/anime_iruka_boat
+    100002: anime_iruka_boat/anime_iruka_boat/group_iruka_boat
+    100004: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/ball
+    100006: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/ball/ballShape
+    100008: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat
+    100010: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_a
+    100012: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_a/boat_8:outputCloth2
+    100014: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_b
+    100016: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_b/boat_bShape
+    100018: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka
+    100020: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/huta
+    100022: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/huta/hutaShape
+    100024: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/iruka_body
+    100026: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/iruka_body/iruka_bodyShape
+    100028: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/screw
+    100030: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/screw/screwShape
+    400000: anime_iruka_boat/anime_iruka_boat/Transform
+    400002: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/Transform
+    400004: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/ball/Transform
+    400006: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/ball/ballShape/Transform
+    400008: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/Transform
+    400010: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_a/Transform
+    400012: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_a/boat_8:outputCloth2/Transform
+    400014: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_b/Transform
+    400016: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_b/boat_bShape/Transform
+    400018: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/Transform
+    400020: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/huta/Transform
+    400022: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/huta/hutaShape/Transform
+    400024: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/iruka_body/Transform
+    400026: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/iruka_body/iruka_bodyShape/Transform
+    400028: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/screw/Transform
+    400030: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/screw/screwShape/Transform
+    2100000: Default Material
+    2300000: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/ball/ballShape/MeshRenderer
+    2300002: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_a/boat_8:outputCloth2/MeshRenderer
+    2300004: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_b/boat_bShape/MeshRenderer
+    2300006: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/huta/hutaShape/MeshRenderer
+    2300008: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/iruka_body/iruka_bodyShape/MeshRenderer
+    2300010: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/screw/screwShape/MeshRenderer
+    3300000: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/ball/ballShape/MeshFilter
+    3300002: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_a/boat_8:outputCloth2/MeshFilter
+    3300004: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/boat/boat_b/boat_bShape/MeshFilter
+    3300006: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/huta/hutaShape/MeshFilter
+    3300008: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/iruka_body/iruka_bodyShape/MeshFilter
+    3300010: anime_iruka_boat/anime_iruka_boat/group_iruka_boat/iruka/screw/screwShape/MeshFilter
+    4300000: /group_iruka_boat/iruka/huta/hutaShape
+    4300002: /group_iruka_boat/iruka/screw/screwShape
+    4300004: /group_iruka_boat/iruka/iruka_body/iruka_bodyShape
+    4300006: /group_iruka_boat/boat/boat_a/boat_8:outputCloth2
+    4300008: /group_iruka_boat/boat/boat_b/boat_bShape
+    4300010: /group_iruka_boat/ball/ballShape
+    7400000: Default Animation
+    7400002: anime_iruka_boat_Frames
+    11400000: anime_iruka_boat/anime_iruka_boat/MonoBehaviour-UTJ.Alembic.AlembicStreamPlayer
+    11400002: anime_iruka_boat_ABCDesc
+    100100000: anime_iruka_boat
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f53f5fc499d31e44b9deee84d28a9ee8, type: 3}
+  streamSettings:
+    normals: 1
+    tangents: 1
+    cameraAspectRatio: 2
+    scaleFactor: 1
+    swapHandedness: 1
+    flipFaces: 0
+    turnQuadEdges: 0
+    interpolateSamples: 1
+    importPointPolygon: 1
+    importLinePolygon: 1
+    importTrianglePolygon: 1
+    importXform: 1
+    importCameras: 1
+    importMeshes: 1
+    importPoints: 1
+    importVisibility: 1
+  abcStartTime: 0.041666666666666664
+  abcEndTime: 4.166666666666667
+  startTime: 0.041666666666666664
+  endTime: 4.166666666666667
+  importWarning: 
+  varyingTopologyMeshNames: []
+  splittingMeshNames: []

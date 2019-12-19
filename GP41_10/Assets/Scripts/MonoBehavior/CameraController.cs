@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class CameraController : MonoBehaviour
     }
     public GameObject MapCamera;
     public GameObject stageState;
+    public Canvas flame;
+    private Canvas cameraFlame;
     private CameraState camerastate;
     private StageState state;
     private List<GameObject> CameraList = new List<GameObject>();
@@ -26,6 +29,10 @@ public class CameraController : MonoBehaviour
     {
         camerastate = CameraState.DEFAULT;
         state = stageState.GetComponent<StageState>();
+        cameraFlame = Instantiate(flame);
+        cameraFlame.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        cameraFlame.GetComponent<Canvas>().worldCamera = MapCamera.GetComponent<Camera>();
+        cameraFlame.GetComponent<Canvas>().planeDistance = 1;
     }
 
     // Update is called once per frame
@@ -77,11 +84,13 @@ public class CameraController : MonoBehaviour
         if(camerastate == CameraState.DEFAULT)
         {
             MapCamera.GetComponent<Camera>().rect = MapRect[0];
+            cameraFlame.transform.GetChild(0).GetComponent<Image>().enabled = false;
         }
         else if(camerastate == CameraState.SHOOT)
         {
             MapCamera.GetComponent<Camera>().rect = MapRect[CameraList.Count];
-            switch(CameraList.Count)
+            cameraFlame.transform.GetChild(0).GetComponent<Image>().enabled = true;
+            switch (CameraList.Count)
             {
                 case 1:
                     CameraList[0].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x, DispSize.y);
