@@ -3758,7 +3758,7 @@ PrefabInstance:
     - target: {fileID: 1253336538888931476, guid: 264eec7a6b294184c97546719abd7c2c,
         type: 3}
       propertyPath: shoottime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1253336538888931476, guid: 264eec7a6b294184c97546719abd7c2c,
         type: 3}

@@ -28,6 +28,8 @@ public class StageSpawner : MonoBehaviour
     private float[] SeaAreaAngle;
     [SerializeField, Header("海流の速度")]
     private float[] SeaAreaSpeed;
+    [SerializeField, Header("海の荒さ")]
+    private float[] SeaPower = new float[3];
     [SerializeField, Header("船の位置")]
     private Vector3[] ShipPos = new Vector3[4];
     [SerializeField, Header("カメラと魚雷とのオフセット（x:左右、y:上下、z:前後）")]
@@ -102,7 +104,7 @@ public class StageSpawner : MonoBehaviour
 
             // 流れの向きと速度を設定
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
-            SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
+            SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[2]);
         }
         oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.2f;
         Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
@@ -110,19 +112,19 @@ public class StageSpawner : MonoBehaviour
         audioSource[1].loop = true;
         audioSource[1].Play();
 
-        //// 障害物
-        //for (int x = 0; x < 16; ++x)
-        //{
-        //    int z = Random.Range(0, 6);
-        //    int rock = Random.Range(0, 4);
-        //    Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
-        //}
+        // 障害物
+        for (int x = 0; x < 16; ++x)
+        {
+            int z = Random.Range(0, 6);
+            int rock = Random.Range(0, 4);
+            Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
+        }
 
-        //// 船
-        //for(int i = 0; i < 4; ++i)
-        //{
-        //    Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f,0f));
-        //}
+        // 船
+        for (int i = 0; i < 4; ++i)
+        {
+            Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f, 0f));
+        }
 
         // カーソル
         if (StageData.GetPlayerNum() == 0)

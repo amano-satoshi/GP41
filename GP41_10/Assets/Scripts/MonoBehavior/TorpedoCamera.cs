@@ -20,9 +20,11 @@ public class TorpedoCamera : MonoBehaviour
     private Vector2 DispPos = Vector2.zero;
     [SerializeField, Header("演出時カメラ振れ幅")]
     private float vibration = 0f;
-    [SerializeField, Header("演出時カメラ振動往復回数")]
-    private int vibrationNum = 0;
-    private float vibrationInterval = 0f;
+    [SerializeField, Header("演出時カメラ振動スピード")]
+    private float vibrationSpeed = 0f;
+    [SerializeField, Header("演出時カメラ振動時間")]
+    private float vibrationTime = 0f;
+    private float vibrationCurrentRad = 0f;
     private Vector3 offset = new Vector3(0f, 0f, 0f); // オフセット
     private bool destflg = false;
     private bool productionEndFlg = false;
@@ -47,7 +49,6 @@ public class TorpedoCamera : MonoBehaviour
         stageState = GameObject.Find("StageState");
         audioSource = mapCamera.GetComponents<AudioSource>();
         audioSource[2].PlayOneShot(sounds[2]);
-        vibrationInterval = vibration / vibrationNum;
     }
 
     void Update()
@@ -61,13 +62,13 @@ public class TorpedoCamera : MonoBehaviour
                 targetCamPos,
                 Time.deltaTime * smoothing
             );
-            //if(!productionEndFlg && stageState.GetComponent<StageState>().GetStageState() != StageState.STAGE_STATE.PRODUCTION)
-            //{
-            //    ShootProduction();
-            //}
             transform.rotation = target.transform.rotation;
+            if (!productionEndFlg && stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.RESCUE)
+            {
+                ShootProduction();
+            }
 
-            if(target.GetComponent<TorpedoBehavior>().torpedostate == TorpedoBehavior.TorpedoState.RESCUE && !TextDisp)
+            if (target.GetComponent<TorpedoBehavior>().torpedostate == TorpedoBehavior.TorpedoState.RESCUE && !TextDisp)
             {
                 DispResult(true);
                 TextDisp = true;
@@ -237,13 +238,12 @@ public class TorpedoCamera : MonoBehaviour
 
     void ShootProduction()
     {
-        transform.position += new Vector3(0f, vibration, 0f);
-        vibration *= -1f;
-        if (vibration > 0f)
-        {
-            vibration -= vibrationInterval;
-        }
-        if(Mathf.Abs(vibration) <= 0.1f)
+        float pos;
+        vibrationCurrentRad += Time.deltaTime * vibrationSpeed;
+        Debug.Log(vibrationCurrentRad);
+        pos = Mathf.Sin(vibrationCurrentRad) * vibration;
+        transform.position += new Vector3(0f, pos, 0f);
+        if((vibrationTime * vibrationSpeed) < vibrationCurrentRad)
         {
             productionEndFlg = true;
         }
