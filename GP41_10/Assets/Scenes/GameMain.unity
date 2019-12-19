@@ -1210,6 +1210,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1495794620026882527, guid: 404ea992455ed644bbf69c2065723348,
         type: 3}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: SeaPower.Array.data[0]
+      value: -4.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: SeaPower.Array.data[1]
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: SeaPower.Array.data[2]
+      value: 1.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355746630672284639, guid: 5fe79e9bf93d72b45b0458b35551312d,
+        type: 3}
+      propertyPath: SeaPowerLevel
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe79e9bf93d72b45b0458b35551312d, type: 3}
 --- !u!1 &421588576 stripped
