@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
             case StageState.STAGE_STATE.PREPARE:
                 ResetCameraState();
                 break;
-            case StageState.STAGE_STATE.RESCUE:
+            case StageState.STAGE_STATE.PRODUCTION:
                 camerastate = CameraState.SHOOT;
                 break;
             default:

@@ -18,8 +18,14 @@ public class TorpedoCamera : MonoBehaviour
     private float smoothing = 0f;
     [SerializeField, Header("成功失敗表示位置")]
     private Vector2 DispPos = Vector2.zero;
+    [SerializeField, Header("演出時カメラ振れ幅")]
+    private float vibration = 0f;
+    [SerializeField, Header("演出時カメラ振動往復回数")]
+    private int vibrationNum = 0;
+    private float vibrationInterval = 0f;
     private Vector3 offset = new Vector3(0f, 0f, 0f); // オフセット
     private bool destflg = false;
+    private bool productionEndFlg = false;
     public Canvas success;
     public Canvas failed;
     private Canvas result = null;
@@ -28,6 +34,7 @@ public class TorpedoCamera : MonoBehaviour
 
     private GameObject mapCamera;
     private GameObject stageSpawner;
+    private GameObject stageState;
     private List<GameObject> cameraList;
 
     public AudioClip[] sounds = new AudioClip[3];
@@ -37,13 +44,15 @@ public class TorpedoCamera : MonoBehaviour
     {
         mapCamera = GameObject.Find("MapCamera");
         stageSpawner = GameObject.Find("StageSpawner");
+        stageState = GameObject.Find("StageState");
         audioSource = mapCamera.GetComponents<AudioSource>();
         audioSource[2].PlayOneShot(sounds[2]);
+        vibrationInterval = vibration / vibrationNum;
     }
 
     void Update()
     {
-        if(target != null)
+        if (target != null)
         {
             // 滑らかに追従
             Vector3 targetCamPos = target.transform.position + target.transform.forward * offset.z + target.transform.up * offset.y + transform.right * offset.x;
@@ -52,6 +61,10 @@ public class TorpedoCamera : MonoBehaviour
                 targetCamPos,
                 Time.deltaTime * smoothing
             );
+            //if(!productionEndFlg && stageState.GetComponent<StageState>().GetStageState() != StageState.STAGE_STATE.PRODUCTION)
+            //{
+            //    ShootProduction();
+            //}
             transform.rotation = target.transform.rotation;
 
             if(target.GetComponent<TorpedoBehavior>().torpedostate == TorpedoBehavior.TorpedoState.RESCUE && !TextDisp)
@@ -219,6 +232,20 @@ public class TorpedoCamera : MonoBehaviour
                         -= new Vector3(-DispPos.x, DispPos.y, 0f);
                 }
             }
+        }
+    }
+
+    void ShootProduction()
+    {
+        transform.position += new Vector3(0f, vibration, 0f);
+        vibration *= -1f;
+        if (vibration > 0f)
+        {
+            vibration -= vibrationInterval;
+        }
+        if(Mathf.Abs(vibration) <= 0.1f)
+        {
+            productionEndFlg = true;
         }
     }
 }

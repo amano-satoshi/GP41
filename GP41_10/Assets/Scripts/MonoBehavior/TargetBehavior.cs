@@ -14,7 +14,6 @@ public class TargetBehavior : MonoBehaviour
     void Start()
     {
         stageSpawer = GameObject.Find("StageSpawner");
-        GetComponent<MeshRenderer>().material.color = Color.red;
         SuccessRange += StageData.GetBuffRange();
     }
 
@@ -33,7 +32,6 @@ public class TargetBehavior : MonoBehaviour
         {
             if(!DrowingPersons[i].GetComponent<DrowningPersonBehavior>().GetRescued() && ((DrowingPersons[i].transform.position - new Vector3(transform.position.x, transform.position.y - 5f, transform.position.z)).magnitude <= SuccessRange))
             {
-                GetComponent<MeshRenderer>().material.color = Color.blue;
                 DrowingPersons[i].GetComponent<DrowningPersonBehavior>().Rescued();
                 RescuePersons.Add(DrowingPersons[i]);
             }

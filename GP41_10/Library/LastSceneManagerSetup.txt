@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/blor_test/test.unity
+- path: Assets/Scenes/PlayerSelect.unity
   isLoaded: 1
   isActive: 1
