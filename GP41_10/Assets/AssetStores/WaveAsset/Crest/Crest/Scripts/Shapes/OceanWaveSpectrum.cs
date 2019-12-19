@@ -38,6 +38,7 @@ namespace Crest
         float _multiplier = 1f;
 
         [SerializeField]
+        // -6　～　5の間
         float[] _powerLog = new float[NUM_OCTAVES]
             { -6f, -6f, -6f, -4.0088496f, -3.4452133f, -2.6996124f, -2.615044f, -1.2080691f, -0.53905386f, 0.27448857f, 0.53627354f, 1.0282621f, 1.4403292f, -6f };
 
@@ -61,6 +62,7 @@ namespace Crest
 
         public float GetAmplitude(float wavelength, float componentsPerOctave)
         {
+
             // Always take random value so that sequence remains deterministic even if this function early outs
             var rand0 = Random.value;
 
@@ -72,6 +74,7 @@ namespace Crest
             var lower = Mathf.Pow(2f, Mathf.Floor(wl_pow2));
 
             var index = (int)(wl_pow2 - SMALLEST_WL_POW_2);
+
 
             if(_powerLog.Length < NUM_OCTAVES)
             {
@@ -271,6 +274,19 @@ namespace Crest
             return PiersonMoskowitzSpectrum(gravity, windspeed, frequency_peak, alpha, wavelength) * Mathf.Pow(gamma, r);
         }
 
+        // 追加
+        public void SetWavePower(int num, float power)
+        {
+            if (num < _powerLog.Length)
+            {
+                _powerLog[num] = power;
+            }
+            else
+            {
+                Debug.Log("範囲外エラー");
+            }
+        }
+
 #if UNITY_EDITOR
         public void Upgrade()
         {
@@ -329,6 +345,8 @@ namespace Crest
                 ArrayUtility.Insert(ref values, 0, defaultValue);
             }
         }
+
+
 
         public override void OnInspectorGUI()
         {
@@ -466,7 +484,11 @@ namespace Crest
             }
 
             serializedObject.ApplyModifiedProperties();
+
         }
+
+       
     }
+    
 #endif
 }

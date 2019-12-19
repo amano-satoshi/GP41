@@ -36,7 +36,9 @@ public class resultBoat : MonoBehaviour
 
     [SerializeField]
     public GameObject player;
-
+    public GameObject FireWorks;
+    private List<GameObject> FireWorksList = new List<GameObject>();
+    public GameObject FireWorksPrefab;
 
     private BoatAlignNormal[] boatAlignNormal = new BoatAlignNormal[3]; // ボート格納用
     private float elapsedTime;
@@ -66,12 +68,13 @@ public class resultBoat : MonoBehaviour
 
         elapsedTime = 0.0f;
         rescueNum = StageData.GetRescuePersonCnt();
-        rescueNum = 15;
+//        rescueNum = 6;
         CreateNum(rescueNum);
-        
+
+        FireWorks.SetActive(false);
 
         // 人間の生成
-        for(int i = 0, j = 0; i < rescueNum; i++, j++)
+        for (int i = 0, j = 0; i < rescueNum; i++, j++)
         {
             playerList.Add(Instantiate(player));
 
@@ -119,6 +122,14 @@ public class resultBoat : MonoBehaviour
         {// 大漁
             Tairyo.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
             Tairyo.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.0f);
+            for (int i = 0; i < 2; i++)
+            {
+                FireWorksList.Add(Instantiate(FireWorks));
+                FireWorksList[i].transform.parent = FireWorksPrefab.transform;
+                FireWorksList[i].transform.localPosition = new Vector3(40 * i, 
+                    FireWorksList[i].transform.localPosition.y,
+                    FireWorksList[i].transform.localPosition.z);
+            }
             Destroy(Iikanji); // いい感じは削除
         }
 
@@ -126,6 +137,8 @@ public class resultBoat : MonoBehaviour
         {// いい感じ
             Iikanji.transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
             Iikanji.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.0f);
+            FireWorks.transform.position = new Vector3(0.0f, FireWorks.transform.position.y,
+                FireWorks.transform.position.z);
 
             Destroy(Tairyo); // 大漁は削除
         }
@@ -134,6 +147,7 @@ public class resultBoat : MonoBehaviour
         {// 表示なし
             Destroy(Tairyo); // 大漁は削除
             Destroy(Iikanji); // いい感じは削除
+            Destroy(FireWorks);
         }
 
     }
@@ -230,6 +244,12 @@ public class resultBoat : MonoBehaviour
                 {
                     Tairyo.transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
                     isEnd = true;
+                    for(int i = 0; i < FireWorksList.Count; i ++)
+                    {
+                        FireWorksList[i].SetActive(true);
+                    }
+                    FireWorks.SetActive(true);
+
                 }
             }
 
@@ -242,6 +262,8 @@ public class resultBoat : MonoBehaviour
                 {
                     Iikanji.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                     isEnd = true;
+                    FireWorks.SetActive(true);
+
                 }
             }
             else
