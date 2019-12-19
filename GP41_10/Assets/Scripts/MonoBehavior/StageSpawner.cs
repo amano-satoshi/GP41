@@ -8,7 +8,8 @@ public class StageSpawner : MonoBehaviour
     public GameObject SeaArea;
     public GameObject Bow;
     public GameObject Ship;
-    public GameObject cursor;
+    public GameObject cursor1;
+    public GameObject cursor2;
     public GameObject Target;
     public GameObject Torpedo;
     public GameObject Torpedocamera;
@@ -126,19 +127,19 @@ public class StageSpawner : MonoBehaviour
         // カーソル
         if (StageData.GetPlayerNum() == 0)
         {
-            GameObject cursorObj = Instantiate(cursor, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            GameObject cursorObj = Instantiate(cursor1, new Vector3(0f, 5f, 0f), Quaternion.Euler(0f, 180f, 0f));
             CursorList.Add(cursorObj);
             int remainTorpedo = 4;
             RemainTorpedoList.Add(remainTorpedo);
         }
         else if (StageData.GetPlayerNum() == 1)
         {
-            GameObject cursorObj = Instantiate(cursor, new Vector3(40f, 0f, 0f), Quaternion.identity);
+            GameObject cursorObj = Instantiate(cursor1, new Vector3(40f, 5f, 0f), Quaternion.Euler(0f, 180f, 0f));
             cursorObj.GetComponent<MeshRenderer>().material.color = Color.red;
             CursorList.Add(cursorObj);
             int remainTorpedo = 2;
             RemainTorpedoList.Add(remainTorpedo);
-            cursorObj = Instantiate(cursor, new Vector3(-40f, 0f, 0f), Quaternion.identity);
+            cursorObj = Instantiate(cursor2, new Vector3(-40f, 5f, 0f), Quaternion.Euler(0f, 180f, 0f));
             cursorObj.GetComponent<MeshRenderer>().material.color = Color.blue;
             CursorList.Add(cursorObj);
             RemainTorpedoList.Add(remainTorpedo);

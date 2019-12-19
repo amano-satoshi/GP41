@@ -1,31 +1,15 @@
-Base path: C:/Users/だらけ/Desktop/Unity/2018_3.14/Editor/Data
+Base path: C:/Users/satoshi/Desktop/unityeditor/2018.3.14f1/Editor/Data
 Cmd: initializeCompiler
-Cmd: preprocess
-  insize=2211 outsize=2146 ok=1
-Cmd: preprocess
-  insize=1980 outsize=317 ok=1
-Cmd: preprocess
-  insize=2216 outsize=556 ok=1
-Cmd: preprocess
-  insize=466 outsize=333 ok=1
-Cmd: preprocess
-  insize=4145 outsize=1018 ok=1
-Cmd: preprocess
-  insize=501 outsize=301 ok=1
-Cmd: preprocess
-  insize=1915 outsize=818 ok=1
-Cmd: preprocess
-  insize=2193 outsize=2127 ok=1
-Cmd: preprocess
-  insize=2301 outsize=2236 ok=1
-Cmd: preprocess
-  insize=4219 outsize=1093 ok=1
-Cmd: preprocess
-  insize=1442 outsize=1378 ok=1
-Cmd: preprocess
-  insize=612 outsize=410 ok=1
-Cmd: preprocess
-  insize=1421 outsize=261 ok=1
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler

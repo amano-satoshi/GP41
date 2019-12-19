@@ -145,11 +145,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (StageData.GetPlayerNum() == 1)
         {
-            if ((Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Pad1_B")) && stageSpawner.GetRemainTorpedo()[0] <= 2 && !ShootFlg[0])
+            if ((Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Pad1_B")) && stageSpawner.GetRemainTorpedo()[0] < 2 && !ShootFlg[0])
             {
                 ShootFlg[0] = true;
             }
-            if ((Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Pad2_B")) && stageSpawner.GetRemainTorpedo()[1] <= 2 && !ShootFlg[1])
+            if ((Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Pad2_B")) && stageSpawner.GetRemainTorpedo()[1] < 2 && !ShootFlg[1])
             {
                 ShootFlg[1] = true;
             }
