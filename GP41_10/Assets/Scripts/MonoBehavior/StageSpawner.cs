@@ -110,19 +110,19 @@ public class StageSpawner : MonoBehaviour
         audioSource[1].loop = true;
         audioSource[1].Play();
 
-        // 障害物
-        for (int x = 0; x < 16; ++x)
-        {
-            int z = Random.Range(0, 6);
-            int rock = Random.Range(0, 4);
-            Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
-        }
+        //// 障害物
+        //for (int x = 0; x < 16; ++x)
+        //{
+        //    int z = Random.Range(0, 6);
+        //    int rock = Random.Range(0, 4);
+        //    Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
+        //}
 
-        // 船
-        for(int i = 0; i < 4; ++i)
-        {
-            Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f,0f));
-        }
+        //// 船
+        //for(int i = 0; i < 4; ++i)
+        //{
+        //    Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f,0f));
+        //}
 
         // カーソル
         if (StageData.GetPlayerNum() == 0)

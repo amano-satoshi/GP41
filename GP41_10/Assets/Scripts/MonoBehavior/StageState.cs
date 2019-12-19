@@ -24,6 +24,7 @@ public class StageState : MonoBehaviour
     public GameObject StageInfo;
     public GameObject playerController;
     public Canvas Combo;
+    public GameObject Fade;
     private Canvas comboText = null;
     private StageSpawner stageSpawner;
     private PlayerController playerControllerObj;
@@ -183,7 +184,12 @@ public class StageState : MonoBehaviour
             {
                 //stageSpawner.GetEndProduction().GetComponent<EndProduction>().DelProduction();
                 // リザルトへ
-                SceneManager.LoadScene("ResultScene");
+                Fade.GetComponent<FadeController>().SetFadeOut(true);
+                Fade.GetComponent<FadeController>().SetFadeIn(false);
+                if(Fade.GetComponent<FadeController>().GetAlpha() >= 1.0f)
+                {
+                    SceneManager.LoadScene("ResultScene");
+                }
             }
         }
     }
