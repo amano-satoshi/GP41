@@ -16,22 +16,32 @@ public class Iwashi : MonoBehaviour
     void Start()
     {
 
-        rand = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-15.5f, 15.5f), Random.Range(-0.5f, 0.5f));
+        rand = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-90f, 90.0f), Random.Range(-0.5f, 0.5f));
         intTime = Random.Range(2.0f, 4.0f);
 
         gos = myManager.allFish;
+
         //    speed = Random.Range(myManager.minSpeed,
         //                         myManager.maxSpeed);
     }
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * speed;       // まっすぐ進む
 
         if (time < 0.0f)
         {
-            rand = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-15.5f, 15.5f), Random.Range(-0.5f, 0.5f));
+            rand = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-3, 3f), Random.Range(-0.5f, 0.5f));
             time = 5.0f;
+
+            iwashi.transform.Rotate(iwashi.transform.rotation.x + rand.x,
+                iwashi.transform.rotation.y + rand.y,
+                iwashi.transform.rotation.z + rand.z);
+            foreach (GameObject go in gos)
+            {
+                go.transform.Rotate(go.transform.rotation.x + rand.x,
+                go.transform.rotation.y + rand.y,
+                go.transform.rotation.z + rand.z);
+            }
         }
         time -= 0.1f;
        
@@ -40,24 +50,60 @@ public class Iwashi : MonoBehaviour
         {
             //   go.transform.rotation = iwashi.transform.rotation;
 
-            go.transform.rotation = Quaternion.Euler(go.transform.rotation.x + rand.x,
-                go.transform.rotation.y + rand.y,
-                go.transform.rotation.z + rand.z);
+
+            go.transform.position += go.transform.forward * Time.deltaTime * speed;       // まっすぐ進む
+
             
-            if (go.transform.position.x > 20f || go.transform.position.x < -20f)
+            
+            if (go.transform.position.x > 80f)
             {
-                go.transform.position = new Vector3(go.transform.position.x + 180, go.transform.position.y, go.transform.position.z);
+                go.transform.position = new Vector3(go.transform.position.x - 10, go.transform.position.y, go.transform.position.z);
             }
 
-            if (go.transform.position.y > 1.5f)
+            if(go.transform.position.x < -80f)
             {
-                go.transform.position = new Vector3(go.transform.position.x, 1.5f, go.transform.position.z);
+                go.transform.position = new Vector3(go.transform.position.x + 10, go.transform.position.y, go.transform.position.z);
+
             }
 
-            if (go.transform.position.z > 70)
+            if (go.transform.position.y > 2.5f)
             {
-                go.transform.rotation = Quaternion.Euler(go.transform.rotation.x, go.transform.rotation.y + 180, go.transform.rotation.z);
+                go.transform.position = new Vector3(go.transform.position.x, 2.5f, go.transform.position.z);
+            }
+
+            if (go.transform.position.y < -1f)
+            {
+                go.transform.position = new Vector3(go.transform.position.x, -1f , go.transform.position.z);
+            }
+
+            if (go.transform.position.z > 100)
+            {
                 go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, go.transform.position.z - 10.0f);
+            }
+
+            if (go.transform.position.z < -10)
+            {
+                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, go.transform.position.z + 10.0f);
+            }
+
+            if (go.transform.rotation.x > 5)
+            {
+                go.transform.Rotate(5, go.transform.rotation.y, go.transform.rotation.z);
+            }
+
+            if (go.transform.rotation.x < -5)
+            {
+                go.transform.Rotate(-5, go.transform.rotation.y, go.transform.rotation.z);
+            }
+
+            if (go.transform.rotation.z > 5)
+            {
+                go.transform.Rotate(go.transform.rotation.x, go.transform.rotation.y, 5f);
+            }
+
+            if (go.transform.rotation.z < -5)
+            {
+                go.transform.Rotate(go.transform.rotation.x, go.transform.rotation.y, -5f);
             }
         }
 
