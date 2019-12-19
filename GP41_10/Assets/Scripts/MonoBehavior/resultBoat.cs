@@ -48,11 +48,14 @@ public class resultBoat : MonoBehaviour
     private bool bninkyu;
     private bool bninzuu;
     private bool bhyoka;
+    private bool bBoatStop;
 
     private List<GameObject> WorkList = new List<GameObject>();
 
     private List<GameObject> playerList = new List<GameObject>();
     string rescueNumText;
+
+    public GameObject FadeObj;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +66,7 @@ public class resultBoat : MonoBehaviour
 
         elapsedTime = 0.0f;
         rescueNum = StageData.GetRescuePersonCnt();
+        rescueNum = 15;
         CreateNum(rescueNum);
         
 
@@ -108,6 +112,7 @@ public class resultBoat : MonoBehaviour
         bninkyu = false;
         bninzuu = false;
         bhyoka = false;
+        bBoatStop = false;
 
         // 評価の表示
         if (rescueNum > rescueBorder2)
@@ -136,10 +141,19 @@ public class resultBoat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isEnd)
+        if (isEnd && bBoatStop)
         {
-            if(Input.GetButtonDown("Pad1_A") || Input.GetKeyDown(KeyCode.Return))
+
+            if (Input.GetButtonDown("Pad1_A") || Input.GetKeyDown(KeyCode.Return))
             {
+                FadeObj.transform.SetAsLastSibling();
+                FadeObj.GetComponent<FadeController>().SetFadeOut(true);
+                FadeObj.GetComponent<FadeController>().SetFadeIn(false);
+            }
+
+            if (FadeObj.GetComponent<FadeController>().GetAlpha() >= 1.0f)
+            {
+                Debug.Log("入った");
                 SceneManager.LoadScene("Title");
             }
             return;
@@ -150,6 +164,7 @@ public class resultBoat : MonoBehaviour
         if (rescueNum <= rescueBorder1)
         {
             boatNum = 1;
+            //boatAlignNormal[0]
         }
         else if (rescueNum > rescueBorder1 && rescueNum <= rescueBorder2)
         {
@@ -162,9 +177,12 @@ public class resultBoat : MonoBehaviour
 
         if (elapsedTime > boatStopTime)
         {   // ボートが止まった
+
             if (boatAlignNormal[0].rawForward != 0.0f)
                 for (int i = 0; i < boatNum; i++)
                     boatAlignNormal[i].rawForward = 0.0f;
+
+            bBoatStop = true;
         }
         else if (elapsedTime > boatStartTime)
         {// ボートが動いている
