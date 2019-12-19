@@ -10,6 +10,7 @@ public class StageState : MonoBehaviour
         START = 0,          // ステージ開始時
         PREPARE,            // 発射場所選択時
         SHOOT,              // 発射時
+        PRODUCTION,         // 発射演出時
         RESCUE,             // 救出者探索時
         TORPEDO_RESULT,     // 救出結果表示時
         LEARNING,           // 学習項目選択時
@@ -26,9 +27,12 @@ public class StageState : MonoBehaviour
     private Canvas comboText = null;
     private StageSpawner stageSpawner;
     private PlayerController playerControllerObj;
+    [SerializeField, Header("発射待機時間")]
+    private float shoottime = 0f;
     [SerializeField, Header("演出待機時間")]
     private float waittime = 0f;
     private float worktime = 0f;
+    private float shootworktime = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,7 @@ public class StageState : MonoBehaviour
         stageSpawner = StageInfo.GetComponent<StageSpawner>();
         playerControllerObj = playerController.GetComponent<PlayerController>();
         worktime = waittime;
+        shootworktime = shoottime;
     }
 
     // Update is called once per frame
@@ -62,6 +67,15 @@ public class StageState : MonoBehaviour
             if (stageSpawner.GetShootProduction() != null && stageSpawner.GetShootProduction().GetComponent<ShootProduction>().GetProduction())
             {
                 stageSpawner.GetShootProduction().GetComponent<ShootProduction>().DelProduction();
+                stageState = STAGE_STATE.PRODUCTION;
+            }
+        }
+        if (stageState == STAGE_STATE.PRODUCTION)
+        {
+            shootworktime -= Time.deltaTime;
+            if (shootworktime <= 0f)
+            {
+                shootworktime = shoottime;
                 stageState = STAGE_STATE.RESCUE;
             }
         }

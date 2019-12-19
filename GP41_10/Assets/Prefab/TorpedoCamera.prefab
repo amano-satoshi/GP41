@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2514315882919919663}
   - component: {fileID: 4212946275674439555}
   - component: {fileID: 3805449394078605897}
+  - component: {fileID: 7036306445927850908}
   m_Layer: 0
   m_Name: TorpedoCamera
   m_TagString: Untagged
@@ -90,12 +91,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothing: 3
   DispPos: {x: 300, y: 180}
+  vibration: 1
+  vibrationNum: 5
   success: {fileID: 3107628807715002182, guid: 170ef9de1ea0abf4080f8c8cee10f448, type: 3}
   failed: {fileID: 6059939991266627106, guid: 4f0c4851eee14d74e99ee553e7cb495d, type: 3}
   sounds:
   - {fileID: 8300000, guid: 4540a103fa1caf64aa221499ada0d364, type: 3}
   - {fileID: 8300000, guid: aaed445814446db4ebae7a52fa6c0bfe, type: 3}
   - {fileID: 8300000, guid: 7903f31603696724594504b0534dd5a6, type: 3}
+--- !u!114 &7036306445927850908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757127274633118695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704d27b9a5b954ee0a0d9bc010c245a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    shutterAngle: 270
+    sampleCount: 10
+    frameBlending: 1
+  _reconstructionShader: {fileID: 4800000, guid: 7ea8cfee2809541fa81c5ed422ded933,
+    type: 3}
+  _frameBlendingShader: {fileID: 4800000, guid: 83da3aecb8b462f498946f5198cbd58e,
+    type: 3}
 --- !u!1001 &3271725036865119970
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -127,14 +127,14 @@ public class StageSpawner : MonoBehaviour
         // カーソル
         if (StageData.GetPlayerNum() == 0)
         {
-            GameObject cursorObj = Instantiate(cursor1, new Vector3(0f, 5f, 0f), Quaternion.Euler(0f, 180f, 0f));
+            GameObject cursorObj = Instantiate(cursor1, new Vector3(0f, 6f, 0f), Quaternion.Euler(0f, 180f, 0f));
             CursorList.Add(cursorObj);
             int remainTorpedo = 4;
             RemainTorpedoList.Add(remainTorpedo);
         }
         else if (StageData.GetPlayerNum() == 1)
         {
-            GameObject cursorObj = Instantiate(cursor1, new Vector3(40f, 5f, 0f), Quaternion.Euler(0f, 180f, 0f));
+            GameObject cursorObj = Instantiate(cursor1, new Vector3(40f, 6f, 0f), Quaternion.Euler(0f, 180f, 0f));
             cursorObj.GetComponent<MeshRenderer>().material.color = Color.red;
             CursorList.Add(cursorObj);
             int remainTorpedo = 2;
@@ -402,7 +402,7 @@ public class StageSpawner : MonoBehaviour
         for (int i = 0; i < targets.Count; ++i)
         {
             RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
-            TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 5f, 0f), Quaternion.Euler(0f, 0f, 0f));
+            TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 5f, 0f), Quaternion.Euler(0f, i * 90f, 0f));
             if (RescueTarget != null)
             {
                 for (int j = 0; j < RescueTarget.Count; ++j)

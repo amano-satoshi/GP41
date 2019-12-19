@@ -82,7 +82,7 @@ public class TorpedoBehavior : MonoBehaviour
     // ===================== Update =======================
     void Update()
     {
-        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT)
+        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT || stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.PRODUCTION)
         {
             return;
         }
@@ -588,7 +588,7 @@ public class TorpedoBehavior : MonoBehaviour
                 MoveLeft();
             }
             // 救出者が上にいる
-            if (Vector3.Dot(vec, transform.up) <= 1f && Vector3.Dot(vec, transform.up) > 0.1f)
+            if (Vector3.Dot(vec, transform.up) <= 1f && Vector3.Dot(vec, transform.up) > 0.1f && (new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude < 10f)
             {
                 MoveUp();
             }
@@ -665,7 +665,7 @@ public class TorpedoBehavior : MonoBehaviour
             DrowningPersonList.Add(DrowningPerson);
         }
         target = DrowningPersonList[0];
-        transform.LookAt(target.transform.position);
+        //transform.LookAt(target.transform.position);
         SuccessFlg = true;
     }
 
