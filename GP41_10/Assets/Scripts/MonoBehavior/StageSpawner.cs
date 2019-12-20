@@ -28,6 +28,10 @@ public class StageSpawner : MonoBehaviour
     private float[] SeaAreaAngle;
     [SerializeField, Header("海流の速度")]
     private float[] SeaAreaSpeed;
+    [SerializeField, Header("海の荒さの度合")]
+    [Range(0, 13)] private int SeaPowerLevel = 7;
+    [SerializeField, Header("海の荒さ")]
+    [Range(-6f, 5f)] private float[] SeaPower = new float[3];
     [SerializeField, Header("船の位置")]
     private Vector3[] ShipPos = new Vector3[4];
     [SerializeField, Header("カメラと魚雷とのオフセット（x:左右、y:上下、z:前後）")]
@@ -104,25 +108,25 @@ public class StageSpawner : MonoBehaviour
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentVec(new Vector3(x, y, z));
             SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
         }
-        oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.2f;
+        oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
         Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
         audioSource[1].clip = sounds[0];
         audioSource[1].loop = true;
         audioSource[1].Play();
 
-        //// 障害物
-        //for (int x = 0; x < 16; ++x)
-        //{
-        //    int z = Random.Range(0, 6);
-        //    int rock = Random.Range(0, 4);
-        //    Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
-        //}
+        // 障害物
+        for (int x = 0; x < 16; ++x)
+        {
+            int z = Random.Range(0, 6);
+            int rock = Random.Range(0, 4);
+            Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
+        }
 
-        //// 船
-        //for(int i = 0; i < 4; ++i)
-        //{
-        //    Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f,0f));
-        //}
+        // 船
+        for (int i = 0; i < 4; ++i)
+        {
+            Instantiate(Ship, ShipPos[i], Quaternion.Euler(0f, i * 90f, 0f));
+        }
 
         // カーソル
         if (StageData.GetPlayerNum() == 0)
@@ -192,15 +196,15 @@ public class StageSpawner : MonoBehaviour
             audioSource[1].Play();
             if(randomwave == 0)
             {
-                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.2f;
+                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
             }
             else if (randomwave == 1)
             {
-                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.5f;
+                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[1]);
             }
             else if (randomwave == 2)
             {
-                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._weight = 0.8f;
+                oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[2]);
             }
             Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
             WaveSpeedChange--;
@@ -244,6 +248,31 @@ public class StageSpawner : MonoBehaviour
             // 終了演出準備
             EndProductionObj = Instantiate(EndProduction);
             audioSource[0].Stop();
+        }
+
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+            for (int i = 0; i < 5; ++i)
+            {
+                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
+            }
+            oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
+        }
+        else if (Input.GetKeyDown(KeyCode.F3))
+        {
+            for (int i = 0; i < 5; ++i)
+            {
+                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[1]);
+            }
+            oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[1]);
+        }
+        else if (Input.GetKeyDown(KeyCode.F4))
+        {
+            for (int i = 0; i < 5; ++i)
+            {
+                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[2]);
+            }
+            oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[2]);
         }
     }
 
