@@ -81,9 +81,9 @@ public class Iwashi : MonoBehaviour
                 go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, go.transform.position.z - 10.0f);
             }
 
-            if (go.transform.position.z < -10)
+            if (go.transform.position.z < 5)
             {
-                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, go.transform.position.z + 10.0f);
+                go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, 5.0f);
             }
 
             if (go.transform.rotation.x > 5)
