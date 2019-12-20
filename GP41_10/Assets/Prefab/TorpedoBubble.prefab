@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4946852047182788510}
   - component: {fileID: 4946852047182788511}
   - component: {fileID: 4946852047182788508}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: TorpedoBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
