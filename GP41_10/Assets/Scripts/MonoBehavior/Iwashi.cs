@@ -62,7 +62,8 @@ public class Iwashi : MonoBehaviour
         }
 
 
-        if (groupSize < 8)
+        /*
+        if (groupSize < 2)
         {
             vcentre = vcentre / groupSize;
             speed = gSpeed / groupSize;
@@ -74,8 +75,9 @@ public class Iwashi : MonoBehaviour
                                      myManager.rotationSpeed * Time.deltaTime);
 
         }
+        */
 
-        if(transform.position.x > 10 || transform.position.x < -10
+        if(transform.position.x >15 || transform.position.x < -15
             || transform.position.z > 30 || transform.position.z < 0)
         {
             Vector3 direction = new Vector3(0f, 0f, 0f) - transform.position;

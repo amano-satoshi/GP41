@@ -820,14 +820,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2013027279}
     m_Modifications:
-    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
-      propertyPath: m_Name
-      value: UnderWaterMeniscus
-      objectReference: {fileID: 0}
-    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -871,6 +863,14 @@ PrefabInstance:
     - target: {fileID: 4478995129147352, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
+      propertyPath: m_Name
+      value: UnderWaterMeniscus
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040961582426892, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23339501637627632, guid: 6d79ad5f5edb537448c2c13e54ffac88,
         type: 3}
@@ -1918,6 +1918,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
+      propertyPath: _viewpoint.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
       propertyPath: _primaryLight
       value: 
       objectReference: {fileID: 587401454}
@@ -1926,6 +1931,16 @@ PrefabInstance:
       propertyPath: _material
       value: 
       objectReference: {fileID: 2100000, guid: ecd3dff1174427b4198d7f7e85c70419, type: 2}
+    - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
+      propertyPath: _viewpoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 2013027279}
+    - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
+      propertyPath: _viewpoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 2013027279}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f8cf07f100683f4db5a55aa97f4d03b, type: 3}
 --- !u!1001 &2000756747
