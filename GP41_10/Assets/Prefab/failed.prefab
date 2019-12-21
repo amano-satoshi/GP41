@@ -58,7 +58,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &8408103735172677691
 MonoBehaviour:
@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 4687258113201997978}
   - component: {fileID: 174975783086542163}
   - component: {fileID: 1289859603401860871}
+  - component: {fileID: 6197258250501037640}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -173,3 +174,20 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6197258250501037640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090041721133973771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217c5fa6f6c60fa4fb0f2ed53f7aa9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPos: 200
+  FallSpeed: 800
+  RotSpeed: 180
+  MaxRot: 20
+  PreTime: 0.1

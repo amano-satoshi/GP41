@@ -41,6 +41,8 @@ public class DrowningPersonBehavior : MonoBehaviour
             transform.position += vec * speed * Time.deltaTime;
         }
 
+        transform.rotation = Quaternion.identity;
+
         if (DispTime > 0f)
         {
             DispTime -= Time.deltaTime;

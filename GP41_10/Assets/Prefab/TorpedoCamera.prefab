@@ -57,7 +57,7 @@ Camera:
     y: 0
     width: 1
     height: 0.85
-  near clip plane: 0.3
+  near clip plane: 1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -65,7 +65,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 394551
+    m_Bits: 1443127
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -178,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 23363507218070258, guid: 1ab0847a8e46b4c4fa728256231f88eb,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
@@ -246,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 23339501637627632, guid: 6d79ad5f5edb537448c2c13e54ffac88,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d79ad5f5edb537448c2c13e54ffac88, type: 3}

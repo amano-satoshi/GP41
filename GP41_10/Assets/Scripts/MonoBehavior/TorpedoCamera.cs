@@ -82,10 +82,21 @@ public class TorpedoCamera : MonoBehaviour
             }
         }
 
+        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.LEARNING)
+        {
+            if(result != null)
+            {
+                Destroy(result.gameObject);
+            }
+        }
+
         if (destflg)
         {
             audioSource[2].Stop();
-            Destroy(result.gameObject);
+            if (result != null)
+            {
+                Destroy(result.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }
@@ -240,7 +251,6 @@ public class TorpedoCamera : MonoBehaviour
     {
         float pos;
         vibrationCurrentRad += Time.deltaTime * vibrationSpeed;
-        Debug.Log(vibrationCurrentRad);
         pos = Mathf.Sin(vibrationCurrentRad) * vibration;
         transform.position += new Vector3(0f, pos, 0f);
         if((vibrationTime * vibrationSpeed) < vibrationCurrentRad)
