@@ -1344,12 +1344,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishPrefab: {fileID: 159337072}
   fish: {fileID: 1867915653}
-  numFish: 10
+  numFish: 20
   allFish: []
   swimLimits: {x: 5, y: 5, z: 5}
   minSpeed: 0.32
-  maxSpeed: 0.94
-  neighbourDistance: 8.6
+  maxSpeed: 5
+  neighbourDistance: 10
   rotationSpeed: 3.16
 --- !u!1 &949144615
 GameObject:
@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishPrefab: {fileID: 1847571683}
   fish: {fileID: 340151190}
-  numFish: 10
+  numFish: 15
   allFish: []
   swimLimits: {x: 5, y: 5, z: 5}
   minSpeed: 0.25
@@ -2570,13 +2570,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishPrefab: {fileID: 1124104679}
   fish: {fileID: 117566958}
-  numFish: 10
+  numFish: 7
   allFish: []
   swimLimits: {x: 5, y: 5, z: 5}
   minSpeed: 0.12
-  maxSpeed: 0.41
-  neighbourDistance: 8.64
-  rotationSpeed: 2.53
+  maxSpeed: 0.72
+  neighbourDistance: 10
+  rotationSpeed: 0.92
 --- !u!1001 &1581026553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2966,7 +2966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1847571684
 Transform:
   m_ObjectHideFlags: 0
@@ -3115,15 +3115,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd1aada60ff366a41a3c735f95da35d2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd1aada60ff366a41a3c735f95da35d2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd1aada60ff366a41a3c735f95da35d2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: cd1aada60ff366a41a3c735f95da35d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
