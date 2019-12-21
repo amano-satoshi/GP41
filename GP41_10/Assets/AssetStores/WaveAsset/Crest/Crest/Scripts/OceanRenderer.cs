@@ -193,7 +193,7 @@ namespace Crest
 
         void InitViewpoint()
         {
-            if (_viewpoint == null)
+            if (_viewpoint[0] == null)
             {
                 var camMain = Camera.main;
                 if (camMain != null)
@@ -242,9 +242,9 @@ namespace Crest
             Shader.SetGlobalFloat(sp_texelsPerWave, MinTexelsPerWave);
             Shader.SetGlobalFloat(sp_crestTime, CurrentTime);
 
-            if (_viewpoint == null)
+            if (_viewpoint[0] == null)
             {
-                Debug.LogError("_viewpoint is null, ocean update will fail.", this);
+                Debug.LogError("_viewpoint[0] is null, ocean update will fail.", this);
             }
 
             if (_followViewpoint)

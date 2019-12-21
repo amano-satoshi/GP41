@@ -781,6 +781,21 @@ PrefabInstance:
       propertyPath: ShapeModule.angle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198162320094770130, guid: d8b56b4d9f7ade24082aebbe30daa6c3,
+        type: 3}
+      propertyPath: RotationModule.x.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198162320094770130, guid: d8b56b4d9f7ade24082aebbe30daa6c3,
+        type: 3}
+      propertyPath: RotationModule.y.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198162320094770130, guid: d8b56b4d9f7ade24082aebbe30daa6c3,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 198454017238610850, guid: d8b56b4d9f7ade24082aebbe30daa6c3,
         type: 3}
       propertyPath: InitialModule.rotation3D
@@ -922,6 +937,11 @@ PrefabInstance:
     - target: {fileID: 4720579618361426, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23363507218070258, guid: 1ab0847a8e46b4c4fa728256231f88eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}

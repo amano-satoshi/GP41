@@ -32,6 +32,7 @@ public class Bubble : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         for(int i = 0; i < MAX_BUBBLE; i++)
         {
             bubbles[i].gameobject = GameObject.Instantiate(
@@ -49,6 +50,7 @@ public class Bubble : MonoBehaviour
             bubbles[i].gameobject.transform.localScale = new Vector3(RandScl / 10, RandScl / 10, 1.0f);
             bubbles[i].fMoveTime = 0.0f;
         }
+        */
 
         bNext = false;
         fCureentTime = 0.0f;

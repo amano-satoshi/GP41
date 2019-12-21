@@ -6,7 +6,7 @@ public class IwashiManager : MonoBehaviour
 {
     public GameObject fishPrefab;
     public GameObject fish;
-    public int numFish = 20;
+    public int numFish;
     public GameObject[] allFish;
     public Vector3 swimLimits = new Vector3(10, 10, 5);
 
