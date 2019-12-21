@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4355746630672284608
+--- !u!1 &6569885940829825782
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4355746630672284638}
-  - component: {fileID: 4355746630672284639}
+  - component: {fileID: 6569885940829825780}
+  - component: {fileID: 6569885940829825783}
   m_Layer: 0
   m_Name: StageSpawner
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4355746630672284638
+--- !u!4 &6569885940829825780
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355746630672284608}
+  m_GameObject: {fileID: 6569885940829825782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.722615, y: -0.6288843, z: -3.7527971}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,16 +31,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4355746630672284639
+--- !u!114 &6569885940829825783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4355746630672284608}
+  m_GameObject: {fileID: 6569885940829825782}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e45ec183b6d764e48b1b6b5fe70319ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cube: {fileID: 6793025384555814364, guid: a833b3d9da6b6544b8a80941adae6829, type: 3}
+  Cube: {fileID: 95212794464667798, guid: 99c3cba0daeb51041868f6f912be23fa, type: 3}
+  SeaArea: {fileID: 5759400786271115235, guid: c1f6519fa9c0f7841b1cd8ab16230218, type: 3}
+  Bow: {fileID: 2026676106888654903, guid: 4ffc4507f232b0c4aab69358de0843eb, type: 3}
+  Ship: {fileID: 6816832072452144147, guid: da2c1e2ee89a3ab469d4525ca6fdf85c, type: 3}
+  cursor1: {fileID: 6948363884394578452, guid: 0cf5a659a8bd8e64aa15d63cfe9a143a, type: 3}
+  cursor2: {fileID: 1495794620026882527, guid: 404ea992455ed644bbf69c2065723348, type: 3}
+  Target: {fileID: 5488377245051299665, guid: 61a5d6509d8d9d541b40f09fb15b24e1, type: 3}
+  Torpedo: {fileID: 6668548025211318664, guid: 7ccdc45861e684545a526aaf0088e59d, type: 3}
+  Torpedocamera: {fileID: 5757127274633118695, guid: c4a31b6dcaff32e4ca3c338d9e91d684,
+    type: 3}
+  cameraController: {fileID: 0}
+  stageTimer: {fileID: 0}
+  stageState: {fileID: 0}
+  oceanInput: {fileID: 0}
+  startProduction: {fileID: 7735661393874079043, guid: 7eeec683801e536478458a06c3e9849a,
+    type: 3}
+  ShootProduction: {fileID: 4296796587867606952, guid: da6dc9f046a6b894c816170d98b4c17b,
+    type: 3}
+  TorpedoLearning: {fileID: 3732549632151382249, guid: 5decfc5ee7a28c848a07f363b4cda40e,
+    type: 3}
+  EndProduction: {fileID: 7064587801922654819, guid: 330fb5c7a62d6ca45b05f00e647af92d,
+    type: 3}
+  Obstacle:
+  - {fileID: 8583453709862867334, guid: 10305ed860e5a254ebcb807428483962, type: 3}
+  - {fileID: 5429500995637859109, guid: 69bba752f28328a44a7dffc198baec8c, type: 3}
+  - {fileID: 7312365496875922232, guid: f8628b9ef5f17694f8c6501937a218f5, type: 3}
+  - {fileID: 4052168204861448916, guid: b3c01dbc4d5aaf340abbad2eeae33db7, type: 3}
+  DebugMode: 1
+  SeaAreaBowPos:
+  - {x: -65, y: 5, z: 15}
+  - {x: -50, y: 5, z: -20}
+  - {x: -20, y: 5, z: 5}
+  - {x: 30, y: 5, z: 20}
+  - {x: 20, y: 5, z: -10}
+  SeaAreaAngle:
+  - -45
+  - -135
+  - -70
+  - -135
+  - -45
+  SeaAreaSpeed:
+  - 0.5
+  - 1.5
+  - 3
+  SeaPowerLevel: 11
+  SeaPower:
+  - -4.09
+  - -0.05
+  - 1.68
+  ShipPos:
+  - {x: 0, y: 0, z: -30}
+  - {x: -75, y: 0, z: 0}
+  - {x: 0, y: 0, z: 30}
+  - {x: 75, y: 0, z: 0}
+  offset: {x: 0, y: 1, z: -2.5}
+  BowSize: 0.5
+  BowChangeSpeed: 2
+  mapCamera: {fileID: 0}
+  sounds:
+  - {fileID: 8300000, guid: 85601a5ec3525c741af3681d4afcd772, type: 3}
+  - {fileID: 8300000, guid: 33711bd90626f874097f7638f8bf7d82, type: 3}
+  - {fileID: 8300000, guid: a6438fafcfb3a034f9ce35f58ec555b8, type: 3}
+  - {fileID: 8300000, guid: f4da20567433276448b1c2e6a0461be4, type: 3}

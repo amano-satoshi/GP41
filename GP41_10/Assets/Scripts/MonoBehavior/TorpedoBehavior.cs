@@ -64,6 +64,7 @@ public class TorpedoBehavior : MonoBehaviour
     private bool[] SearchDirection = new bool[(int)CheckPlace.MAX_PLACE];
     private bool destflg = false;
     private bool SuccessFlg = false;
+    private float ProductionDist = 2f;
 
     private List<GameObject> DrowningPersonList = new List<GameObject>();
     private GameObject StageInfo;
@@ -82,8 +83,18 @@ public class TorpedoBehavior : MonoBehaviour
     // ===================== Update =======================
     void Update()
     {
-        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT || stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.PRODUCTION)
+        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.SHOOT)
         {
+            return;
+        }
+
+        if(stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.PRODUCTION)
+        {
+            if(ProductionDist >= 0f)
+            {
+                transform.position -= new Vector3(0f, Time.deltaTime * 2f, 0f);
+                ProductionDist -= Time.deltaTime * 2f;
+            }
             return;
         }
         // 加速・減速間隔計算用
@@ -553,8 +564,8 @@ public class TorpedoBehavior : MonoBehaviour
             }
         }
 
-        if(transform.position.y > 0.5f || transform.position.x > 80f || transform.position.x < -80f || transform.position.z > 40f ||
-            transform.position.z < -40f)
+        if(transform.position.y > 0.5f || transform.position.x > 100f || transform.position.x < -100f || transform.position.z > 50f ||
+            transform.position.z < -50f)
         {
             torpedoState = TorpedoState.FAILED;
         }
@@ -588,7 +599,7 @@ public class TorpedoBehavior : MonoBehaviour
                 MoveLeft();
             }
             // 救出者が上にいる
-            if (Vector3.Dot(vec, transform.up) <= 1f && Vector3.Dot(vec, transform.up) > 0.1f && (new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude < 10f)
+            if (Vector3.Dot(vec, transform.up) <= 1f && Vector3.Dot(vec, transform.up) > 0.1f/* && (new Vector3(target.transform.position.x, target.transform.position.y - 5f, target.transform.position.z) - (transform.position + transform.up)).magnitude < 10f*/)
             {
                 MoveUp();
             }

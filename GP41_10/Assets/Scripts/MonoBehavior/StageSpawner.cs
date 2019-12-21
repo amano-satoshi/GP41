@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageSpawner : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class StageSpawner : MonoBehaviour
     public Canvas TorpedoLearning;
     public Canvas EndProduction;
     public GameObject[] Obstacle = new GameObject[4];
+    [SerializeField, Header("デバッグモード")]
+    private bool DebugMode = false;
     [SerializeField, Header("海流の方向の矢印の配置")]
     private Vector3[] SeaAreaBowPos;
     [SerializeField, Header("海流の方向")]
@@ -77,15 +80,26 @@ public class StageSpawner : MonoBehaviour
         audioSource[0].Play();
 
         // おぼれている人
-        for (int z = 0; z < 5; ++z)
+        if(DebugMode)
+        {
             for (int x = 0; x < 10; ++x)
             {
-                if (Random.Range(0, 5) == 1)
-                {
-                    Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
-                    DrowingPersons.Add(Cubeobj);
-                }
+                Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (x % 5 - 2) * 15f), Quaternion.identity);
+                DrowingPersons.Add(Cubeobj);                
             }
+        }
+        else
+        {
+            for (int z = 0; z < 5; ++z)
+                for (int x = 0; x < 10; ++x)
+                {
+                    if (Random.Range(0, 5) == 1)
+                    {
+                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
+                        DrowingPersons.Add(Cubeobj);
+                    }
+                }
+        }
         AddPersonLimit = true;
 
         // 海域
@@ -115,12 +129,12 @@ public class StageSpawner : MonoBehaviour
         audioSource[1].Play();
 
         // 障害物
-        for (int x = 0; x < 16; ++x)
-        {
-            int z = Random.Range(0, 6);
-            int rock = Random.Range(0, 4);
-            Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
-        }
+        //for (int x = 0; x < 16; ++x)
+        //{
+        //    int z = Random.Range(0, 6);
+        //    int rock = Random.Range(0, 4);
+        //    Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
+        //}
 
         // 船
         for (int i = 0; i < 4; ++i)
@@ -165,49 +179,93 @@ public class StageSpawner : MonoBehaviour
     {
         int times = stageTimer.GetComponent<RemainTime>().GetRemainTime();
 
-        if (times % 10 == 0 && !AddPersonLimit)
+        if(DebugMode)
         {
-            // おぼれている人追加
-            for (int i = 0; i < AddPersonLimitNum; ++i)
+            if(Input.GetKeyDown(KeyCode.F5))
             {
-                Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, 3) * 15f + i * 50f - 65f, 0f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
-                DrowingPersons.Add(Cubeobj);
+                for (int x = 0; x < 10; ++x)
+                {
+                    Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (x % 5 - 2) * -15f), Quaternion.identity);
+                    DrowingPersons.Add(Cubeobj);
+                }
             }
-            AddPersonLimit = true;
         }
-        else if(times % 10 != 0 && AddPersonLimit)
+        else
         {
-            AddPersonLimit = false;
+            if (times % 10 == 0 && !AddPersonLimit)
+            {
+                // おぼれている人追加
+                for (int i = 0; i < AddPersonLimitNum; ++i)
+                {
+                    Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, 3) * 15f + i * 50f - 65f, 0f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
+                    DrowingPersons.Add(Cubeobj);
+                }
+                AddPersonLimit = true;
+            }
+            else if (times % 10 != 0 && AddPersonLimit)
+            {
+                AddPersonLimit = false;
+            }
         }
 
         // 波の荒さ変更
-        if((times == RandomWave[0] && WaveSpeedChange == 5) || (times == RandomWave[1] && WaveSpeedChange == 4) || 
-            (times == RandomWave[2] && WaveSpeedChange == 3) || (times == RandomWave[3] && WaveSpeedChange == 2) ||
-            (times == RandomWave[4] && WaveSpeedChange == 1))
+        if(DebugMode)
         {
-            int randomwave = Random.Range(0, 3);
-            audioSource[1].Stop();
-            for (int i = 0; i < 5; ++i)
+            if (Input.GetKeyDown(KeyCode.F2))
             {
-                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[randomwave]);
-            }
-            audioSource[1].clip = sounds[randomwave];
-            audioSource[1].loop = true;
-            audioSource[1].Play();
-            if(randomwave == 0)
-            {
+                for (int i = 0; i < 5; ++i)
+                {
+                    SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
+                }
                 oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
             }
-            else if (randomwave == 1)
+            else if (Input.GetKeyDown(KeyCode.F3))
             {
+                for (int i = 0; i < 5; ++i)
+                {
+                    SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[1]);
+                }
                 oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[1]);
             }
-            else if (randomwave == 2)
+            else if (Input.GetKeyDown(KeyCode.F4))
             {
+                for (int i = 0; i < 5; ++i)
+                {
+                    SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[2]);
+                }
                 oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[2]);
             }
-            Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
-            WaveSpeedChange--;
+        }
+        else
+        {
+            if ((times == RandomWave[0] && WaveSpeedChange == 5) || (times == RandomWave[1] && WaveSpeedChange == 4) ||
+            (times == RandomWave[2] && WaveSpeedChange == 3) || (times == RandomWave[3] && WaveSpeedChange == 2) ||
+            (times == RandomWave[4] && WaveSpeedChange == 1))
+            {
+                int randomwave = Random.Range(0, 3);
+                audioSource[1].Stop();
+                for (int i = 0; i < 5; ++i)
+                {
+                    SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[randomwave]);
+                }
+                audioSource[1].clip = sounds[randomwave];
+                audioSource[1].loop = true;
+                audioSource[1].Play();
+                if (randomwave == 0)
+                {
+                    oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
+                }
+                else if (randomwave == 1)
+                {
+                    oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[1]);
+                }
+                else if (randomwave == 2)
+                {
+                    oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[2]);
+                }
+                Debug.Log(SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed());
+                WaveSpeedChange--;
+            }
         }
 
         // 矢印の拡大縮小
@@ -250,29 +308,34 @@ public class StageSpawner : MonoBehaviour
             audioSource[0].Stop();
         }
 
-        if(Input.GetKeyDown(KeyCode.F2))
+        // デバッグ用
+        if(DebugMode)
         {
-            for (int i = 0; i < 5; ++i)
+            // リザルトシーンへ
+            if (Input.GetKeyDown(KeyCode.F1))
             {
-                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[0]);
+                SceneManager.LoadScene("ResultScene");
             }
-            oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
-        }
-        else if (Input.GetKeyDown(KeyCode.F3))
-        {
-            for (int i = 0; i < 5; ++i)
+            // 救出者数取得
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[1]);
+                Debug.Log(StageData.GetRescuePersonCnt());
             }
-            oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[1]);
-        }
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            for (int i = 0; i < 5; ++i)
+            // 学習ゲージ取得
+            if (Input.GetKeyDown(KeyCode.RightShift))
             {
-                SeaAreaObj.transform.GetChild(i).GetComponent<OceanCurrent>().SetOceanCurrentSpeed(SeaAreaSpeed[2]);
+                Debug.Log(StageData.GetLearningGauge());
             }
-            oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[2]);
+            // 学習ゲージ最大
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                StageData.MaxLearningGauge();
+            }
+            // 救出者数増加
+            else if(Input.GetKeyDown(KeyCode.F7))
+            {
+                StageData.SetIncreaseRescuePersonCnt(20);
+            }
         }
     }
 
@@ -359,14 +422,14 @@ public class StageSpawner : MonoBehaviour
         GameObject target;
         if(SpawnPlayer == 1)
         {
-            target = Instantiate(Target, CursorList[0].transform.position, Quaternion.identity);
+            target = Instantiate(Target, new Vector3(CursorList[0].transform.position.x, CursorList[0].transform.position.y, CursorList[0].transform.position.z - 1f), Quaternion.identity);
             targets.Add(target);
             audioSource[2].PlayOneShot(sounds[3]);
             RemainTorpedoList[0] -= 1;
         }
         else if (SpawnPlayer == 2)
         {
-            target = Instantiate(Target, CursorList[1].transform.position, Quaternion.identity);
+            target = Instantiate(Target, new Vector3(CursorList[1].transform.position.x, CursorList[1].transform.position.y, CursorList[1].transform.position.z - 1f), Quaternion.identity);
             targets.Add(target);
             audioSource[2].PlayOneShot(sounds[3]);
             RemainTorpedoList[1] -= 1;
@@ -431,7 +494,7 @@ public class StageSpawner : MonoBehaviour
         for (int i = 0; i < targets.Count; ++i)
         {
             RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
-            TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 5f, 0f), Quaternion.Euler(0f, i * 90f, 0f));
+            TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 3f, 0f), Quaternion.Euler(0f, i * 90f, 0f));
             if (RescueTarget != null)
             {
                 for (int j = 0; j < RescueTarget.Count; ++j)

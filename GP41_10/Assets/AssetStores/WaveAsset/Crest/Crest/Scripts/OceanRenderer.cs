@@ -161,10 +161,7 @@ namespace Crest
             {
                 gameObject.AddComponent<BuildCommandBuffer>();
             }
-
-            // 変更
-            if(false)
-            gameObject.GetComponent<BuildCommandBuffer>().SetOcean(nNum, this);
+            
 
             InitViewpoint();
             InitTimeProvider();

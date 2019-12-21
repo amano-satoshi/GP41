@@ -203,7 +203,7 @@ Shader "Crest/Underwater Curtain"
 
 				// 変更
 				//half3 col = lerp(sceneColour, scatterCol, 1.0 - exp(-_DepthFogDensity.xyz * sceneZ));
-				half3 col = lerp(sceneColour, scatterCol, 1.0 - exp(-_DepthFogDensity.xyz * sceneZ) - 0.2f);
+				half3 col = lerp(sceneColour, scatterCol, 1.0 - exp(-_DepthFogDensity.xyz * sceneZ) - 0.5f);
 
 				return half4(col, 1.0);
 			}

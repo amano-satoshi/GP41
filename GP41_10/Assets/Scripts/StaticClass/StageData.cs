@@ -31,6 +31,12 @@ public static class StageData
         RescuePersonCnt++;
     }
 
+    // ============ 救出者数任意数増加 =============
+    static public void SetIncreaseRescuePersonCnt(int num)
+    {
+        RescuePersonCnt += num;
+    }
+
     // ============ ポイント数取得 =============
     static public int GetLearningGauge()
     {
@@ -41,6 +47,12 @@ public static class StageData
     static public void SetLearningGauge(int point)
     {
         LearningGauge += point;
+    }
+
+    // ============ ポイント数最大 =============
+    static public void MaxLearningGauge()
+    {
+        LearningGauge = 10;
     }
 
     // ============ 強化スピード数取得 =============
