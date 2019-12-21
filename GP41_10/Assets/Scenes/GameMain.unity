@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -552,6 +552,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
+      propertyPath: _viewpoint.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
       propertyPath: _primaryLight
       value: 
       objectReference: {fileID: 2138767376}
@@ -559,7 +564,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _viewpoint
       value: 
-      objectReference: {fileID: 1775659138}
+      objectReference: {fileID: 0}
     - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
       propertyPath: _disableSkirt
@@ -570,6 +575,17 @@ PrefabInstance:
       propertyPath: _uniformTiles
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
+      propertyPath: _viewpoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 1775659138}
+    - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
+      propertyPath: _viewpoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 2514315882919919663, guid: c4a31b6dcaff32e4ca3c338d9e91d684,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f8cf07f100683f4db5a55aa97f4d03b, type: 3}
 --- !u!1 &392026441
@@ -1596,6 +1612,11 @@ PrefabInstance:
     - target: {fileID: 3042060748591619970, guid: 87044156f70bd7248aabfb969ece8fc5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042060748937852158, guid: 87044156f70bd7248aabfb969ece8fc5,
+        type: 3}
+      propertyPath: _weight
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
