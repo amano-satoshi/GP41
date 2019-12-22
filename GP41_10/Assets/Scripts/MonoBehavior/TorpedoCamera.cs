@@ -137,7 +137,7 @@ public class TorpedoCamera : MonoBehaviour
                 else if (camID == 1)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(0f, DispPos.y, 0f);
+                        -= new Vector3(0f, DispPos.y / 1.5f, 0f);
                 }
             }
             else if (cameraList.Count == 3)
@@ -155,7 +155,7 @@ public class TorpedoCamera : MonoBehaviour
                 else if (camID == 2)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(DispPos.x, DispPos.y, 0f);
+                        -= new Vector3(DispPos.x, DispPos.y / 2f, 0f);
                 }
             }
             else if (cameraList.Count == 4)
@@ -173,12 +173,12 @@ public class TorpedoCamera : MonoBehaviour
                 else if (camID == 2)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(DispPos.x, DispPos.y, 0f);
+                        -= new Vector3(DispPos.x, DispPos.y / 2f, 0f);
                 }
                 else if (camID == 3)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(-DispPos.x, DispPos.y, 0f);
+                        -= new Vector3(-DispPos.x, DispPos.y / 2f, 0f);
                 }
             }
         }
@@ -200,7 +200,7 @@ public class TorpedoCamera : MonoBehaviour
                 else if (camID == 1)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(0f, DispPos.y, 0f);
+                        -= new Vector3(0f, DispPos.y / 1.5f, 0f);
                 }
             }
             else if (cameraList.Count == 3)
@@ -218,7 +218,7 @@ public class TorpedoCamera : MonoBehaviour
                 else if (camID == 2)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(DispPos.x, DispPos.y, 0f);
+                        -= new Vector3(DispPos.x, DispPos.y / 2f, 0f);
                 }
             }
             else if (cameraList.Count == 4)
@@ -236,12 +236,12 @@ public class TorpedoCamera : MonoBehaviour
                 else if (camID == 2)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(DispPos.x, DispPos.y, 0f);
+                        -= new Vector3(DispPos.x, DispPos.y / 2f, 0f);
                 }
                 else if (camID == 3)
                 {
                     result.GetComponent<Canvas>().transform.GetChild(0).GetComponent<Image>().rectTransform.position
-                        -= new Vector3(-DispPos.x, DispPos.y, 0f);
+                        -= new Vector3(-DispPos.x, DispPos.y / 2f, 0f);
                 }
             }
         }

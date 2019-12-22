@@ -34,6 +34,7 @@ public class TorpedoLearningMain : MonoBehaviour
     private float WaitTime = 0f;
 
     private GameObject mapCamera;
+    private GameObject stageSpawner;
 
     public AudioClip[] sounds = new AudioClip[2];
     AudioSource[] audioSource;
@@ -53,6 +54,7 @@ public class TorpedoLearningMain : MonoBehaviour
         ProductionNum = 0;
         EndPos = new Vector3(-66f, 0f, 0f);
         mapCamera = GameObject.Find("MapCamera");
+        stageSpawner = GameObject.Find("StageSpawner");
         audioSource = mapCamera.GetComponents<AudioSource>();
     }
 
@@ -81,8 +83,15 @@ public class TorpedoLearningMain : MonoBehaviour
             // パネル反映
             SetPanel();
 
-            // 時間管理
-            CountTimer();
+            if (!stageSpawner.GetComponent<StageSpawner>().GetDebugMode())
+            {
+                // 時間管理
+                CountTimer();
+            }
+            else
+            {
+                image.enabled = false;
+            }
         }
 
         if (DelFlg)

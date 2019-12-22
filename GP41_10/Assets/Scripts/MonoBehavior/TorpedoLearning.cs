@@ -119,6 +119,7 @@ public class TorpedoLearning : MonoBehaviour
             }
             audioSource.PlayOneShot(sounds[0]);
         }
+
         if (Input.GetKeyDown(KeyCode.Return) || currentTime <= 0f)    // 決定
         {
             if (Choice == 0)

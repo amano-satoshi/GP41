@@ -3710,6 +3710,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock_05
       objectReference: {fileID: 0}
+    - target: {fileID: 4052168204861448916, guid: b3c01dbc4d5aaf340abbad2eeae33db7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2753188594473177428, guid: b3c01dbc4d5aaf340abbad2eeae33db7,
         type: 3}
       propertyPath: m_LocalPosition.x

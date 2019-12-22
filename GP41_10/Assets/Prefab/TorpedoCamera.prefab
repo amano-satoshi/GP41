@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 3
-  DispPos: {x: 300, y: 180}
+  DispPos: {x: 500, y: 360}
   vibration: 0.1
   vibrationSpeed: 31.4
   vibrationTime: 0.3
