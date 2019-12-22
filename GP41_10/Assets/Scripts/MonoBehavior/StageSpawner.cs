@@ -181,7 +181,7 @@ public class StageSpawner : MonoBehaviour
 
         if(DebugMode)
         {
-            if(Input.GetKeyDown(KeyCode.F5))
+            if(Input.GetKeyDown(KeyCode.F6))
             {
                 for (int x = 0; x < 10; ++x)
                 {
@@ -211,7 +211,7 @@ public class StageSpawner : MonoBehaviour
         // 波の荒さ変更
         if(DebugMode)
         {
-            if (Input.GetKeyDown(KeyCode.F2))
+            if (Input.GetKeyDown(KeyCode.F3))
             {
                 for (int i = 0; i < 5; ++i)
                 {
@@ -219,7 +219,7 @@ public class StageSpawner : MonoBehaviour
                 }
                 oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[0]);
             }
-            else if (Input.GetKeyDown(KeyCode.F3))
+            else if (Input.GetKeyDown(KeyCode.F4))
             {
                 for (int i = 0; i < 5; ++i)
                 {
@@ -227,7 +227,7 @@ public class StageSpawner : MonoBehaviour
                 }
                 oceanInput.transform.GetChild(0).GetComponent<Crest.ShapeGerstnerBatched>()._spectrum.SetWavePower(SeaPowerLevel, SeaPower[1]);
             }
-            else if (Input.GetKeyDown(KeyCode.F4))
+            else if (Input.GetKeyDown(KeyCode.F5))
             {
                 for (int i = 0; i < 5; ++i)
                 {
@@ -316,6 +316,11 @@ public class StageSpawner : MonoBehaviour
             {
                 SceneManager.LoadScene("ResultScene");
             }
+            // プレイヤーセレクトシーンへ
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                SceneManager.LoadScene("PlayerSelect");
+            }
             // 救出者数取得
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
@@ -327,12 +332,12 @@ public class StageSpawner : MonoBehaviour
                 Debug.Log(StageData.GetLearningGauge());
             }
             // 学習ゲージ最大
-            if (Input.GetKeyDown(KeyCode.F6))
+            if (Input.GetKeyDown(KeyCode.F7))
             {
                 StageData.MaxLearningGauge();
             }
             // 救出者数増加
-            else if(Input.GetKeyDown(KeyCode.F7))
+            else if(Input.GetKeyDown(KeyCode.F8))
             {
                 StageData.SetIncreaseRescuePersonCnt(20);
             }
@@ -514,5 +519,10 @@ public class StageSpawner : MonoBehaviour
         }
 
         cameraController.GetComponent<CameraController>().SetCameraList(cameraList);
+    }
+
+    public bool GetDebugMode()
+    {
+        return DebugMode;
     }
 }

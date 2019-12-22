@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
     [SerializeField, Header("UI部分を除いた画面の大きさ")]
     private Vector2 DispSize = new Vector2(0f, 0f);
 
+    private bool changeflg = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,35 +85,46 @@ public class CameraController : MonoBehaviour
     {
         if(camerastate == CameraState.DEFAULT)
         {
-            MapCamera.GetComponent<Camera>().rect = MapRect[0];
-            cameraFlame.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            if (changeflg)
+            {
+                MapCamera.GetComponent<Camera>().rect = MapRect[0];
+                cameraFlame.transform.GetChild(0).GetComponent<Image>().enabled = false;
+                changeflg = false;
+            }
         }
         else if(camerastate == CameraState.SHOOT)
         {
-            MapCamera.GetComponent<Camera>().rect = MapRect[CameraList.Count];
-            cameraFlame.transform.GetChild(0).GetComponent<Image>().enabled = true;
-            switch (CameraList.Count)
+            if(!changeflg)
             {
-                case 1:
-                    CameraList[0].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x, DispSize.y);
-                    break;
-                case 2:
-                    CameraList[0].GetComponent<Camera>().rect = new Rect(0f, DispSize.y / 2f, DispSize.x, DispSize.y / 2f);
-                    CameraList[1].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x, DispSize.y / 2f);
-                    break;
-                case 3:
-                    CameraList[0].GetComponent<Camera>().rect = new Rect(0f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
-                    CameraList[1].GetComponent<Camera>().rect = new Rect(DispSize.x / 2f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
-                    CameraList[2].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x / 2f, DispSize.y / 2f);
-                    break;
-                case 4:
-                    CameraList[0].GetComponent<Camera>().rect = new Rect(0f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
-                    CameraList[1].GetComponent<Camera>().rect = new Rect(DispSize.x / 2f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
-                    CameraList[2].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x / 2f, DispSize.y / 2f);
-                    CameraList[3].GetComponent<Camera>().rect = new Rect(DispSize.x / 2f, 0f, DispSize.x / 2f, DispSize.y / 2f);
-                    break;
-                default:
-                    break;
+                MapCamera.GetComponent<Camera>().rect = MapRect[CameraList.Count];
+                cameraFlame.transform.GetChild(0).GetComponent<Image>().enabled = true;
+                switch (CameraList.Count)
+                {
+                    case 1:
+                        CameraList[0].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x, DispSize.y);
+                        break;
+                    case 2:
+                        CameraList[0].GetComponent<Camera>().rect = new Rect(0f, DispSize.y / 2f, DispSize.x, DispSize.y / 2f);
+                        CameraList[1].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x, DispSize.y / 2f);
+                        break;
+                    case 3:
+                        CameraList[0].GetComponent<Camera>().rect = new Rect(0f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
+                        CameraList[1].GetComponent<Camera>().rect = new Rect(DispSize.x / 2f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
+                        CameraList[2].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x / 2f, DispSize.y / 2f);
+                        cameraFlame.transform.GetChild(0).GetComponent<Image>().rectTransform.localScale = new Vector2(
+                            cameraFlame.transform.GetChild(0).GetComponent<Image>().rectTransform.localScale.x * 1.65f,
+                            cameraFlame.transform.GetChild(0).GetComponent<Image>().rectTransform.localScale.y * 1.65f);
+                        break;
+                    case 4:
+                        CameraList[0].GetComponent<Camera>().rect = new Rect(0f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
+                        CameraList[1].GetComponent<Camera>().rect = new Rect(DispSize.x / 2f, DispSize.y / 2f, DispSize.x / 2f, DispSize.y / 2f);
+                        CameraList[2].GetComponent<Camera>().rect = new Rect(0f, 0f, DispSize.x / 2f, DispSize.y / 2f);
+                        CameraList[3].GetComponent<Camera>().rect = new Rect(DispSize.x / 2f, 0f, DispSize.x / 2f, DispSize.y / 2f);
+                        break;
+                    default:
+                        break;
+                }
+                changeflg = true;
             }
         }
     }
