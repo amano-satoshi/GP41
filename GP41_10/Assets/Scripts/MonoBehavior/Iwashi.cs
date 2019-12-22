@@ -53,32 +53,26 @@ public class Iwashi : MonoBehaviour
                 }
             }
 
+            
             if(go.transform.position.y > 2.5f)
             {
                 go.transform.position = new Vector3(go.transform.position.x,
                     2.5f,
                     go.transform.position.z);
             }
+            /*
+            if (go.transform.position.y < -2.0f)
+            {
+                go.transform.position = new Vector3(go.transform.position.x,
+                    -2.0f,
+                    go.transform.position.z);
+            }
+            */
         }
-
-
-        /*
-        if (groupSize < 2)
-        {
-            vcentre = vcentre / groupSize;
-            speed = gSpeed / groupSize;
-
-            Vector3 direction = (vcentre + vavoid) - transform.position;
-            if (direction != Vector3.zero)
-                transform.rotation = Quaternion.Slerp(transform.rotation,
-                                     Quaternion.LookRotation(direction),
-                                     myManager.rotationSpeed * Time.deltaTime);
-
-        }
-        */
 
         if(transform.position.x >15 || transform.position.x < -15
-            || transform.position.z > 30 || transform.position.z < 0)
+            || transform.position.z > 30 || transform.position.z < 0
+            || transform.position.y < -2.0f)
         {
             Vector3 direction = new Vector3(0f, 0f, 0f) - transform.position;
             transform.rotation = Quaternion.Slerp(transform.rotation,

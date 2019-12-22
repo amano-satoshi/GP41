@@ -566,11 +566,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 812642462}
     m_Modifications:
-    - target: {fileID: 1507253297555218313, guid: 2d9b12ded0a1e02448592eca12bbf48e,
-        type: 3}
-      propertyPath: m_Name
-      value: FadePanal
-      objectReference: {fileID: 0}
     - target: {fileID: 1507253297555218312, guid: 2d9b12ded0a1e02448592eca12bbf48e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -685,6 +680,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507253297555218313, guid: 2d9b12ded0a1e02448592eca12bbf48e,
+        type: 3}
+      propertyPath: m_Name
+      value: FadePanal
       objectReference: {fileID: 0}
     - target: {fileID: 1507253297555218311, guid: 2d9b12ded0a1e02448592eca12bbf48e,
         type: 3}
@@ -886,14 +886,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2013027279}
     m_Modifications:
-    - target: {fileID: 1648640012831910, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
-      propertyPath: m_Name
-      value: UnderWaterCurtainGeom
-      objectReference: {fileID: 0}
-    - target: {fileID: 1648640012831910, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4720579618361426, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -937,6 +929,14 @@ PrefabInstance:
     - target: {fileID: 4720579618361426, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648640012831910, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
+      propertyPath: m_Name
+      value: UnderWaterCurtainGeom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648640012831910, guid: 1ab0847a8e46b4c4fa728256231f88eb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23363507218070258, guid: 1ab0847a8e46b4c4fa728256231f88eb,
         type: 3}
@@ -1956,7 +1956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41b1a75d21776a44399d3cdbc9afb487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.9
+      value: -37.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 41b1a75d21776a44399d3cdbc9afb487, type: 3}
       propertyPath: m_LocalPosition.y
