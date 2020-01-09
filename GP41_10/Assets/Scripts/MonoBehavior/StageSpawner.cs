@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// ステージ生成(StageSpawner : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/10/20
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -103,7 +110,7 @@ public class StageSpawner : MonoBehaviour
         AddPersonLimit = true;
 
         // 海域
-        SeaAreaObj = Instantiate(SeaArea, Vector3.zero, Quaternion.identity);
+        SeaAreaObj = Instantiate(SeaArea, new Vector3(0f, 1f, 0f), Quaternion.Euler(0f, 180f, 0f));
         for (int i = 0; i < 5; ++i)
         {
             // 矢印

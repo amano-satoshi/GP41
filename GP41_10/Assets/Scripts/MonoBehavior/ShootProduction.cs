@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 発射演出(ShootProduction : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/29
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

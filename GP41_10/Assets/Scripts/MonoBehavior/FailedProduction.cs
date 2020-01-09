@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 失敗演出(FailedProduction : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/25
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +45,7 @@ public class FailedProduction : MonoBehaviour
         {
             return;
         }
+        // 文字落下
         if(!Fall)
         {
             GetComponent<Image>().rectTransform.position -= new Vector3(0f, FallSpeed * Time.deltaTime, 0f);
@@ -47,6 +55,7 @@ public class FailedProduction : MonoBehaviour
                 Fall = true;
             }
         }
+        // 文字傾き
         else
         {
             CurrentTime += Time.deltaTime;

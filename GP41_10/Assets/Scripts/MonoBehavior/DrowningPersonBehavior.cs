@@ -36,6 +36,7 @@ public class DrowningPersonBehavior : MonoBehaviour
         {
             return;
         }
+        // 救助されていなければ移動
         if (!Rescue)
         {
             transform.position += vec * speed * Time.deltaTime;
@@ -43,6 +44,7 @@ public class DrowningPersonBehavior : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
 
+        // マップカメラに位置表示
         if (DispTime > 0f)
         {
             DispTime -= Time.deltaTime;
@@ -69,6 +71,7 @@ public class DrowningPersonBehavior : MonoBehaviour
         return id;
     }
 
+    // 流される向きと速さ
     private void OnTriggerStay(Collider collider)
     {
         if(collider.gameObject.tag == "SeaArea")
@@ -79,6 +82,7 @@ public class DrowningPersonBehavior : MonoBehaviour
         }
     }
 
+    // レーダー表示
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Rader" && !Rescue)
@@ -90,6 +94,7 @@ public class DrowningPersonBehavior : MonoBehaviour
         }
     }
 
+    // 救出された
     public void Rescued()
     {
         if (DrowingPerson != null)
@@ -100,11 +105,13 @@ public class DrowningPersonBehavior : MonoBehaviour
         Rescue = true;
     }
 
+    // 救助されたかどうか
     public bool GetRescued()
     {
         return Rescue;
     }
 
+    // マップカメラの表示の消去
     public void DestDrowningPerson()
     {
         destflg = true;

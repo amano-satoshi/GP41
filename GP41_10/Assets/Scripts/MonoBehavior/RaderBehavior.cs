@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// レーダー移動(RaderBehavior : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/10/20
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

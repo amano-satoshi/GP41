@@ -1,12 +1,19 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 終了演出(EndProduction : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/29
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EndProduction : MonoBehaviour
 {
-    private float ProductionTime = 4f;
-    private float Remaintime;
+    private float ProductionTime = 4f;  // 演出時間
+    private float Remaintime;   // 演出残り時間
     private bool Startflg;
     private bool Endflg;
     private bool Delflg;
@@ -37,13 +44,13 @@ public class EndProduction : MonoBehaviour
         if (Mathf.FloorToInt(Remaintime) == 3 && count == 1)
         {
             count--;
-            Startflg = true;
+            Startflg = true;    // 演出開始
         }
         else if (Mathf.FloorToInt(Remaintime) == 0 && count == 0)
         {
             //Destroy(End.gameObject);
             //Destroy(CutIn.gameObject);
-            Endflg = true;
+            Endflg = true;  // 演出終了
             count--;
         }
 
@@ -68,6 +75,7 @@ public class EndProduction : MonoBehaviour
         return Endflg;
     }
 
+    // 移動演出
     void MoveProduction()
     {
         CutIn.rectTransform.position -= new Vector3(CutInSpeed * Time.deltaTime, 0f, 0f);

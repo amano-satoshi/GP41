@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// ターゲットの挙動(TargetBehavior : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/01
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

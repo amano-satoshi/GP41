@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 魚雷の学習(TorpedoLearningMain : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/29
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

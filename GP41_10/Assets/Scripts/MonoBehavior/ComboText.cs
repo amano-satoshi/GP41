@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// コンボ表示(ComboText : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/25
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,16 +26,19 @@ public class ComboText : MonoBehaviour
 
     }
 
+    // 2コンボ
     public void TwoCombo()
     {
         images[0].enabled = true;
     }
 
+    // 3コンボ
     public void ThreeCombo()
     {
         images[1].enabled = true;
     }
 
+    // 4コンボ
     public void FourCombo()
     {
         images[2].enabled = true;

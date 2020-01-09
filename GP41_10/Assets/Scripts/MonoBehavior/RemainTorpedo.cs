@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 残り魚雷数表示(RemainTorpedo : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/12/01
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,6 +42,7 @@ public class RemainTorpedo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 1人用
         if (StageData.GetPlayerNum() == 0)
         {
             switch (stageSpawnerObj.GetRemainTorpedo()[0])
@@ -82,6 +90,7 @@ public class RemainTorpedo : MonoBehaviour
                     break;
             }
         }
+        // 2人用
         else if (StageData.GetPlayerNum() == 1)
         {
             switch (stageSpawnerObj.GetRemainTorpedo()[0])

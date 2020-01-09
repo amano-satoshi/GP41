@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 成功演出(SuccessProduction : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/25
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
