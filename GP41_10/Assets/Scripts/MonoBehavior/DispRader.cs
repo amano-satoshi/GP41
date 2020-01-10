@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// レーダー表示(DispRader : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/02
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

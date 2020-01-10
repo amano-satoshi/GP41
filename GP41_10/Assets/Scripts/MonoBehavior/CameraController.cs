@@ -7,8 +7,8 @@ public class CameraController : MonoBehaviour
 {
     public enum CameraState
     {
-        DEFAULT = 0,
-        SHOOT,
+        DEFAULT = 0,    // マップカメラのみ
+        SHOOT,          // 魚雷カメラとマップカメラ
 
         MAX_CAMERASTATE
     }
@@ -55,6 +55,7 @@ public class CameraController : MonoBehaviour
         SetCamera();
     }
 
+    // 魚雷カメラのリスト作成
     public void SetCameraList(List<GameObject> cameraList)
     {
         if(cameraList != null)
@@ -63,6 +64,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // 魚雷カメラのリストの取得
     public List<GameObject> GetCameraList()
     {
         if (CameraList != null)
@@ -75,12 +77,14 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // 魚雷カメラのリストのリセット
     void ResetCameraState()
     {
         camerastate = CameraState.DEFAULT;
         CameraList.Clear();
     }
 
+    // カメラ表示位置の指定
     void SetCamera()
     {
         if(camerastate == CameraState.DEFAULT)

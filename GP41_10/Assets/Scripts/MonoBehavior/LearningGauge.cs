@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 学習ゲージ管理(LearningGauge : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/12/09
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

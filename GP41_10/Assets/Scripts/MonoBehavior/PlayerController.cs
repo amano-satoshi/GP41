@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// プレイヤー操作(PlayerController : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/10/20
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +37,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // カーソルリスト取得
         if(cursorBehaviorList.Count == 0)
         {
             cursorList = stageSpawner.GetCursor();

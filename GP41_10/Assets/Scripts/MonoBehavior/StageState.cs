@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// ステージの状態管理(StageState : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/29
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -59,7 +66,7 @@ public class StageState : MonoBehaviour
         }
         int n = 0;
         if(stageTimer.GetComponent<RemainTime>().GetRemainTime() <= 0f && stageState != STAGE_STATE.TIME_UP && stageState != STAGE_STATE.RESCUE &&
-            stageState != STAGE_STATE.TORPEDO_RESULT && stageState != STAGE_STATE.SHOOT)
+            stageState != STAGE_STATE.TORPEDO_RESULT && stageState != STAGE_STATE.SHOOT && stageState != STAGE_STATE.PRODUCTION)
         {
             stageState = STAGE_STATE.TIME_UP;
         }
@@ -137,14 +144,15 @@ public class StageState : MonoBehaviour
                     return;
                 }
 
+                if (comboText != null)
+                {
+                    Destroy(comboText.gameObject);
+                    comboText = null;
+                }
+
                 if (StageData.GetLearningGauge() >= 10)
                 {
                     StageData.SetLearningGauge(-10);
-                    if (comboText != null)
-                    {
-                        Destroy(comboText.gameObject);
-                        comboText = null;
-                    }
                     stageState = STAGE_STATE.LEARNING;
                 }
                 else
@@ -154,11 +162,6 @@ public class StageState : MonoBehaviour
                     stageSpawner.RescueDrowningPerson();
                     stageSpawner.ResetTarget();
                     stageSpawner.ResetRemainTorpedo();
-                    if (comboText != null)
-                    {
-                        Destroy(comboText.gameObject);
-                        comboText = null;
-                    }
                     playerControllerObj.ResetShootFlg();
                     stageState = STAGE_STATE.PREPARE;
                 }

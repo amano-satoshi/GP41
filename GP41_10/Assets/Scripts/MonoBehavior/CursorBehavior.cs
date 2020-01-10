@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// カーソル移動(CursorBehavior : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/01
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +42,7 @@ public class CursorBehavior : MonoBehaviour
         }
     }
 
+    // キーボード移動
     public void CursorMove(KeyCode Key)
     {
         if (Key == KeyCode.W || Key == KeyCode.I)
@@ -55,6 +63,7 @@ public class CursorBehavior : MonoBehaviour
         }
     }
 
+    // スティック移動
     public void CursorMoveStick(float vertical, float holizon)
     {
         Vector3 vec = new Vector3(holizon, 0f, -vertical);

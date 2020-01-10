@@ -82,7 +82,7 @@ public class TorpedoCamera : MonoBehaviour
             }
         }
 
-        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.LEARNING)
+        if (stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.LEARNING || stageState.GetComponent<StageState>().GetStageState() == StageState.STAGE_STATE.TIME_UP)
         {
             if(result != null)
             {

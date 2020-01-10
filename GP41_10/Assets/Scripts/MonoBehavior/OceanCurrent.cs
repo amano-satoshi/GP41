@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////////////////////////
+//
+// 海の流れと向き(OceanCurrent : MonoBehaviour)
+// Author : Satoshi Amano
+// 作成日 : 2019/11/01
+//
+///////////////////////////////////////////////////////////////
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
