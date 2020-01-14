@@ -6044,7 +6044,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9964f7b59e587a545a20cd0ab425f360, type: 3}
   - {fileID: 21300000, guid: fb99472e7ac5947458f9044d8e1baa02, type: 3}
   - {fileID: 21300000, guid: 25f32ff08d3a75f4aa036a98b0e7ca15, type: 3}
-  gameTime: 180
+  gameTime: 5
   CountDownTime: 10
   mapCamera: {fileID: 7642857805272894267}
   sound1: {fileID: 8300000, guid: 9bbe6ed5e0d23b34c99ec008dcc95955, type: 3}
@@ -9321,7 +9321,7 @@ PrefabInstance:
     - target: {fileID: 3280303968154119109, guid: 29ae0aa44d76ded4cbbbe427d75588e7,
         type: 3}
       propertyPath: gameTime
-      value: 180
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3280303968154119108, guid: 29ae0aa44d76ded4cbbbe427d75588e7,
         type: 3}
