@@ -53,9 +53,18 @@ public class DrowningPersonBehavior : MonoBehaviour
         if (DispTime > 0f)
         {
             DispTime -= Time.deltaTime;
+
+            if (DispTime <= 0.5f)
+            {
+                DrowingPerson.transform.localScale = new Vector3(DrowingPerson.transform.localScale.x - 0.2f,
+                    DrowingPerson.transform.localScale.y - 0.2f, 1f);
+            }
+
             if (DispTime <= 0f && DrowingPerson != null)
             {
+                // 後で消す
                 Destroy(DrowingPerson);
+
                 DispTime = 0f;
             }
         }
@@ -107,8 +116,13 @@ public class DrowningPersonBehavior : MonoBehaviour
         if (collider.gameObject.tag == "Rader" && !Rescue)
         {
             Vector3 pos = new Vector3(transform.position.x, 5f, transform.position.z);
+
             DrowingPerson = Instantiate(DispPerson, pos, Quaternion.identity);
-            DrowingPerson.GetComponent<MeshRenderer>().material.color = Color.red;
+            DrowingPerson.transform.position = new Vector3(DrowingPerson.transform.position.x, DrowingPerson.transform.position.y + 1.0f, DrowingPerson.transform.position.z);
+            DrowingPerson.transform.localScale = new Vector3(4f, 4f, 1f);
+            DrowingPerson.transform.Rotate(90f, DrowingPerson.transform.rotation.y, DrowingPerson.transform.rotation.z);
+            //DrowingPerson.GetComponent<MeshRenderer>().material.color = Color.red;
+
             DispTime = DispMaxTime;
         }
     }
