@@ -2228,27 +2228,27 @@ PrefabInstance:
     - target: {fileID: 6569885940829825783, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: SeaAreaBowPos.Array.data[0].y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6569885940829825783, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: SeaAreaBowPos.Array.data[1].y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6569885940829825783, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: SeaAreaBowPos.Array.data[2].y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6569885940829825783, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: SeaAreaBowPos.Array.data[3].y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6569885940829825783, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
       propertyPath: SeaAreaBowPos.Array.data[4].y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6569885940829825783, guid: 5fe79e9bf93d72b45b0458b35551312d,
         type: 3}
