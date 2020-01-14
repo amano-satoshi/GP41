@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/だらけ/Desktop/HAL用/授業/4年/未来創造/Repository/GP41_10/GP41_10.exe
+C:/Users/だらけ/Documents/GP41_10.exe
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/PlayerSelect.unity
@@ -73,8 +73,6 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 98ad81e9f689a492509f07e75b810aaa Unity.TextMeshPro.dll:TMPro.TMP_InputField
 f6633ace6e530c0000f2ac6da4269c52 Unity.ProBuilder.dll:UnityEngine.ProBuilder.PolyShape
 f3aeb5bc44e3e4f1e1ba79485a5003b3 Assembly-CSharp.dll:UTJ.Alembic.AlembicCameraParams
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 17f9eee4c6bda25af6983494f5ed863a Assembly-CSharp.dll:Crest.SimSettingsAnimatedWaves
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
