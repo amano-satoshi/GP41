@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1079,6 +1079,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ocean
       objectReference: {fileID: 0}
+    - target: {fileID: 3609769551519233930, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3609769551519233932, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1137,12 +1142,12 @@ PrefabInstance:
     - target: {fileID: 3609769551519233932, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 96
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3609769551519233932, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 96
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3609769551519233931, guid: 0f8cf07f100683f4db5a55aa97f4d03b,
         type: 3}
@@ -3206,6 +3211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OceanInputs
       objectReference: {fileID: 0}
+    - target: {fileID: 3042060748591619971, guid: 87044156f70bd7248aabfb969ece8fc5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3042060748591619970, guid: 87044156f70bd7248aabfb969ece8fc5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3264,7 +3274,7 @@ PrefabInstance:
     - target: {fileID: 3042060748937852158, guid: 87044156f70bd7248aabfb969ece8fc5,
         type: 3}
       propertyPath: _weight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87044156f70bd7248aabfb969ece8fc5, type: 3}
@@ -5536,7 +5546,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9964f7b59e587a545a20cd0ab425f360, type: 3}
   - {fileID: 21300000, guid: fb99472e7ac5947458f9044d8e1baa02, type: 3}
   - {fileID: 21300000, guid: 25f32ff08d3a75f4aa036a98b0e7ca15, type: 3}
-  gameTime: 10
+  gameTime: 999
   CountDownTime: 10
   mapCamera: {fileID: 7642857805272894267}
   sound1: {fileID: 8300000, guid: 9bbe6ed5e0d23b34c99ec008dcc95955, type: 3}
@@ -8533,7 +8543,7 @@ PrefabInstance:
     - target: {fileID: 3280303968154119109, guid: 29ae0aa44d76ded4cbbbe427d75588e7,
         type: 3}
       propertyPath: gameTime
-      value: 10
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 3280303968154119108, guid: 29ae0aa44d76ded4cbbbe427d75588e7,
         type: 3}
