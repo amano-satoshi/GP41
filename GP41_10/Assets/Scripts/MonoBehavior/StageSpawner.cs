@@ -478,12 +478,20 @@ public class StageSpawner : MonoBehaviour
     public void ResetTarget()
     {
         GameObject target;
+        GameObject target2;
         int count = targets.Count;
+        int count2 = targets1p.Count;
         for (int i = 0; i < count; ++i)
         {
             target = targets[0];
             targets.RemoveAt(0);
             target.GetComponent<TargetBehavior>().TargetDelete();
+        }
+        for (int i = 0; i < count2; ++i)
+        {
+            target2 = targets1p[0];
+            targets1p.RemoveAt(0);
+            target2.GetComponent<TargetBehavior>().TargetDelete();
         }
     }
 
