@@ -118,7 +118,7 @@ public class PlayerSelect : MonoBehaviour
                         }
                         else
                         {
-                            TwoModel.gameObject.transform.position = new Vector3(-2.156564f, -1.096563f, 0f);
+                            TwoModel.gameObject.transform.position = new Vector3(-3.156564f, -1.096563f, 0f);
                         }
 
                     }

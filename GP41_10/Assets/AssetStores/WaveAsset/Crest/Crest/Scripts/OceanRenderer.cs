@@ -291,7 +291,8 @@ namespace Crest
 
             Scale = Mathf.Pow(2f, l2f);
             // 変更した
-            transform.localScale = new Vector3(Scale, 1f, Scale);
+            //transform.localScale = new Vector3(Scale, 1f, Scale);
+            //transform.localScale = new Vector3(Scale, 1f, Scale);
         }
 
         void LateUpdateViewerHeight()
