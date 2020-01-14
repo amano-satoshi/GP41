@@ -34,7 +34,7 @@ public class RemainTime : MonoBehaviour
     void Start()
     {
         ActiveTimer = false;
-        SizeUp = true;
+        SizeUp = false;
         CountFlg = false;
         EndFlg = false;
         // 残り時間を設定
@@ -51,9 +51,9 @@ public class RemainTime : MonoBehaviour
         }
 
         // ゼロ秒以下にならないようにする
-        if (currentTime <= 0.0f)
+        if (currentTime <= 0f)
         {
-            currentTime = 0.0f;
+            currentTime = 0f;
         }
 
         SetNumbers();
@@ -109,7 +109,8 @@ public class RemainTime : MonoBehaviour
                 {
                     images[i].color = Color.red;
                 }
-            }
+                images[i].rectTransform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            } 
             audioSource[2].clip = sound1;
             audioSource[2].loop = true;
             audioSource[2].Play();
@@ -127,31 +128,19 @@ public class RemainTime : MonoBehaviour
     {
         for (int i = 0; i < 3; ++i)
         {
-            if (images[i].color != Color.red)
-            {
-                images[i].color = Color.red;
-            }
             if (SizeUp)
             {
-                images[i].rectTransform.localScale = Vector3.Lerp(images[i].rectTransform.localScale,
-                                                        new Vector3(2f, 2f, 2f),
-                                                        Time.deltaTime * 1.5f
-                                                        );
-                if (images[i].rectTransform.localScale.x >= 1.5f)
+                images[i].rectTransform.localScale += new Vector3(1f * Time.deltaTime, 1f * Time.deltaTime, 1f * Time.deltaTime);
+                if (images[2].rectTransform.localScale.x >= 1.5f)
                 {
-                    images[i].rectTransform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                     SizeUp = false;
                 }
             }
             else
             {
-                images[i].rectTransform.localScale = Vector3.Lerp(images[i].rectTransform.localScale,
-                                                        new Vector3(0.5f, 0.5f, 0.5f),
-                                                        Time.deltaTime * 1.5f
-                                                        );
-                if (images[i].rectTransform.localScale.x <= 1f)
+                images[i].rectTransform.localScale -= new Vector3(1f * Time.deltaTime, 1f * Time.deltaTime, 1f * Time.deltaTime);
+                if (images[2].rectTransform.localScale.x <= 1f)
                 {
-                    images[i].rectTransform.localScale = new Vector3(1f, 1f, 1f);
                     SizeUp = true;
                 }
             }

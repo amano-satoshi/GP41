@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - DrowingPerson
   - Target
+  - Island
   layers:
   - Default
   - TransparentFX

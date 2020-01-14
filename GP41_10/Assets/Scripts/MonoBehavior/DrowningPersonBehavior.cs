@@ -16,6 +16,7 @@ public class DrowningPersonBehavior : MonoBehaviour
     private float DispMaxTime = 0f;
     private float DispTime = 0f;
     private GameObject stagestate;
+    private GameObject stagespawner;
     public GameObject DispPerson;
     private GameObject DrowingPerson;
     private Vector3 vec = new Vector3(0f, 0f, 0f);
@@ -26,6 +27,10 @@ public class DrowningPersonBehavior : MonoBehaviour
     void Start()
     {
         stagestate = GameObject.Find("StageState");
+        if(stagespawner == null)
+        {
+            stagespawner = GameObject.Find("StageSpawner");
+        }
     }
 
     // Update is called once per frame
@@ -57,6 +62,11 @@ public class DrowningPersonBehavior : MonoBehaviour
 
         if (destflg)
         {
+            if (DrowingPerson != null)
+            {
+                Destroy(DrowingPerson);
+                DispTime = 0f;
+            }
             Destroy(this.gameObject);
         }
     }
@@ -85,6 +95,15 @@ public class DrowningPersonBehavior : MonoBehaviour
     // レーダー表示
     private void OnTriggerEnter(Collider collider)
     {
+        if (collider.gameObject.tag == "Island" && !Rescue)
+        {
+            Rescued();
+            if(stagespawner == null)
+            {
+                stagespawner = GameObject.Find("StageSpawner");
+            }
+            stagespawner.GetComponent<StageSpawner>().RescueDrowningPerson();
+        }
         if (collider.gameObject.tag == "Rader" && !Rescue)
         {
             Vector3 pos = new Vector3(transform.position.x, 5f, transform.position.z);
@@ -111,7 +130,7 @@ public class DrowningPersonBehavior : MonoBehaviour
         return Rescue;
     }
 
-    // マップカメラの表示の消去
+    // おぼれている人消去
     public void DestDrowningPerson()
     {
         destflg = true;
