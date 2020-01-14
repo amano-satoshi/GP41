@@ -20,6 +20,7 @@ public class StageSpawner : MonoBehaviour
     public GameObject cursor2;
     public GameObject Target;
     public GameObject Torpedo;
+    public GameObject Torpedo1p;
     public GameObject Torpedocamera;
     public GameObject cameraController;
     public GameObject stageTimer;
@@ -51,7 +52,7 @@ public class StageSpawner : MonoBehaviour
     [SerializeField, Header("矢印の拡大縮小速度")]
     private float BowChangeSpeed = 10f;
     private bool AddPersonLimit = false;
-    private int AddPersonLimitNum = 3;
+    private int[] AddPersonLimitNum = { 3, 5, 7 };
     private GameObject SeaAreaObj;
     private GameObject Bowobj;
     private GameObject Cubeobj;
@@ -61,6 +62,7 @@ public class StageSpawner : MonoBehaviour
     private Canvas EndProductionObj;
     private List<GameObject> DrowingPersons = new List<GameObject>();
     private List<GameObject> targets = new List<GameObject>();
+    private List<GameObject> targets1p = new List<GameObject>();
     private List<GameObject> RescueTarget = new List<GameObject>();
     private List<GameObject> cameraList = new List<GameObject>();
     private List<GameObject> TorpedoList = new List<GameObject>();
@@ -91,26 +93,24 @@ public class StageSpawner : MonoBehaviour
         {
             for (int x = 0; x < 10; ++x)
             {
-                Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (x % 5 - 2) * 15f), Quaternion.identity);
+                Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, -5f, (x % 5 - 2) * 15f), Quaternion.identity);
+                Cubeobj.GetComponent<DrowningPersonBehavior>().SetID(x);
                 DrowingPersons.Add(Cubeobj);                
             }
         }
         else
         {
-            for (int z = 0; z < 5; ++z)
-                for (int x = 0; x < 10; ++x)
-                {
-                    if (Random.Range(0, 5) == 1)
-                    {
-                        Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (z - 2.5f) * 15f + 5f), Quaternion.identity);
-                        DrowingPersons.Add(Cubeobj);
-                    }
-                }
+            for (int x = 0; x < 10; ++x)
+            {
+                Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, -5f, (Random.Range(0, 5) - 2.5f) * 15f + 5f), Quaternion.identity);
+                Cubeobj.GetComponent<DrowningPersonBehavior>().SetID(x);
+                DrowingPersons.Add(Cubeobj);
+            }
         }
         AddPersonLimit = true;
 
         // 海域
-        SeaAreaObj = Instantiate(SeaArea, new Vector3(0f, 1f, 0f), Quaternion.Euler(0f, 180f, 0f));
+        SeaAreaObj = Instantiate(SeaArea, new Vector3(0f, -4f, 0f), Quaternion.Euler(0f, 180f, 0f));
         for (int i = 0; i < 5; ++i)
         {
             // 矢印
@@ -135,14 +135,6 @@ public class StageSpawner : MonoBehaviour
         audioSource[1].loop = true;
         audioSource[1].Play();
 
-        // 障害物
-        //for (int x = 0; x < 16; ++x)
-        //{
-        //    int z = Random.Range(0, 6);
-        //    int rock = Random.Range(0, 4);
-        //    Instantiate(Obstacle[rock], new Vector3((x - 5) * 6.0f, -7f, (z - 2) * 8.0f), Quaternion.identity);
-        //}
-
         // 船
         for (int i = 0; i < 4; ++i)
         {
@@ -152,19 +144,19 @@ public class StageSpawner : MonoBehaviour
         // カーソル
         if (StageData.GetPlayerNum() == 0)
         {
-            GameObject cursorObj = Instantiate(cursor1, new Vector3(0f, 6f, 0f), Quaternion.Euler(0f, 180f, 0f));
+            GameObject cursorObj = Instantiate(cursor1, new Vector3(0f, 1f, 0f), Quaternion.Euler(0f, 180f, 0f));
             CursorList.Add(cursorObj);
             int remainTorpedo = 4;
             RemainTorpedoList.Add(remainTorpedo);
         }
         else if (StageData.GetPlayerNum() == 1)
         {
-            GameObject cursorObj = Instantiate(cursor1, new Vector3(40f, 6f, 0f), Quaternion.Euler(0f, 180f, 0f));
+            GameObject cursorObj = Instantiate(cursor1, new Vector3(40f, 1f, 0f), Quaternion.Euler(0f, 180f, 0f));
             cursorObj.GetComponent<MeshRenderer>().material.color = Color.red;
             CursorList.Add(cursorObj);
             int remainTorpedo = 2;
             RemainTorpedoList.Add(remainTorpedo);
-            cursorObj = Instantiate(cursor2, new Vector3(-40f, 5f, 0f), Quaternion.Euler(0f, 180f, 0f));
+            cursorObj = Instantiate(cursor2, new Vector3(-40f, 1f, 0f), Quaternion.Euler(0f, 180f, 0f));
             cursorObj.GetComponent<MeshRenderer>().material.color = Color.blue;
             CursorList.Add(cursorObj);
             RemainTorpedoList.Add(remainTorpedo);
@@ -192,7 +184,7 @@ public class StageSpawner : MonoBehaviour
             {
                 for (int x = 0; x < 10; ++x)
                 {
-                    Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, 0f, (x % 5 - 2) * -15f), Quaternion.identity);
+                    Cubeobj = Instantiate(Cube, new Vector3((x - 5) * 15f + 5f, -5f, (x % 5 - 2) * -15f), Quaternion.identity);
                     DrowingPersons.Add(Cubeobj);
                 }
             }
@@ -202,10 +194,32 @@ public class StageSpawner : MonoBehaviour
             if (times % 10 == 0 && !AddPersonLimit)
             {
                 // おぼれている人追加
-                for (int i = 0; i < AddPersonLimitNum; ++i)
+                if (SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed() == 0.5f)
                 {
-                    Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, 3) * 15f + i * 50f - 65f, 0f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
-                    DrowingPersons.Add(Cubeobj);
+                    for (int i = 0; i < AddPersonLimitNum[0]; ++i)
+                    {
+                        Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, AddPersonLimitNum[0]) * 15f + i * 50f - 65f, -5f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
+                        Cubeobj.GetComponent<DrowningPersonBehavior>().SetID(DrowingPersons.Count);
+                        DrowingPersons.Add(Cubeobj);
+                    }
+                }
+                else if (SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed() == 1.25f)
+                {
+                    for (int i = 0; i < AddPersonLimitNum[1]; ++i)
+                    {
+                        Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, AddPersonLimitNum[1]) * 7.5f + i * 25f - 65f, -5f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
+                        Cubeobj.GetComponent<DrowningPersonBehavior>().SetID(DrowingPersons.Count);
+                        DrowingPersons.Add(Cubeobj);
+                    }
+                }
+                else if (SeaAreaObj.transform.GetChild(0).GetComponent<OceanCurrent>().GetOceanCurrentSpeed() == 2f)
+                {
+                    for (int i = 0; i < AddPersonLimitNum[2]; ++i)
+                    {
+                        Cubeobj = Instantiate(Cube, new Vector3(Random.Range(0, AddPersonLimitNum[2]) * 5f + i * 17f - 65f, -5f, Random.Range(0, 11) * 5f - 25f), Quaternion.identity);
+                        Cubeobj.GetComponent<DrowningPersonBehavior>().SetID(DrowingPersons.Count);
+                        DrowingPersons.Add(Cubeobj);
+                    }
                 }
                 AddPersonLimit = true;
             }
@@ -280,7 +294,7 @@ public class StageSpawner : MonoBehaviour
         {
             if(BowUpFlg[i])
             {
-                BowList[i].transform.localScale += new Vector3(BowChangeSpeed * Time.deltaTime, 0f, BowChangeSpeed * Time.deltaTime);
+                BowList[i].transform.localScale += new Vector3(BowChangeSpeed * Time.deltaTime, -5f, BowChangeSpeed * Time.deltaTime);
                 if(BowList[i].transform.localScale.x > 5f + BowSize)
                 {
                     BowUpFlg[i] = false;
@@ -288,7 +302,7 @@ public class StageSpawner : MonoBehaviour
             }
             else
             {
-                BowList[i].transform.localScale -= new Vector3(BowChangeSpeed * Time.deltaTime, 0f, BowChangeSpeed * Time.deltaTime);
+                BowList[i].transform.localScale -= new Vector3(BowChangeSpeed * Time.deltaTime, -5f, BowChangeSpeed * Time.deltaTime);
                 if (BowList[i].transform.localScale.x < 5f - BowSize)
                 {
                     BowUpFlg[i] = true;
@@ -432,19 +446,32 @@ public class StageSpawner : MonoBehaviour
     public void SpawnTarget(int SpawnPlayer)
     {
         GameObject target;
-        if(SpawnPlayer == 1)
+        if (StageData.GetPlayerNum() == 0)
         {
-            target = Instantiate(Target, new Vector3(CursorList[0].transform.position.x, CursorList[0].transform.position.y, CursorList[0].transform.position.z - 1f), Quaternion.identity);
-            targets.Add(target);
-            audioSource[2].PlayOneShot(sounds[3]);
-            RemainTorpedoList[0] -= 1;
+            if (SpawnPlayer == 1)
+            {
+                target = Instantiate(Target, new Vector3(CursorList[0].transform.position.x, CursorList[0].transform.position.y, CursorList[0].transform.position.z - 1f), Quaternion.identity);
+                targets.Add(target);
+                audioSource[2].PlayOneShot(sounds[3]);
+                RemainTorpedoList[0] -= 1;
+            }
         }
-        else if (SpawnPlayer == 2)
+        else if (StageData.GetPlayerNum() == 1)
         {
-            target = Instantiate(Target, new Vector3(CursorList[1].transform.position.x, CursorList[1].transform.position.y, CursorList[1].transform.position.z - 1f), Quaternion.identity);
-            targets.Add(target);
-            audioSource[2].PlayOneShot(sounds[3]);
-            RemainTorpedoList[1] -= 1;
+            if (SpawnPlayer == 1)
+            {
+                target = Instantiate(Target, new Vector3(CursorList[0].transform.position.x, CursorList[0].transform.position.y, CursorList[0].transform.position.z - 1f), Quaternion.identity);
+                targets.Add(target);
+                audioSource[2].PlayOneShot(sounds[3]);
+                RemainTorpedoList[0] -= 1;
+            }
+            else if (SpawnPlayer == 2)
+            {
+                target = Instantiate(Target, new Vector3(CursorList[1].transform.position.x, CursorList[1].transform.position.y, CursorList[1].transform.position.z - 1f), Quaternion.identity);
+                targets1p.Add(target);
+                audioSource[2].PlayOneShot(sounds[3]);
+                RemainTorpedoList[1] -= 1;
+            }
         }
     }
 
@@ -491,10 +518,15 @@ public class StageSpawner : MonoBehaviour
         {
             if(DrowingPersons[i].GetComponent<DrowningPersonBehavior>().GetRescued())
             {
-                drowningPerson = DrowingPersons[i];
-                DrowingPersons.RemoveAt(i);
-                drowningPerson.GetComponent<DrowningPersonBehavior>().DestDrowningPerson();
-                i--;
+                drowningPerson = DrowingPersons[i]; // 退避
+                DrowingPersons.RemoveAt(i);         // リストから削除
+                drowningPerson.GetComponent<DrowningPersonBehavior>().DestDrowningPerson(); // 削除
+                // ID設定しなおし
+                for (int j = 0; j < DrowingPersons.Count; j++)
+                {
+                    DrowingPersons[j].GetComponent<DrowningPersonBehavior>().SetID(j);
+                }
+                    i--;
             }
         }
     }
@@ -503,26 +535,74 @@ public class StageSpawner : MonoBehaviour
     {
         GameObject TorpedoObj;
         GameObject TorpedocameraObj;
-        for (int i = 0; i < targets.Count; ++i)
+        if (StageData.GetPlayerNum() == 0)
         {
-            RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
-            TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 3f, 0f), Quaternion.Euler(0f, i * 90f, 0f));
-            if (RescueTarget != null)
+            for (int i = 0; i < targets.Count; ++i)
             {
-                for (int j = 0; j < RescueTarget.Count; ++j)
+                RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
+                TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 3f, 0f), Quaternion.Euler(0f, i * 90f, 0f));
+                if (RescueTarget != null)
                 {
-                    TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                    for (int j = 0; j < RescueTarget.Count; ++j)
+                    {
+                        TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                    }
                 }
+                else
+                {
+                    TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                }
+                TorpedoList.Add(TorpedoObj);
+                TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
+                TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
+                TorpedocameraObj.GetComponent<TorpedoCamera>().SetCamID(i);
+                cameraList.Add(TorpedocameraObj);
             }
-            else
+        }
+        else if (StageData.GetPlayerNum() == 1)
+        {
+            for (int i = 0; i < targets.Count; ++i)
             {
-                TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                RescueTarget = targets[i].GetComponent<TargetBehavior>().TorpedoShoot();
+                TorpedoObj = Instantiate(Torpedo, ShipPos[i] - new Vector3(0f, 3f, 0f), Quaternion.Euler(0f, i * 90f, 0f));
+                if (RescueTarget != null)
+                {
+                    for (int j = 0; j < RescueTarget.Count; ++j)
+                    {
+                        TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[j]);
+                    }
+                }
+                else
+                {
+                    TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets[i]);
+                }
+                TorpedoList.Add(TorpedoObj);
+                TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
+                TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
+                TorpedocameraObj.GetComponent<TorpedoCamera>().SetCamID(i);
+                cameraList.Add(TorpedocameraObj);
             }
-            TorpedoList.Add(TorpedoObj);
-            TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
-            TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
-            TorpedocameraObj.GetComponent<TorpedoCamera>().SetCamID(i);
-            cameraList.Add(TorpedocameraObj);
+            for (int k = 0; k < targets1p.Count; ++k)
+            {
+                RescueTarget = targets1p[k].GetComponent<TargetBehavior>().TorpedoShoot();
+                TorpedoObj = Instantiate(Torpedo1p, ShipPos[targets.Count + k] - new Vector3(0f, 3f, 0f), Quaternion.Euler(0f, (targets.Count + k) * 90f, 0f));
+                if (RescueTarget != null)
+                {
+                    for (int l = 0; l < RescueTarget.Count; ++l)
+                    {
+                        TorpedoObj.GetComponent<TorpedoBehavior>().SetDrowningPerson(RescueTarget[l]);
+                    }
+                }
+                else
+                {
+                    TorpedoObj.GetComponent<TorpedoBehavior>().SetTarget(targets1p[k]);
+                }
+                TorpedoList.Add(TorpedoObj);
+                TorpedocameraObj = Instantiate(Torpedocamera, TorpedoObj.transform.position + TorpedoObj.transform.up * offset.y + TorpedoObj.transform.forward * offset.z, Quaternion.identity);
+                TorpedocameraObj.GetComponent<TorpedoCamera>().SetTorpedo(TorpedoObj, offset);
+                TorpedocameraObj.GetComponent<TorpedoCamera>().SetCamID(targets.Count + k);
+                cameraList.Add(TorpedocameraObj);
+            }
         }
 
         cameraController.GetComponent<CameraController>().SetCameraList(cameraList);
