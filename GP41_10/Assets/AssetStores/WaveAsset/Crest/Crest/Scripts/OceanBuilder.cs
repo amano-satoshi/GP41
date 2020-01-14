@@ -501,6 +501,7 @@ namespace Crest
                     else
                         patch.transform.localRotation = Quaternion.FromToRotation(from, to);
                 }
+                // 変更
                 if (patch.name == "Tile_L1" || patch.name == "Tile_L2" || patch.name == "Tile_L3"
                   || patch.name == "Tile_L4" || patch.name == "Tile_L5" || patch.name == "Tile_L6")
                 {

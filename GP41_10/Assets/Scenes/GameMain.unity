@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3334,11 +3334,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2118642037}
     m_Modifications:
-    - target: {fileID: 1507253297555218313, guid: 2d9b12ded0a1e02448592eca12bbf48e,
-        type: 3}
-      propertyPath: m_Name
-      value: FadePanal
-      objectReference: {fileID: 0}
     - target: {fileID: 1507253297555218312, guid: 2d9b12ded0a1e02448592eca12bbf48e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3458,6 +3453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2.9179332
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507253297555218313, guid: 2d9b12ded0a1e02448592eca12bbf48e,
+        type: 3}
+      propertyPath: m_Name
+      value: FadePanal
       objectReference: {fileID: 0}
     - target: {fileID: 1507253297555218311, guid: 2d9b12ded0a1e02448592eca12bbf48e,
         type: 3}
