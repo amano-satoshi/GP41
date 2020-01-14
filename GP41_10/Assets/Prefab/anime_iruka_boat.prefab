@@ -570,6 +570,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5234255795996550891, guid: 03a5575cca45c634ab68bc31ae76c477,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6899597131834400854, guid: 03a5575cca45c634ab68bc31ae76c477,
         type: 3}
       propertyPath: m_MotionVectors
@@ -584,6 +589,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MotionVectors
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 333783769750068361, guid: 03a5575cca45c634ab68bc31ae76c477,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 535457628764901699, guid: 03a5575cca45c634ab68bc31ae76c477,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3375745674987857060, guid: 03a5575cca45c634ab68bc31ae76c477, type: 3}
