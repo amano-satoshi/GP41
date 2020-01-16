@@ -2928,7 +2928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DispMaxTime: 2
-  DispPerson: {fileID: 8695535380204423190, guid: 0e03fc95e94f14a41ac62364a5b99ba3,
+  DispPerson: {fileID: 6057289264470026427, guid: c3b44b95a8f8b044286e5e1e3867c569,
     type: 3}
 --- !u!136 &8726383929165192382
 CapsuleCollider:
